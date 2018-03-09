@@ -1,0 +1,94 @@
+<!--
+@license
+Copyright (c) 2017 Rick Hansen Institute. All rights reserved.
+This code should not be modified and/or distributed without explicit permission from the Rick Hansen Institute.
+Author: RhiTech <tech@rickhanseninstitute.org>
+-->
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html"/>
+<link rel="import" href="rhi-ui-isncsci-grid-cell.html"/>
+<dom-module id="rhi-ui-isncsci-grid">
+    <!-- Optional shadow DOM template -->
+    <template>
+        <!--<style include="rhi-ad-ui-styles"></style>-->
+        <style>
+            :host {
+                display: block;
+            }
+
+            .row {
+                display: flex;
+                width: 100%;
+            }
+
+            rhi-ui-isncsci-grid-cell,
+            .empty-cell {
+                margin: 1px;
+                flex: 1 0;
+            }
+        </style>
+        <!-- shadow DOM for your element -->
+        <div id="grid">
+            <div class="row">
+                <div class="empty-cell">C3</div>
+                <div class="empty-cell">&nbsp;</div>
+                <rhi-ui-isncsci-grid-cell dermatome="C3RightTouch"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell dermatome="C3RightPrick"></rhi-ui-isncsci-grid-cell>
+            </div>
+            <div class="row">
+                <div class="empty-cell">C4</div>
+                <div class="empty-cell">&nbsp;</div>
+                <rhi-ui-isncsci-grid-cell dermatome="C4RightTouch"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell dermatome="C4RightPrick"></rhi-ui-isncsci-grid-cell>
+            </div>
+            <div class="row">
+                <div class="empty-cell">C5</div>
+                <rhi-ui-isncsci-grid-cell dermatome="C5RightMotor"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell dermatome="C5RightTouch"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell dermatome="C5RightPrick"></rhi-ui-isncsci-grid-cell>
+            </div>
+        </div>
+    </template>
+    <script>
+        /* global Polymer customElements */
+        'use strict';
+        
+        class RhiUiIsncsciGrid extends Polymer.Element {
+            static get is() { return 'rhi-ui-isncsci-grid'; }
+            
+            // Properties for the element's public API
+            static get properties() {
+                return {};
+            }
+
+            constructor() {
+                super();
+            }
+
+            ready() {
+                super.ready();
+                //console.log(this.shadowRoot.innerHTML);
+                console.log(this.$.grid.innerHTML);
+                const rowCount = this.$.grid.children.length;
+                console.log(rowCount);
+
+                for (let i=0; i<rowCount;i++) {
+                    const row = this.$.grid.children[i];
+                    const columnCount = row.children.length;
+
+                    for (let j=0; j<columnCount; j++) {
+                        const cell = row.children[j];
+
+                        if (cell.tagName.toUpperCase() === 'RHI-UI-ISNCSCI-GRID-CELL') {
+                            cell.column = j;
+                            cell.row = i;
+                            cell.value = `${j},${i}`;
+                        }
+                        console.log(cell.tagName);
+                    }
+                }
+            }
+        }
+        
+        customElements.define(RhiUiIsncsciGrid.is, RhiUiIsncsciGrid);
+    </script>
+</dom-module>

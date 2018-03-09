@@ -1,25 +1,18 @@
 {
   "author": "RhiTech <tech@rickhanseninstitute.org>",
-  "dependencies": {
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers",
-    "paper-button": "PolymerElements/paper-button"
-  },
+  "dependencies": {},
   "description": "Web components package for the ISNCSCI project.",
-  "devDependencies": {},
-  "flat": true,
+  "devDependencies": {
+    "express": "^4.16.2"
+  },
   "homepage": "https://www.rickhanseninstitute.org/rhi-isncsci/",
+  "license": "MIT",
+  "main": "index.js",
   "name": "rhi-ui-isncsci",
+  "private": false,
+  "repository": "https://github.com/rick-hansen-institute/rhi-ui-isncsci.git",
   "scripts": {
     "start": "node server.js"
   },
-  "version": "0.0.1",
-  "main": "index.js",
-  "repository": "https://github.com/rick-hansen-institute/rhi-ui-isncsci.git",
-  "license": "MIT",
-  "private": false,
-  "resolutions": {
-    "depd": "1.1.2",
-    "setprototypeof": "1.1.0",
-    "statuses": "1.4.0"
-  }
+  "version": "0.0.1"
 }

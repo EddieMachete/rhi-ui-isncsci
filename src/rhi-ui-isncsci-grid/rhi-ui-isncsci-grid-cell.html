@@ -1,0 +1,70 @@
+<!--
+@license
+Copyright (c) 2017 Rick Hansen Institute. All rights reserved.
+This code should not be modified and/or distributed without explicit permission from the Rick Hansen Institute.
+Author: RhiTech <tech@rickhanseninstitute.org>
+-->
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html"/>
+<dom-module id="rhi-ui-isncsci-grid-cell">
+    <!-- Optional shadow DOM template -->
+    <template>
+        <!--<style include="rhi-ad-ui-styles"></style>-->
+        <style>
+            :host {
+                display: block;
+            }
+
+            span {
+                background-color:#E2E2E2;
+                border:solid 1px #CCC;
+                display:block;
+                font-family: Georgia;
+                font-size: 1.2em;
+                /*width:40px;*/
+
+                -webkit-box-shadow: 2px 2px rgba(226, 226, 226, 0.7);
+                -moz-box-shadow: 2px 2px rgba(226, 226, 226, 0.7);
+                box-shadow: 2px 2px rgba(226, 226, 226, 0.7);
+            }
+
+            /*.smart-cell.entered-by-user span {
+                background-color:#FFF;
+            }
+
+            .smart-cell a {
+                display:block;
+                height:25px;
+                line-height:23px;
+                text-align:center;
+                text-decoration:none;
+            }*/
+
+            /*.right-column .selected span,
+            .left-column .selected span {
+            border-color:Orange;
+            }*/
+        </style>
+        <!-- shadow DOM for your element -->
+        <span>{{value}}</span>
+    </template>
+    <script>
+        /* global Polymer customElements */
+        'use strict';
+        
+        class RhiUiIsncsciGridCell extends Polymer.Element {
+            static get is() { return 'rhi-ui-isncsci-grid-cell'; }
+            
+            // Properties for the element's public API
+            static get properties() {
+                return {
+                    column: Number,
+                    row: Number,
+                    dermatome: String,
+                    value: String
+                };
+            }
+        }
+        
+        customElements.define(RhiUiIsncsciGridCell.is, RhiUiIsncsciGridCell);
+    </script>
+</dom-module>
