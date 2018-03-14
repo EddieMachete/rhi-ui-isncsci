@@ -1,28 +1,44 @@
 import { Element as PolymerElement } from '../../node_modules/@polymer/polymer/polymer-element.js';
 import { DomIf } from '../../node_modules/@polymer/polymer/lib/elements/dom-if.js';
 export class RhiUiIsncsciGridRow extends PolymerElement {
-  constructor(){
-    super();
-    this._NA = "N/A";
-  }
-
   static get properties(){
     return {
-      helper: String,
-      label: String,
-      right: Boolean,
-      left: Boolean,
+      touchPrickOptions:{
+        type: Array,
+        value: [
+          {label:'2',value:'2'},
+          {label:'1!',value:'1!'},
+          {label:'1',value:'1'},
+          {label:'0!',value:'0!'},
+          {label:'0',value:'0'},
+          {label:'NT!',value:'NT!'},
+          {label:'NT*',value:'NT*'},
+          {label:'NT',value:'NT'}
+        ]
+      },
+      motorOptions:{
+        type: Array,
+        value: [
+          {label:'5*',value:'5*'},
+          {label:'5',value:'5'},
+          {label:'4!',value:'4!'},
+          {label:'4',value:'4'},
+          {label:'3!',value:'3!'},
+          {label:'3',value:'3'},
+          {label:'2!',value:'2!'},
+          {label:'2',value:'2'},
+          {label:'1!',value:'1!'},
+          {label:'1',value:'1'},
+          {label:'0!',value:'0!'},
+          {label:'0',value:'0'},
+          {label:'NT!',value:'NT!'},
+          {label:'NT*',value:'NT*'},
+          {label:'NT',value:'NT'}
+        ]
+      },
       propagateDown: Boolean,
-      colOne: {
-        type: String,
-        notify: true
-      },
-      colTwo: {
-        type: String,
-        notify: true
-      },
-      colThree: {
-        type: String,
+      isncsciExamLevel: {
+        type: Object,
         notify: true
       }
     }
@@ -32,36 +48,38 @@ export class RhiUiIsncsciGridRow extends PolymerElement {
     return html`
       <style>
         :host{
-          display:block;
+          display: block;
+          text-align: center;
+        }
+        div.divider{
+          display: inline-block;
+          margin: 0 2rem;
         }
       </style>
-      <template is="dom-if" if="{{right}}">
-        <span>[[helper]]</span>
-        <span>[[label]]</span>
+      <!-- <template is="dom-if" if="{{isncsciExamLevel.isKeyMuscle}}"><span>[[helper]]</span></template> -->
+      <span>[[isncsciExamLevel.name]]</span>
+
+      <template is="dom-if" if="{{isncsciExamLevel.isKeyMuscle}}">
+        <rhi-ui-isncsci-grid-dropdown value="{{isncsciExamLevel.rightMotor}}" options="[[motorOptions]]"></rhi-ui-isncsci-grid-dropdown>
       </template>
-      <template is="dom-if" if="{{_if(colOne)}}">
-        <rhi-ui-isncsci-grid-cell value="{{colOne}}"></rhi-ui-isncsci-grid-cell>
+      <rhi-ui-isncsci-grid-dropdown value="{{isncsciExamLevel.rightTouch}}" options="[[touchPrickOptions]]"></rhi-ui-isncsci-grid-dropdown>
+      <rhi-ui-isncsci-grid-dropdown value="{{isncsciExamLevel.rightPrick}}" options="[[touchPrickOptions]]"></rhi-ui-isncsci-grid-dropdown>
+
+      <div class="divider"></div>
+
+      <rhi-ui-isncsci-grid-dropdown value="{{isncsciExamLevel.leftTouch}}" options="[[touchPrickOptions]]"></rhi-ui-isncsci-grid-dropdown>
+      <rhi-ui-isncsci-grid-dropdown value="{{isncsciExamLevel.leftPrick}}" options="[[touchPrickOptions]]"></rhi-ui-isncsci-grid-dropdown>
+      <template is="dom-if" if="{{isncsciExamLevel.isKeyMuscle}}">
+        <rhi-ui-isncsci-grid-dropdown value="{{isncsciExamLevel.leftMotor}}" options="[[motorOptions]]"></rhi-ui-isncsci-grid-dropdown>
       </template>
-      <template is="dom-if" if="{{_if(colTwo)}}">
-        <rhi-ui-isncsci-grid-cell value="{{colTwo}}"></rhi-ui-isncsci-grid-cell>
-      </template>
-      <template is="dom-if" if="{{_if(colThree)}}">
-        <rhi-ui-isncsci-grid-cell value="{{colThree}}"></rhi-ui-isncsci-grid-cell>
-      </template>
-      <template is="dom-if" if="{{left}}">
-        <span>[[label]]</span>
-        <span>[[helper]]</span>
-      </template>
+
+      <span>[[isncsciExamLevel.name]]</span>
+      <!-- <template is="dom-if" if="{{isncsciExamLevel.isKeyMuscle}}"><span>[[helper]]</span></template> -->
     `;
   }
+
   ready(){
     super.ready();
-    this.addEventListener('col-one-changed', this._updateValues);
-    this.addEventListener('col-two-changed', this._updateValues);
-    this.addEventListener('col-three-changed', this._updateValues);
-  }
-  _if(col){
-    return col !== null;
   }
 
   _updateValues(e){

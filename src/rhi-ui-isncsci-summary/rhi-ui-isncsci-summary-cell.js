@@ -14,8 +14,11 @@ export class RhiUiIsncsciSummaryCell extends PolymerElement {
         :host{
           display: block;
         }
+        span{
+          margin-left: 20px;
+        }
       </style>
-      <label>[[label]]</label><input value="[[value]]" disabled/>
+      <label>[[label]]</label><span>[[value]]</span>
     `;
   }
 }

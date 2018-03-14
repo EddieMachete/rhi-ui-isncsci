@@ -8,7 +8,7 @@ export class RhiUiIsncsciGridDropdown extends PolymerElement {
       label: String,
       options: Array,
       value: {
-        type: String,
+        type: Number,
         notify: true
       }
     }
@@ -18,18 +18,17 @@ export class RhiUiIsncsciGridDropdown extends PolymerElement {
     return html`
       <style>
         :host{
-          display: block;
+          display: inline-block;
         }
       </style>
       <span>[[label]]</span>
-      <select data-name="AnalSensation" value="{{value}}" on-change="onChange">
-        <option value="None"></option>
+      <select value="{{value}}" on-change="onChange">
         <template is="dom-repeat" items="[[options]]" as="option">
           <template is="dom-if" if="{{_if(option,value)}}">
-            <option value$="[[option]]" selected>[[option]]</option>
+            <option value$="[[option.value]]" selected>[[option.label]]</option>
           </template>
           <template is="dom-if" if="{{!_if(option,value)}}">
-            <option value$="[[option]]">[[option]]</option>
+            <option value$="[[option.value]]">[[option.label]]</option>
           </template>
         </template>
       </select>
@@ -37,11 +36,11 @@ export class RhiUiIsncsciGridDropdown extends PolymerElement {
   }
 
   _if(option,value){
-    return option == value;
+    return option.value == value;
   }
 
   onChange(e){
-    this.value = e.target.value;
+    this.value = Number.parseInt(e.target.value);
   }
 }
 customElements.define('rhi-ui-isncsci-grid-dropdown', RhiUiIsncsciGridDropdown);

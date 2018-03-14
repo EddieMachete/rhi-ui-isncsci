@@ -3,7 +3,7 @@ export class RhiUiIsncsciGridCell extends PolymerElement {
   static get properties(){
     return {
       value: {
-        type: String,
+        type: Number,
         notify: true
       }
     }
@@ -13,15 +13,15 @@ export class RhiUiIsncsciGridCell extends PolymerElement {
     return html`
       <style>
         input{
-          width: 20px;
+          width: 25px;
         }
       </style>
-      <input value="{{value}}" on-input="onInput"/>
+      <input value="{{value}}" type="number" on-input="onInput"/>
     `;
   }
 
   onInput(e){
-    this.value = e.target.value;
+    this.value = Number.parseInt(e.target.value);
   }
 }
 customElements.define('rhi-ui-isncsci-grid-cell', RhiUiIsncsciGridCell);
