@@ -12,6 +12,11 @@ $ polymer serve
 ```
 
 You can also package the app using webpack:
+First install dependencies:
+```
+$ npm install
+```
+Then run webpack:
 ```
 $ npm run webpack
 ```
@@ -152,9 +157,7 @@ Displays the test total of the ISNCSCI exam for viewing the mismatches in the te
 
 ## Problems/Notes
 - current implementation of this web component is very specific to this app. The components found in ```<rhi-isncsci-grid>``` seems like something that can be used in other applications. But to handle the logic for interaction, the props/attrs were hard coded for indicators for firing events. To generalize the web component for other applications, the hard coded props/attrs such as ```levelName```,```side``` have compressed in to a single object. But this makes it harder for other developers because this means if the this object need to be well designed and handled.
+- to create custom event that bubbles from a shadow-root you must set ```bubbles: true``` AND ```composed: true```
 - ```this.getAttribute('value')``` in ```<rhi-isncsci-grid-cell>``` is returning string value ```"undefined"``` sometimes. It seems to happen when rendering the initial components and the attribute is ```null```.
 - ontouchmove event only gets fired from and element where the touch started
 - setting up the logic for attribute and properties of web component can get complicated and confusing very fast
-
-## Notes
-- to create custom event that bubbles from a shadow-root you must set ```bubbles: true``` AND ```composed: true```
