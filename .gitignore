@@ -13,5 +13,5 @@ node_modules/
 *.tgz
 .env
 
-sci/
 package-lock.json
+src/rhi-ui-isncsci-grid/demo/scripts

@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "lib": [
+          "dom",
+          "es6",
+          "scripthost"
+        ],
+        "module": "es6",
+        "moduleResolution": "node",
+        "noEmitOnError": true,
+        "noImplicitAny": false,
+        "outDir": "./scripts",
+        "removeComments": false,
+        "sourceMap": false,
+        "target": "es6"
+    },
+    "files": [
+        "../rhi-ui-isncsci-neurology-form.ts",
+        "../rhi-ui-isncsci-grid.ts",
+        "../rhi-ui-isncsci-grid-cell.ts"
+    ]
+}

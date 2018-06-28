@@ -37,3 +37,7 @@ To update the npm package, so that the changes can be consumed by the apps:
 ..* If the changes enhance functionality and won't break any of the apps, just increase the patch version.
 ..* Once we have a production build, stick to [Semantic Versioning](http://semver.org/).
 2. Run *npm publish*
+
+
+
+3. *tsc --p tsconfig-core.json*
