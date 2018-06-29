@@ -6,14 +6,17 @@ Author: RhiTech <tech@rickhanseninstitute.org>
 */
 'use strict';
 
-import { html, PolymerElement } from '@polymer/polymer';
-import { IsncsciExam } from 'rhi-core-isncsci-algorithm/src/isncsciExam';
-import { NeuroLevel } from 'rhi-core-isncsci-algorithm/src/neuroLevel';
+//import { html, PolymerElement } from '@polymer/polymer';
+import { html, LitElement } from '@polymer/lit-element';
+import { TemplateResult } from 'lit-html';
+import { connect } from '../helpers/connect-mixin';
+import { store } from '../store/store';
 
-export class RhiUiIsncsciNeurologyForm extends PolymerElement {
+export class RhiUiIsncsciNeurologyForm extends connect(store)(LitElement) {
     public static get is(): string { return 'rhi-ui-isncsci-neurology-form'; }
 
-    public static get template(): html {
+    //public static get template(): html {
+    public _render(props: any): TemplateResult {
         return html`
             <style>
                 :host {
@@ -28,8 +31,8 @@ export class RhiUiIsncsciNeurologyForm extends PolymerElement {
             <rhi-ui-isncsci-grid class="user-select-none">
                 <div class="row">
                     <div>C2</div>
-                    <rhi-ui-isncsci-grid-cell value="{{c2.rightTouch}}"></rhi-ui-isncsci-grid-cell>
-                    <rhi-ui-isncsci-grid-cell></rhi-ui-isncsci-grid-cell>
+                    <rhi-ui-isncsci-grid-cell value="${props.c2RightTouch}"></rhi-ui-isncsci-grid-cell>
+                    <rhi-ui-isncsci-grid-cell value="${props.c2RightPrick}"></rhi-ui-isncsci-grid-cell>
                 </div>
                 <div class="row">
                     <div>C3</div>
@@ -70,26 +73,23 @@ export class RhiUiIsncsciNeurologyForm extends PolymerElement {
     }
 
     public static get properties(): object {
-        return {};
+        return {
+            c2RightTouch: { type: String, value: '' },
+            c2RightPrick: { type: String, value: '' }
+        };
     }
-
-    private isncsciExam: IsncsciExam;
-    private c2: NeuroLevel;
 
     public constructor() {
         super();
-
-        this.isncsciExam = new IsncsciExam();
-        this.c2 = this.isncsciExam.getLevelWithName('C2');
-        this.c2.rightTouch = 'NT';
-
-        let count = 0;
-        //setInterval(() => {this.c2.rightTouch = (++count).toString();console.log(this.c2.rightTouch);}, 1000);
-        //setTimeout(() => {this.c2.rightTouch = 'a'; console.log(this.c2.rightTouch); }, 1000);
     }
 
     public ready(): void {
         super.ready();
+    }
+
+    public stateChanged(state: any): void {
+        console.log(state);
+        this.c2RightTouch = state.neurologyForm.c2RightTouch;
     }
 }
 

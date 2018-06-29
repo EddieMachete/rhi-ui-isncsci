@@ -18,6 +18,11 @@
     "files": [
         "../rhi-ui-isncsci-neurology-form.ts",
         "../rhi-ui-isncsci-grid.ts",
-        "../rhi-ui-isncsci-grid-cell.ts"
+        "../rhi-ui-isncsci-grid-cell.ts",
+        "../../helpers/connect-mixin.ts",
+        "../../store/actions/neurology-form.ts",
+        "../../store/reducers/index.ts",
+        "../../store/reducers/neurology-form.ts",
+        "../../store/store.ts",
     ]
 }
