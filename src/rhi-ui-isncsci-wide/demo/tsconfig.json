@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "lib": [
+          "dom",
+          "es6",
+          "scripthost"
+        ],
+        "module": "es6",
+        "moduleResolution": "node",
+        "noEmitOnError": true,
+        "noImplicitAny": false,
+        "outDir": "./scripts",
+        "removeComments": false,
+        "sourceMap": false,
+        "target": "es6"
+    },
+    "files": [
+        "../../rhi-ui-isncsci-grid/rhi-ui-isncsci-neurology-form.ts",
+        "../../rhi-ui-isncsci-grid/rhi-ui-isncsci-grid.ts",
+        "../../rhi-ui-isncsci-grid/rhi-ui-isncsci-grid-cell.ts",
+        "../../helpers/connect-mixin.ts",
+        "../../store/actions/neurology-form.ts",
+        "../../store/reducers/index.ts",
+        "../../store/reducers/neurology-form.ts",
+        "../../store/store.ts",
+        "../rhi-ui-isncsci-wide.ts",
+        "../rhi-ui-isncsci-wide-left-grid.ts"
+    ]
+}

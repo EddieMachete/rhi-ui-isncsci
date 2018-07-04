@@ -10,16 +10,17 @@ Author: RhiTech <tech@rickhanseninstitute.org>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-    <title>Demo :: rhi-ui-isncsci-grid :: Rick Hansen Institute</title>
+    <title>Demo :: rhi-ui-isncsci-wide :: Rick Hansen Institute</title>
     <script>
         // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
         // https://github.com/reactjs/redux/issues/2907
         window.process = { env: { NODE_ENV: 'production' } };
     </script>
     <script src="../../../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <script type="module" src="scripts/rhi-ui-isncsci-grid/rhi-ui-isncsci-grid-cell.js"></script>
     <script type="module" src="scripts/rhi-ui-isncsci-grid/rhi-ui-isncsci-grid.js"></script>
-    <script type="module" src="scripts/rhi-ui-isncsci-grid/rhi-ui-isncsci-neurology-form.js"></script>
+    <script type="module" src="scripts/rhi-ui-isncsci-grid/rhi-ui-isncsci-grid-cell.js"></script>
+    <script type="module" src="scripts/rhi-ui-isncsci-wide/rhi-ui-isncsci-wide.js"></script>
+    <script type="module" src="scripts/rhi-ui-isncsci-wide/rhi-ui-isncsci-wide-left-grid.js"></script>
     <style>
         body {
             font-family: 'Roboto', 'Noto', sans-serif;
@@ -35,9 +36,9 @@ Author: RhiTech <tech@rickhanseninstitute.org>
 </head>
 <body>
     <div class="main-content">
-        <h3>&lt;rhi-ui-isncsci-grid&gt;</h3>
+        <h3>&lt;rhi-ui-isncsci-wide&gt;</h3>
         <div class="container">
-            <rhi-ui-isncsci-neurology-form></rhi-ui-isncsci-neurology-form>
+            <rhi-ui-isncsci-wide></rhi-ui-isncsci-wide>
         </div>
     </div>
     <script type="module">

@@ -6,6 +6,7 @@ const initialState =
   };
 
 export const neurologyForm = (state = initialState, action) => {
+  // ... ES6 Rest operator - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters
   switch (action.type) {
     case Actions.UPDATE_C2:
       return {

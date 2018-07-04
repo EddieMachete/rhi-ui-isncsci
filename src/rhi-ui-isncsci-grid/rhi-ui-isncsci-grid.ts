@@ -6,15 +6,16 @@ Author: RhiTech <tech@rickhanseninstitute.org>
 */
 'use strict';
 
-import { html, PolymerElement } from '@polymer/polymer';
+import { html, LitElement } from '@polymer/lit-element';
+import { TemplateResult } from 'lit-html';
 import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
 import * as Gestures from '@polymer/polymer/lib/utils/gestures.js';
-//import { IsncsciExam } from 'rhi-core-isncsci-algorithm';
+import { RhiUiIsncsciGridCell } from './rhi-ui-isncsci-grid-cell';
 
-export class RhiUiIsncsciGrid extends GestureEventListeners(PolymerElement) {
+export class RhiUiIsncsciGrid extends GestureEventListeners(LitElement) {
     public static get is(): string { return 'rhi-ui-isncsci-grid'; }
 
-    public static get template(): html {
+    public _render(props: any): TemplateResult {
         return html`
             <style>
                 :host {
@@ -64,20 +65,28 @@ export class RhiUiIsncsciGrid extends GestureEventListeners(PolymerElement) {
     public ready(): void {
         super.ready();
 
-        this.initializeCells(this['children']);
+        // if the element has children, it means rows were added to the <slot> element.
+        // Other wise we asume the object was extended and the rows were added directly to the element's template instead of <slot>.
+        const rootElement: HTMLElement = this.getRootElement();
+        this.initializeCells(rootElement.children);
 
         Gestures.addListener(this, 'track', this.trackHandler.bind(this));
-
-        // this['addEventListener']('click', (e) => {
-        //     this.currentCell = e.target;
-        //     this.selectNextCell();
-        // });
+        Gestures.addListener(rootElement, 'down', this.downHandler.bind(this));
+        Gestures.addListener(rootElement, 'up', this.upHandler.bind(this));
     }
 
     // Polymer
     public disconnectedCallback(): void {
         super.disconnectedCallback();
+
+        const rootElement: HTMLElement = this.getRootElement();
         Gestures.removeListener(this, 'track', this.trackHandler.bind(this));
+        Gestures.removeListener(rootElement, 'down', this.downHandler.bind(this));
+        Gestures.removeListener(rootElement, 'up', this.upHandler.bind(this));
+    }
+
+    private getRootElement(): HTMLElement {
+        return this['children'].length > 0 ? this : this['shadowRoot'];
     }
 
     private initializeCells(rows: HTMLCollection): void {
@@ -119,14 +128,6 @@ export class RhiUiIsncsciGrid extends GestureEventListeners(PolymerElement) {
         // if (this.SelectedCell)
         //     this.SelectedCell.View.addClass('selected');
     }
-
-    /*public bindTo(isncsciExam: IsncsciExam): RhiUiIsncsciGrid {
-        if (this.isncsciExam) {
-            return this;
-        }
-        
-        return this;
-    }*/
 
     private static rectanglesIntersect(r1Top: number, r1Right: number, r1Bottom: number, r1Left: number, r2Top: number, r2Right: number, r2Bottom: number, r2Left: number): boolean {
         return !(r2Left > r1Right || 
@@ -189,6 +190,43 @@ export class RhiUiIsncsciGrid extends GestureEventListeners(PolymerElement) {
         }
 
         this.updateRange(top, right, bottom, left);
+    }
+
+    private getCellFromElementPath(element: any): HTMLElement {
+        let currentElement = element;
+        let cell: HTMLElement = null;
+
+        while (currentElement && !cell) {
+            if (currentElement.tagName && currentElement.tagName.toLowerCase() === RhiUiIsncsciGridCell.is) {
+                cell = currentElement;
+            }
+
+            currentElement = currentElement.parentNode;
+        }
+
+        return cell;
+    }
+
+    private downHandler(e: any): void {
+        const cell: HTMLElement = this.getCellFromElementPath(e.target);
+
+        if (!cell) {
+            return;
+        }
+
+        const event: CustomEvent = new CustomEvent('cell-down', {detail: {name: cell.getAttribute('name')}});
+        this['dispatchEvent'](event);
+    }
+
+    private upHandler(e): void {
+        const cell: HTMLElement = this.getCellFromElementPath(e.target);
+
+        if (!cell) {
+            return;
+        }
+
+        const event: CustomEvent = new CustomEvent('cell-up', {detail: {name: cell.getAttribute('name')}});
+        this['dispatchEvent'](event);
     }
 }
 

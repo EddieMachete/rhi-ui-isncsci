@@ -15,3 +15,4 @@ node_modules/
 
 package-lock.json
 src/rhi-ui-isncsci-grid/demo/scripts
+src/rhi-ui-isncsci-wide/demo/scripts
