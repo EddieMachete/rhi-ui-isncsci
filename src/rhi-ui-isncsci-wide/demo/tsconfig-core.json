@@ -15,10 +15,12 @@
         "sourceMap": false,
         "target": "es6"
     },
-    "files": [
-        "../../../node_modules/rhi-core-isncsci-algorithm/index.ts",
-        "../../../node_modules/rhi-core-isncsci-algorithm/src/binaryObservation.ts",
-        "../../../node_modules/rhi-core-isncsci-algorithm/src/isncsciExam.ts",
-        "../../../node_modules/rhi-core-isncsci-algorithm/src/neuroLevel.ts"
+    "include": [
+        "../../../node_modules/rhi-core-isncsci-algorithm/boundaries.ts",
+        "../../../node_modules/rhi-core-isncsci-algorithm/boundaries/src/**/*.ts",
+        "../../../node_modules/rhi-core-isncsci-algorithm/domain.ts",
+        "../../../node_modules/rhi-core-isncsci-algorithm/domain/src/**/*.ts",
+        "../../../node_modules/rhi-core-isncsci-algorithm/usecases.ts",
+        "../../../node_modules/rhi-core-isncsci-algorithm/usecases/src/**/*.ts"
     ]
 }

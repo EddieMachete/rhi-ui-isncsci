@@ -1,8 +1,9 @@
-export const UPDATE_C2 = 'NEUROLOGY_FORM_UPDATE_C2';
+export const SET_DERMATOME_VALUE = 'NEUROLOGY_FORM_SET_DERMATOME_VALUE';
 
-export const updateC2 = (rightTouch: string) => {
+export const setDermatomeValue = (dermatomeName: string, value: string) => {
   return {
-    type: UPDATE_C2,
-    rightTouch
+    type: SET_DERMATOME_VALUE,
+    dermatomeName,
+    value
   };
 };

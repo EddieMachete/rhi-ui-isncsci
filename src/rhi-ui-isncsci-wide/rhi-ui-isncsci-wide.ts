@@ -9,14 +9,16 @@ Author: RhiTech <tech@rickhanseninstitute.org>
 //import { html, PolymerElement } from '@polymer/polymer';
 import { html, LitElement } from '@polymer/lit-element';
 import { TemplateResult } from 'lit-html';
+import { SetDermatomeValueUseCase } from 'rhi-core-isncsci-algorithm/usecases/src/setDermatomeValue.usecase';
 import { connect } from '../helpers/connect-mixin';
 import { store } from '../store/store';
-import { RhiUiIsncsciGridCell } from '../rhi-ui-isncsci-grid/rhi-ui-isncsci-grid-cell';
+import { AppStoreProvider } from '../providers';
 
 export class RhiUiIsncsciWide extends connect(store)(LitElement) {
     public static get is(): string { return 'rhi-ui-isncsci-wide'; }
 
     private leftGrid: HTMLElement;
+    private appStoreProvider: AppStoreProvider;
 
     //public static get template(): html {
     public _render(props: any): TemplateResult {
@@ -49,8 +51,19 @@ export class RhiUiIsncsciWide extends connect(store)(LitElement) {
                 }
             </style>
             <!-- shadow DOM for your element -->
+            <div class="cell-input">
+                <button value="0" on-click="${e => this.handleCellInput(e)}">0</button>
+                <button value="1" on-click="${e => this.handleCellInput(e)}">1</button>
+                <button value="2" on-click="${e => this.handleCellInput(e)}">2</button>
+                <button value="3" on-click="${e => this.handleCellInput(e)}">3</button>
+                <button value="4" on-click="${e => this.handleCellInput(e)}">4</button>
+                <button value="5" on-click="${e => this.handleCellInput(e)}">5</button>
+            </div>
             <div class="display-flex">
-                <rhi-ui-isncsci-wide-left-grid id="leftGrid" class="user-select-none" on-celldown="onCellDown"></rhi-ui-isncsci-wide-left-grid>
+                <rhi-ui-isncsci-wide-left-grid id="leftGrid"
+                                               class="user-select-none"
+                                               on-cell-down="${this.handleGridCellDown}"
+                                               on-cell-up="${this.handleGridCellUp}"></rhi-ui-isncsci-wide-left-grid>
                 <div class="diagram">ASIA Man Diagram</div>
                 <div class="grid right">Right Grid</div>
             </div>
@@ -64,40 +77,38 @@ export class RhiUiIsncsciWide extends connect(store)(LitElement) {
 
     public constructor() {
         super();
+
+        this.appStoreProvider = new AppStoreProvider();
     }
 
     public ready(): void {
         super.ready();
 
         this.leftGrid = this.shadowRoot.getElementById('leftGrid');
-        console.log(this.leftGrid);
-
-        this.leftGrid.addEventListener('cell-down', this.gridCellDown);
-        this.leftGrid.addEventListener('cell-up', this.gridCellUp);
     }
 
     // Polymer
     public disconnectedCallback(): void {
         super.disconnectedCallback();
 
-        this.leftGrid.removeEventListener('cell-down', this.gridCellDown);
-        this.leftGrid.removeEventListener('cell-up', this.gridCellUp);
+        this.leftGrid.removeEventListener('cell-down', this.handleGridCellDown);
+        this.leftGrid.removeEventListener('cell-up', this.handleGridCellUp);
     }
 
     public stateChanged(state: any): void {
         //console.log(state);
     }
 
-    private static getCellFromEventPath(path: any[]): HTMLElement {
-        return path.find((e: any) => e.tagName && e.tagName.toLowerCase() === RhiUiIsncsciGridCell.is);
-    }
-
-    private gridCellDown(e: CustomEvent): void {
+    private handleGridCellDown(e: CustomEvent): void {
         console.log('cell down');
     }
 
-    private gridCellUp(e: CustomEvent): void {
+    private handleGridCellUp(e: CustomEvent): void {
         console.log('cell up');
+    }
+
+    public handleCellInput(e): void {
+        new SetDermatomeValueUseCase(this.appStoreProvider).execute('c2RightTouch', e.target.value);
     }
 }
 
