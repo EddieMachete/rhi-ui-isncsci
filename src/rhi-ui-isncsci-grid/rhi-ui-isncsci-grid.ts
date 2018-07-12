@@ -121,6 +121,16 @@ export class RhiUiIsncsciGrid extends GestureEventListeners(LitElement) {
         }
     }
 
+    public getCellValue(name: string): string {
+        const cell: HTMLElement = this.cells.find((c: HTMLElement) => c.getAttribute('name') === name);
+        return cell ? cell.getAttribute('value') : '';
+    }
+
+    public clearSelectionRange(): void {
+        this.cells.forEach((c: HTMLElement) => c.removeAttribute('highlighted'));
+        this.selectionRange = [];
+    }
+
     private static rectanglesIntersect(r1Top: number, r1Right: number, r1Bottom: number, r1Left: number, r2Top: number, r2Right: number, r2Bottom: number, r2Left: number): boolean {
         return !(r2Left > r1Right || 
                  r2Right < r1Left || 
@@ -131,7 +141,7 @@ export class RhiUiIsncsciGrid extends GestureEventListeners(LitElement) {
     private updateRange(top: number, right: number, bottom: number, left: number): void {
         const range: HTMLElement[] = [];
 
-        this.cells.forEach((c) => {
+        this.cells.forEach((c: HTMLElement) => {
             if (RhiUiIsncsciGrid.rectanglesIntersect(c.offsetTop, c.offsetLeft + c.offsetWidth, c.offsetTop + c.offsetHeight, c.offsetLeft, top, right, bottom, left)) {
                 c.setAttribute('highlighted', 'true');
                 range.push(c);

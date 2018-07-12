@@ -11,6 +11,7 @@ import { html, LitElement } from '@polymer/lit-element';
 import { TemplateResult } from 'lit-html';
 import { SelectDermatomeUseCase } from 'rhi-core-isncsci-algorithm/usecases/src/selectDermatome.usecase';
 import { SetDermatomeValueUseCase } from 'rhi-core-isncsci-algorithm/usecases/src/setDermatomeValue.usecase';
+import { UpdateDermatomesInRangeUseCase } from 'rhi-core-isncsci-algorithm/usecases/src/updateDermatomesInRange.usecase';
 import { connect } from '../helpers/connect-mixin';
 import { store } from '../store/store';
 import { AppStoreProvider } from '../providers';
@@ -21,6 +22,7 @@ export class RhiUiIsncsciWide extends connect(store)(LitElement) {
     private leftGrid: HTMLElement;
     private appStoreProvider: AppStoreProvider;
     private dermatomeSelected: string;
+    private dermatomeSelectedValue: string = '';
 
     //public static get template(): html {
     public _render(props: any): TemplateResult {
@@ -96,6 +98,7 @@ export class RhiUiIsncsciWide extends connect(store)(LitElement) {
 
     public stateChanged(state: any): void {
         this.dermatomeSelected = state.uiState.dermatomeSelected;
+        this.dermatomeSelectedValue = this.dermatomeSelected ? state.neurologyForm[this.dermatomeSelected] : '';
     }
 
     private handleGridCellDown(e: CustomEvent): void {
@@ -103,7 +106,16 @@ export class RhiUiIsncsciWide extends connect(store)(LitElement) {
     }
 
     private handleGridCellUp(e: CustomEvent): void {
-        console.log('cell up');
+        const selectionRange: string[] = this.leftGrid['selectionRange']
+        ? this.leftGrid['selectionRange'].map((cell: HTMLElement) => cell.getAttribute('name')) : [];
+        this.leftGrid['clearSelectionRange']();
+
+        if (selectionRange.length === 0 || !this.dermatomeSelected) {
+            return;
+        }
+
+        new UpdateDermatomesInRangeUseCase(this.appStoreProvider)
+        .execute(selectionRange, this.dermatomeSelectedValue);
     }
 
     public handleCellInput(e): void {

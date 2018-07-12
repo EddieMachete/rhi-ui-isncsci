@@ -34,7 +34,7 @@ export class AppStoreProvider implements iIsncsciAppStoreProvider {
     }
 
     public updateDermatomesInRange(dermatomeNames: string[], value: string): Promise<void> {
-        console.log('updateDermatomesInRange');
+        store.dispatch(NeurologyFormActions.updateDermatomesInRange(dermatomeNames, value));
         return Promise.resolve();
     }
 }
