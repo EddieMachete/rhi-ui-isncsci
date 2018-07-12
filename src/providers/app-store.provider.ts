@@ -19,7 +19,6 @@ export class AppStoreProvider implements iIsncsciAppStoreProvider {
     }
 
     public selectDermatome(dermatomeName: string): Promise<void> {
-        console.log('selectDermatome');
         store.dispatch(UiStateActions.selectDermatome(dermatomeName));
         return Promise.resolve();
     }
