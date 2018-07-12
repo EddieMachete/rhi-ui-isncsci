@@ -9,6 +9,7 @@ Author: RhiTech <tech@rickhanseninstitute.org>
 //import { html, PolymerElement } from '@polymer/polymer';
 import { html, LitElement } from '@polymer/lit-element';
 import { TemplateResult } from 'lit-html';
+import { SelectDermatomeUseCase } from 'rhi-core-isncsci-algorithm/usecases/src/selectDermatome.usecase';
 import { SetDermatomeValueUseCase } from 'rhi-core-isncsci-algorithm/usecases/src/setDermatomeValue.usecase';
 import { connect } from '../helpers/connect-mixin';
 import { store } from '../store/store';
@@ -19,6 +20,7 @@ export class RhiUiIsncsciWide extends connect(store)(LitElement) {
 
     private leftGrid: HTMLElement;
     private appStoreProvider: AppStoreProvider;
+    private dermatomeSelected: string;
 
     //public static get template(): html {
     public _render(props: any): TemplateResult {
@@ -62,8 +64,8 @@ export class RhiUiIsncsciWide extends connect(store)(LitElement) {
             <div class="display-flex">
                 <rhi-ui-isncsci-wide-left-grid id="leftGrid"
                                                class="user-select-none"
-                                               on-cell-down="${this.handleGridCellDown}"
-                                               on-cell-up="${this.handleGridCellUp}"></rhi-ui-isncsci-wide-left-grid>
+                                               on-cell-down="${e => this.handleGridCellDown(e)}"
+                                               on-cell-up="${e => this.handleGridCellUp(e)}"></rhi-ui-isncsci-wide-left-grid>
                 <div class="diagram">ASIA Man Diagram</div>
                 <div class="grid right">Right Grid</div>
             </div>
@@ -90,17 +92,14 @@ export class RhiUiIsncsciWide extends connect(store)(LitElement) {
     // Polymer
     public disconnectedCallback(): void {
         super.disconnectedCallback();
-
-        this.leftGrid.removeEventListener('cell-down', this.handleGridCellDown);
-        this.leftGrid.removeEventListener('cell-up', this.handleGridCellUp);
     }
 
     public stateChanged(state: any): void {
-        //console.log(state);
+        this.dermatomeSelected = state.uiState.dermatomeSelected;
     }
 
     private handleGridCellDown(e: CustomEvent): void {
-        console.log('cell down');
+        new SelectDermatomeUseCase(this.appStoreProvider).execute(e.detail.name);
     }
 
     private handleGridCellUp(e: CustomEvent): void {
@@ -108,7 +107,7 @@ export class RhiUiIsncsciWide extends connect(store)(LitElement) {
     }
 
     public handleCellInput(e): void {
-        new SetDermatomeValueUseCase(this.appStoreProvider).execute('c2RightTouch', e.target.value);
+        new SetDermatomeValueUseCase(this.appStoreProvider).execute(this.dermatomeSelected, e.target.value);
     }
 }
 

@@ -63,6 +63,7 @@ export class RhiUiIsncsciGridCell extends PolymerElement {
     public static get properties(): object {
         return {
             selected: {
+                reflectToAttribute: true,
                 type: Boolean,
                 value: false
             },

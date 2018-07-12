@@ -49,7 +49,7 @@ export class RhiUiIsncsciGrid extends GestureEventListeners(LitElement) {
     }
 
     //private isncsciExam: IsncsciExam = null;
-    private currentCell: HTMLElement;
+    private selectedCell: HTMLElement;
     
     // I don't like using any, but that is what
     private currentTrackSource: any = null;
@@ -108,25 +108,17 @@ export class RhiUiIsncsciGrid extends GestureEventListeners(LitElement) {
         }
     }
 
-    public selectNextCell(): void {
-        if (!this.currentCell) {
-            return;
+    public selectCell(name: string) {
+        if (this.selectedCell) {
+            this.selectedCell['selected'] = false;
+            this.selectedCell = null;
         }
 
-
-        //console.log(`${this.currentCell.offsetLeft}, ${this.currentCell.offsetTop}`);
-        //console.log(this.currentCell.nextElementSibling);
-        //console.log(this.currentCell.parentNode);
-    }
-
-    public selectCellWith(dermatome) {
-        // if (this.SelectedCell)
-        //     this.SelectedCell.View.removeClass('selected');
-    
-        // this.SelectedCell = !dermatome ? null : this.SmartCells[dermatome.Level.Name + dermatome.Side + dermatome.MeasurementType];
+        this.selectedCell = this.cells.find((c: HTMLElement) => c.getAttribute('name') === name);
         
-        // if (this.SelectedCell)
-        //     this.SelectedCell.View.addClass('selected');
+        if (this.selectedCell) {
+            this.selectedCell['selected'] = true;
+        }
     }
 
     private static rectanglesIntersect(r1Top: number, r1Right: number, r1Bottom: number, r1Left: number, r2Top: number, r2Right: number, r2Bottom: number, r2Left: number): boolean {

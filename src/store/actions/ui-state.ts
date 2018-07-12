@@ -6,7 +6,11 @@ Author: RhiTech <tech@rickhanseninstitute.org>
 */
 'use strict';
 
-import { combineReducers, createStore } from 'redux';
-import { rootReducer } from './reducers';
+export const SELECT_DERMATOME = 'UI_STATE_SELECT_DERMATOME';
 
-export const store = createStore(rootReducer);
+export const selectDermatome = (dermatomeName: string) => {
+  return {
+    type: SELECT_DERMATOME,
+    dermatomeName
+  };
+};
