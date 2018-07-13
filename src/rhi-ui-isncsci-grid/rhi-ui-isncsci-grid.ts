@@ -45,7 +45,9 @@ export class RhiUiIsncsciGrid extends GestureEventListeners(LitElement) {
 
     // Polymer
     public static get properties(): object {
-        return {};
+        return {
+            previewSelectedValueOnRange: Boolean
+        };
     }
 
     //private isncsciExam: IsncsciExam = null;
@@ -127,7 +129,11 @@ export class RhiUiIsncsciGrid extends GestureEventListeners(LitElement) {
     }
 
     public clearSelectionRange(): void {
-        this.cells.forEach((c: HTMLElement) => c.removeAttribute('highlighted'));
+        this.cells.forEach((c: HTMLElement) => {
+            c.removeAttribute('highlighted');
+            c.removeAttribute('preview');
+        });
+
         this.selectionRange = [];
     }
 
@@ -136,17 +142,30 @@ export class RhiUiIsncsciGrid extends GestureEventListeners(LitElement) {
                  r2Right < r1Left || 
                  r2Top > r1Bottom ||
                  r2Bottom < r1Top);
-      }
+    }
+
+    private isValidForRange(cell: HTMLElement): boolean {
+        return true;
+    }
 
     private updateRange(top: number, right: number, bottom: number, left: number): void {
         const range: HTMLElement[] = [];
+        const currentValue: string = this.selectedCell ? this.selectedCell.getAttribute('value') : null;
 
         this.cells.forEach((c: HTMLElement) => {
-            if (RhiUiIsncsciGrid.rectanglesIntersect(c.offsetTop, c.offsetLeft + c.offsetWidth, c.offsetTop + c.offsetHeight, c.offsetLeft, top, right, bottom, left)) {
+            if (
+                RhiUiIsncsciGrid.rectanglesIntersect(c.offsetTop, c.offsetLeft + c.offsetWidth, c.offsetTop + c.offsetHeight, c.offsetLeft, top, right, bottom, left)
+                && this.isValidForRange(c)
+            ) {
                 c.setAttribute('highlighted', 'true');
                 range.push(c);
+
+                if (this['previewSelectedValueOnRange'] && currentValue) {
+                    c.setAttribute('preview', currentValue);
+                }
             } else {
                 c.removeAttribute('highlighted');
+                c.removeAttribute('preview');
             }
         });
 

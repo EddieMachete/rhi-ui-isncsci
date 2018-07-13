@@ -8,7 +8,13 @@ Author: RhiTech <tech@rickhanseninstitute.org>
 
 import { html } from '@polymer/lit-element';
 import { TemplateResult } from 'lit-html';
-import { motorLevelNameRegExp } from 'rhi-core-isncsci-algorithm/usecases/src/regularExpressions'
+import {
+    motorLevelNameRegExp,
+    validMotorNameRegExp,
+    validMotorValueRegExp,
+    validSensoryNameRegExp,
+    validSensoryValueRegExp
+} from 'rhi-core-isncsci-algorithm/usecases/src/regularExpressions'
 import { RhiUiIsncsciGrid } from '../rhi-ui-isncsci-grid/rhi-ui-isncsci-grid';
 import { connect } from '../helpers/connect-mixin';
 import { store } from '../store/store';
@@ -16,7 +22,6 @@ import { store } from '../store/store';
 export class RhiUiIsncsciWideLeftGrid extends connect(store)(RhiUiIsncsciGrid) {
     public static get is(): string { return 'rhi-ui-isncsci-wide-left-grid'; }
 
-    //public static get template(): html {
     public _render(props: any): TemplateResult {
         return html`
             <!-- shadow DOM for your element -->
@@ -44,159 +49,160 @@ export class RhiUiIsncsciWideLeftGrid extends connect(store)(RhiUiIsncsciGrid) {
             </style>
             <div class="row">
                 <div>C2</div>
-                <rhi-ui-isncsci-grid-cell name="c2RightTouch" value="${props.c2RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="c2RightPrick" value="${props.c2RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c2RightTouch" value$="${props.c2RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c2RightPrick" value$="${props.c2RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>C3</div>
-                <rhi-ui-isncsci-grid-cell name="c3RightTouch" value="${props.c3RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="c3RightPrick" value="${props.c3RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c3RightTouch" value$="${props.c3RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c3RightPrick" value$="${props.c3RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>C4</div>
-                <rhi-ui-isncsci-grid-cell name="c4RightTouch" value="${props.c4RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="c4RightPrick" value="${props.c4RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c4RightTouch" value$="${props.c4RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c4RightPrick" value$="${props.c4RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors C5</div>
-                <rhi-ui-isncsci-grid-cell name="c5RightMotor" value="${props.c5RightMotor}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="c5RightTouch" value="${props.c5RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="c5RightPrick" value="${props.c5RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c5RightMotor" value$="${props.c5RightMotor}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c5RightTouch" value$="${props.c5RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c5RightPrick" value$="${props.c5RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors C6</div>
-                <rhi-ui-isncsci-grid-cell name="c6RightMotor" value="${props.c6RightMotor}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="c6RightTouch" value="${props.c6RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="c6RightPrick" value="${props.c6RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c6RightMotor" value$="${props.c6RightMotor}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c6RightTouch" value$="${props.c6RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c6RightPrick" value$="${props.c6RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors C7</div>
-                <rhi-ui-isncsci-grid-cell name="c7RightMotor" value="${props.c7RightMotor}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="c7RightTouch" value="${props.c7RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="c7RightPrick" value="${props.c7RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c7RightMotor" value$="${props.c7RightMotor}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c7RightTouch" value$="${props.c7RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c7RightPrick" value$="${props.c7RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors C8</div>
-                <rhi-ui-isncsci-grid-cell name="c8RightMotor" value="${props.c8RightMotor}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="c8RightTouch" value="${props.c8RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="c8RightPrick" value="${props.c8RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c8RightMotor" value$="${props.c8RightMotor}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c8RightTouch" value$="${props.c8RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="c8RightPrick" value$="${props.c8RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors T1</div>
-                <rhi-ui-isncsci-grid-cell name="t1RightMotor" value="${props.t1RightMotor}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="t1RightTouch" value="${props.t1RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="t1RightPrick" value="${props.t1RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t1RightMotor" value$="${props.t1RightMotor}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t1RightTouch" value$="${props.t1RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t1RightPrick" value$="${props.t1RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors T2</div>
-                <rhi-ui-isncsci-grid-cell name="t2RightTouch" value="${props.t2RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="t2RightPrick" value="${props.t2RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t2RightTouch" value$="${props.t2RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t2RightPrick" value$="${props.t2RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors T3</div>
-                <rhi-ui-isncsci-grid-cell name="t3RightTouch" value="${props.t3RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="t3RightPrick" value="${props.t3RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t3RightTouch" value$="${props.t3RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t3RightPrick" value$="${props.t3RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors T4</div>
-                <rhi-ui-isncsci-grid-cell name="t4RightTouch" value="${props.t4RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="t4RightPrick" value="${props.t4RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t4RightTouch" value$="${props.t4RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t4RightPrick" value$="${props.t4RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors T5</div>
-                <rhi-ui-isncsci-grid-cell name="t5RightTouch" value="${props.t5RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="t5RightPrick" value="${props.t5RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t5RightTouch" value$="${props.t5RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t5RightPrick" value$="${props.t5RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors T6</div>
-                <rhi-ui-isncsci-grid-cell name="t6RightTouch" value="${props.t6RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="t6RightPrick" value="${props.t6RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t6RightTouch" value$="${props.t6RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t6RightPrick" value$="${props.t6RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors T7</div>
-                <rhi-ui-isncsci-grid-cell name="t7RightTouch" value="${props.t7RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="t7RightPrick" value="${props.t7RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t7RightTouch" value$="${props.t7RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t7RightPrick" value$="${props.t7RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors T8</div>
-                <rhi-ui-isncsci-grid-cell name="t8RightTouch" value="${props.t8RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="t8RightPrick" value="${props.t8RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t8RightTouch" value$="${props.t8RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t8RightPrick" value$="${props.t8RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors T9</div>
-                <rhi-ui-isncsci-grid-cell name="t9RightTouch" value="${props.t9RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="t9RightPrick" value="${props.t9RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t9RightTouch" value$="${props.t9RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t9RightPrick" value$="${props.t9RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors T10</div>
-                <rhi-ui-isncsci-grid-cell name="t10RightTouch" value="${props.t10RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="t10RightPrick" value="${props.t10RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t10RightTouch" value$="${props.t10RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t10RightPrick" value$="${props.t10RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors T11</div>
-                <rhi-ui-isncsci-grid-cell name="t11RightTouch" value="${props.t11RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="t11RightPrick" value="${props.t11RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t11RightTouch" value$="${props.t11RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t11RightPrick" value$="${props.t11RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors T12</div>
-                <rhi-ui-isncsci-grid-cell name="t12RightTouch" value="${props.t12RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="t12RightPrick" value="${props.t12RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t12RightTouch" value$="${props.t12RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="t12RightPrick" value$="${props.t12RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors L1</div>
-                <rhi-ui-isncsci-grid-cell name="l1RightTouch" value="${props.l1RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="l1RightPrick" value="${props.l1RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="l1RightTouch" value$="${props.l1RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="l1RightPrick" value$="${props.l1RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors L2</div>
-                <rhi-ui-isncsci-grid-cell name="l2RightMotor" value="${props.l2RightMotor}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="l2RightTouch" value="${props.l2RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="l2RightPrick" value="${props.l2RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="l2RightMotor" value$="${props.l2RightMotor}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="l2RightTouch" value$="${props.l2RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="l2RightPrick" value$="${props.l2RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors L3</div>
-                <rhi-ui-isncsci-grid-cell name="l3RightMotor" value="${props.l3RightMotor}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="l3RightTouch" value="${props.l3RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="l3RightPrick" value="${props.l3RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="l3RightMotor" value$="${props.l3RightMotor}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="l3RightTouch" value$="${props.l3RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="l3RightPrick" value$="${props.l3RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors L4</div>
-                <rhi-ui-isncsci-grid-cell name="l4RightMotor" value="${props.l4RightMotor}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="l4RightTouch" value="${props.l4RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="l4RightPrick" value="${props.l4RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="l4RightMotor" value$="${props.l4RightMotor}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="l4RightTouch" value$="${props.l4RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="l4RightPrick" value$="${props.l4RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors L5</div>
-                <rhi-ui-isncsci-grid-cell name="l5RightMotor" value="${props.l5RightMotor}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="l5RightTouch" value="${props.l5RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="l5RightPrick" value="${props.l5RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="l5RightMotor" value$="${props.l5RightMotor}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="l5RightTouch" value$="${props.l5RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="l5RightPrick" value$="${props.l5RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors S1</div>
-                <rhi-ui-isncsci-grid-cell name="s1RightMotor" value="${props.s1RightMotor}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="s1RightTouch" value="${props.s1RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="s1RightPrick" value="${props.s1RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="s1RightMotor" value$="${props.s1RightMotor}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="s1RightTouch" value$="${props.s1RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="s1RightPrick" value$="${props.s1RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors S2</div>
-                <rhi-ui-isncsci-grid-cell name="s2RightTouch" value="${props.s2RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="s2RightPrick" value="${props.s2RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="s2RightTouch" value$="${props.s2RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="s2RightPrick" value$="${props.s2RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors S3</div>
-                <rhi-ui-isncsci-grid-cell name="s3RightTouch" value="${props.s3RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="s3RightPrick" value="${props.s3RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="s3RightTouch" value$="${props.s3RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="s3RightPrick" value$="${props.s3RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
             <div class="row">
                 <div>Elbow flexors S4_5</div>
-                <rhi-ui-isncsci-grid-cell name="s4_5RightTouch" value="${props.s4_5RightTouch}"></rhi-ui-isncsci-grid-cell>
-                <rhi-ui-isncsci-grid-cell name="s4_5RightPrick" value="${props.s4_5RightPrick}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="s4_5RightTouch" value$="${props.s4_5RightTouch}"></rhi-ui-isncsci-grid-cell>
+                <rhi-ui-isncsci-grid-cell name="s4_5RightPrick" value$="${props.s4_5RightPrick}"></rhi-ui-isncsci-grid-cell>
             </div>
         `;
     }
 
     public static get properties(): object {
         return {
+            abc: { type: String, value: 'def' },
             c2RightTouch: { type: String, value: '' },
             c2RightPrick: { type: String, value: '' },
             c3RightTouch: { type: String, value: '' },
@@ -272,6 +278,8 @@ export class RhiUiIsncsciWideLeftGrid extends connect(store)(RhiUiIsncsciGrid) {
 
     public ready(): void {
         super.ready();
+        
+        this['previewSelectedValueOnRange'] = true;
     }
 
     public stateChanged(state: any): void {
@@ -303,6 +311,21 @@ export class RhiUiIsncsciWideLeftGrid extends connect(store)(RhiUiIsncsciGrid) {
         if (this.cells) {
             this.selectCell(state.uiState.dermatomeSelected);
         }
+    }
+
+    private isValidForRange(cell: HTMLElement): boolean {
+        if (!this.selectedCell) {
+            return false;
+        }
+
+        const name: string = cell.getAttribute('name');
+        const cellValue: string = this.selectedCell.getAttribute('value');
+
+        if (validMotorNameRegExp.test(name) && validMotorValueRegExp.test(cellValue)) {
+            return true;
+        }
+
+        return validSensoryNameRegExp.test(name) && validSensoryValueRegExp.test(cellValue) ? true : false;
     }
 }
 

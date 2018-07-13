@@ -6,20 +6,21 @@ Author: RhiTech <tech@rickhanseninstitute.org>
 */
 'use strict';
 
-import { html, PolymerElement } from '@polymer/polymer';
+import { html, LitElement } from '@polymer/lit-element';
+import { TemplateResult } from 'lit-html';
 
-export class RhiUiIsncsciGridCell extends PolymerElement {
+export class RhiUiIsncsciGridCell extends LitElement {    
+//export class RhiUiIsncsciGridCell extends PolymerElement {
     public static get is(): string { return 'rhi-ui-isncsci-grid-cell'; }
+    public static get observedAttributes(): string[] {
+        return ['value', 'preview'];
+    }
 
-    public static get template(): html {
+    public _render(props: any): TemplateResult {
         return html`
             <style>
                 :host {
                     display: block;
-
-                    /*-webkit-box-shadow: 2px 2px rgba(226, 226, 226, 0.7);
-                    -moz-box-shadow: 2px 2px rgba(226, 226, 226, 0.7);
-                    box-shadow: 2px 2px rgba(226, 226, 226, 0.7);*/
                 }
 
                 :host([selected]) .cell {
@@ -37,49 +38,60 @@ export class RhiUiIsncsciGridCell extends PolymerElement {
                     margin: 2px;
                     width: 40px;
                 }
-
-                /*.smart-cell.entered-by-user span {
-                    background-color:#FFF;
-                }
-
-                .smart-cell a {
-                    display:block;
-                    height:25px;
-                    line-height:23px;
-                    text-align:center;
-                    text-decoration:none;
-                }*/
-
-                /*.right-column .selected span,
-                .left-column .selected span {
-                border-color:Orange;
-                }*/
             </style>
             <!-- shadow DOM for your element -->
-            <div class="cell">{{value}}</span>
+            <div class="cell">${this.displayValue}</span>
         `;
     }
 
-    public static get properties(): object {
-        return {
-            selected: {
-                reflectToAttribute: true,
-                type: Boolean,
-                value: false
-            },
-            value: {
-                type: String,
-                value: ''
-            }
-        };
+    private displayValue: string = '';
+
+    public get selected(): boolean { return this.hasAttribute('selected'); }
+    public set selected(value: boolean) {
+        if (!value) {
+            this.removeAttribute('selected');
+        } else if (!this.selected) {
+            this.setAttributeNode(document.createAttribute('selected'));
+        }
+    }
+
+    public get value(): string { return this.getAttribute('value'); }
+    public set value(v: string) {
+        if (v !== this.value) {
+            this.setAttribute('value', v);
+        }
+    }
+
+    public get preview(): string { return this.getAttribute('preview'); }
+    public set preview(v: string) { 
+        if (v && v !== this.preview) {
+            this.setAttribute('preview', v);
+            return;
+        }
+        
+        if (!v && this.hasAttribute('preview')) {
+            this.removeAttribute('preview');
+        }
     }
 
     public constructor() {
         super();
     }
 
-    public ready(): void {
-        super.ready();
+    public attributeChangedCallback(name, oldValue, newValue): void {
+        super.attributeChangedCallback(name, oldValue, newValue);
+
+
+        if (oldValue === newValue || !/^(preview|value)$/.test(name)) {
+            return;
+        }
+        
+        this.updateDisplayValue();
+        this.requestRender();
+    }
+
+    private updateDisplayValue(): void {
+        this.displayValue = this.hasAttribute('preview') ? this.preview : this.value;
     }
 }
 
