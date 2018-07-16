@@ -194,20 +194,22 @@ export class RhiUiIsncsciGrid extends GestureEventListeners(LitElement) {
         let top: number;
         let bottom: number;
 
+        // Remember that the detail returns the coordinates based on the screen.
+        // To tell where we are on the actual page we need to add the distance scrolled.
         if (e.detail.dx > 0) {
-            left = e.detail.x - e.detail.dx;
-            right = e.detail.x;
+            left = e.detail.x + window.pageXOffset - e.detail.dx;
+            right = e.detail.x + window.pageXOffset;
         } else {
-            left = e.detail.x;
-            right = e.detail.x - e.detail.dx;
+            left = e.detail.x + window.pageXOffset;
+            right = e.detail.x + window.pageXOffset - e.detail.dx;
         }
 
         if (e.detail.dy > 0) {
-            top = e.detail.y - e.detail.dy;
-            bottom = e.detail.y;
+            top = e.detail.y + window.pageYOffset - e.detail.dy;
+            bottom = e.detail.y + window.pageYOffset;
         } else {
-            top = e.detail.y;
-            bottom = e.detail.y - e.detail.dy;
+            top = e.detail.y + window.pageYOffset;
+            bottom = e.detail.y + window.pageYOffset - e.detail.dy;
         }
 
         this.updateRange(top, right, bottom, left);
