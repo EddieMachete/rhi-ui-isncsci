@@ -31,13 +31,37 @@ Author: RhiTech <tech@rickhanseninstitute.org>
         /*html {
             --nav-background-color: red;
         }*/
+        
+        .row {
+            display: flex;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
     <div class="main-content">
         <h3>&lt;rhi-ui-isncsci-grid&gt;</h3>
         <div class="container">
-            <rhi-ui-isncsci-neurology-form></rhi-ui-isncsci-neurology-form>
+            <rhi-ui-isncsci-grid>
+                <div class="row">
+                    <rhi-ui-isncsci-grid-cell></rhi-ui-isncsci-grid-cell>
+                    <rhi-ui-isncsci-grid-cell></rhi-ui-isncsci-grid-cell>
+                    <rhi-ui-isncsci-grid-cell></rhi-ui-isncsci-grid-cell>
+                    <rhi-ui-isncsci-grid-cell></rhi-ui-isncsci-grid-cell>
+                </div>
+                <div class="row">
+                    <rhi-ui-isncsci-grid-cell></rhi-ui-isncsci-grid-cell>
+                    <rhi-ui-isncsci-grid-cell></rhi-ui-isncsci-grid-cell>
+                    <rhi-ui-isncsci-grid-cell></rhi-ui-isncsci-grid-cell>
+                    <rhi-ui-isncsci-grid-cell></rhi-ui-isncsci-grid-cell>
+                </div>
+                <div class="row">
+                    <rhi-ui-isncsci-grid-cell></rhi-ui-isncsci-grid-cell>
+                    <rhi-ui-isncsci-grid-cell></rhi-ui-isncsci-grid-cell>
+                    <rhi-ui-isncsci-grid-cell></rhi-ui-isncsci-grid-cell>
+                    <rhi-ui-isncsci-grid-cell></rhi-ui-isncsci-grid-cell>
+                </div>
+            </rhi-ui-isncsci-grid>
         </div>
     </div>
     <script type="module">

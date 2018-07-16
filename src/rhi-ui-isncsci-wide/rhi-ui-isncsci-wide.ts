@@ -9,9 +9,7 @@ Author: RhiTech <tech@rickhanseninstitute.org>
 //import { html, PolymerElement } from '@polymer/polymer';
 import { html, LitElement } from '@polymer/lit-element';
 import { TemplateResult } from 'lit-html';
-import { SelectDermatomeUseCase } from 'rhi-core-isncsci-algorithm/usecases/src/selectDermatome.usecase';
-import { SetDermatomeValueUseCase } from 'rhi-core-isncsci-algorithm/usecases/src/setDermatomeValue.usecase';
-import { UpdateDermatomesInRangeUseCase } from 'rhi-core-isncsci-algorithm/usecases/src/updateDermatomesInRange.usecase';
+import { SelectDermatomeUseCase, SetDermatomeValueUseCase, UpdateDermatomesInRangeUseCase } from 'rhi-core-isncsci-algorithm/usecases';
 import { connect } from '../helpers/connect-mixin';
 import { store } from '../store/store';
 import { AppStoreProvider } from '../providers';
@@ -30,6 +28,8 @@ export class RhiUiIsncsciWide extends connect(store)(LitElement) {
             <style>
                 :host {
                     display: block;
+                    --grid-highlight-color: #C60;
+                    --grid-selected-border-color: #C60;
                 }
                 
                 .display-flex {

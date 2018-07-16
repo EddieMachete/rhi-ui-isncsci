@@ -24,19 +24,29 @@ export class RhiUiIsncsciGridCell extends LitElement {
                 }
 
                 :host([selected]) .cell {
-                    border-color: red;
+                    border-color: var(--grid-selected-border-color, #666);
                 }
 
-                :host([highlighted]) .cell {
-                    background-color: orange;
+                :host([special]) .cell {
+                    background-color: var(--grid-special-background-color, #FFF);
+                }
+
+                :host([highlighted]) .cell,
+                :host([special][highlighted]) .cell {
+                    color: var(--grid-highlight-color, #FFF);
+                    background-color: var(--grid-highlight-background-color, #CCC);
                 }
 
                 .cell {
-                    background-color:#E2E2E2;
+                    background-color: var(--grid-background-color, #E2E2E2);
                     border:solid 1px #CCC;
-                    height: 32px;
-                    margin: 2px;
-                    width: 40px;
+                    color: var(--grid-color, #333);
+                    font-size: 14px;
+                    height: 29px;
+                    line-height: 30px;
+                    margin: 1px;
+                    text-align: center;
+                    width: 37px;
                 }
             </style>
             <!-- shadow DOM for your element -->
