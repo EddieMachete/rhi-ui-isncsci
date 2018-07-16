@@ -9,7 +9,8 @@
   },
   "description": "Web components package for the ISNCSCI project.",
   "devDependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "typescript": "^2.9.2"
   },
   "homepage": "https://www.rickhanseninstitute.org/rhi-isncsci/",
   "license": "MIT",
@@ -18,7 +19,8 @@
   "private": false,
   "repository": "https://github.com/rick-hansen-institute/rhi-ui-isncsci.git",
   "scripts": {
+    "tsc": "tsc --watch",
     "start": "node server.js"
   },
-  "version": "0.0.4"
+  "version": "0.0.5"
 }

@@ -19,9 +19,13 @@ By following *Clean Architecture* approaches and *web components* standards we c
 There are currently no build steps required. When we move to HTML packages and ditch HTML imports we will probably start coding with *Type Script*.
 
 #Demo and Test
+<!--
 Each folder in this package contains an individual *web component* with its own *demo* and test *folder*.
 In your browser, open the *test/index.html* file to run the tests for a particular component.
 In your browser, open the *demo/index.html* file to view the demo for a particular component.
+-->
+1. In the root of the project folder run the ```npm run tsc``` command.
+2. Navigate to demo that you want to view to see the result (e.g. http://127.0.0.1:8081/demo/rhi-ui-isncsci-wide/)
 
 #Contribute
 When working on this project, follow these steps:
