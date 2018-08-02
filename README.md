@@ -1,4 +1,6 @@
-# Introduction 
+> :warning: These components are still a work in progress. :warning:
+
+# Introduction
 *rhi-u-isncscii* contains reusable user interface [web components](https://www.webcomponents.org/introduction) for the ISNCSCI project.
 We are currently using [Google Polymer](https://www.polymer-project.org/) for our syntactic sugar.
 
@@ -10,13 +12,8 @@ The recent [Custom Elements Specification](https://w3c.github.io/webcomponents/s
 If it runs on the web platform, it will work.
 By following *Clean Architecture* approaches and *web components* standards we can finally live up to our loftiest engineering goals.
 
-#Getting Started
-1. Make sure you have access to our npm stream by adding our key to your local *.npmrc* file.  Ask the team if you do not know what that means.
-2. *git clone https://github.com/rick-hansen-institute/rhi-ui-isncsci.git*
-3. *npm install*
-
 #Build
-There are currently no build steps required. When we move to HTML packages and ditch HTML imports we will probably start coding with *Type Script*.
+polymer build
 
 #Demo and Test
 <!--
