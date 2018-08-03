@@ -70,7 +70,9 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                 .cell {
                     background-color: var(--isncsci-cell-color, #F2F2F2);
                     height: 40px;
+                    line-height: 40px;
                     margin-left: 8px;
+                    text-align: center;
                     width: 48px;
                 }
 
@@ -134,23 +136,23 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                 </div>
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">${props.textUpperMotor}</span></div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-upper-motor')}">&nbsp;</div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-upper-motor')}">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-upper-motor')}">${props.rightUpperMotor}</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-upper-motor')}">${props.leftUpperMotor}</div>
                 </div>
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">${props.textLowerMotor}</span></div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-lower-motor')}">&nbsp;</div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-lower-motor')}">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-lower-motor')}">${props.rightLowerMotor}</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-lower-motor')}">${props.leftLowerMotor}</div>
                 </div>
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">${props.textLightTouch}</span></div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-touch')}">&nbsp;</div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-touch')}">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-touch')}">${props.rightTouch}</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-touch')}">${props.leftTouch}</div>
                 </div>
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">${props.textPinPrick}</span></div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-prick')}">&nbsp;</div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-prick')}">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-prick')}">${props.rightPrick}</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-prick')}">${props.leftPrick}</div>
                 </div>
             </div>
             <div class="grid">
@@ -198,27 +200,27 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                 </div>
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">${props.textSensoryNl}</span></div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-sensory-nl')}">&nbsp;</div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-sensory-nl')}">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-sensory-nl')}">${props.rightSensoryNl}</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-sensory-nl')}">${props.leftSensoryNl}</div>
                 </div>
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">${props.textMotorNl}</span></div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-motor-nl')}">&nbsp;</div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-motor-nl')}">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-motor-nl')}">${props.rightMotorNl}</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-motor-nl')}">${props.leftMotorNl}</div>
                 </div>
             </div>
             <div class="grid">
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">${props.textNli}</span></div>
-                    <div class="cell">&nbsp;</div>
+                    <div class="cell">${props.nli}</div>
                 </div>
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">${props.textCompleteIncomplete}</span></div>
-                    <div class="cell">&nbsp;</div>
+                    <div class="cell">${props.completeIncomplete}</div>
                 </div>
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">${props.textAis}</span></div>
-                    <div class="cell">&nbsp;</div>
+                    <div class="cell">${props.ais}</div>
                 </div>
             </div>
             <div class="grid">
@@ -228,27 +230,61 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                 </div>
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">${props.textSensoryNlZpp}</span></div>
-                    <div class="cell">&nbsp;</div>
-                    <div class="cell">&nbsp;</div>
+                    <div class="cell">${props.rightSensoryNlZpp}</div>
+                    <div class="cell">${props.leftSensoryNlZpp}</div>
                 </div>
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">${props.textMotorNlZpp}</span></div>
-                    <div class="cell">&nbsp;</div>
-                    <div class="cell">&nbsp;</div>
+                    <div class="cell">${props.rightMotorNlZpp}</div>
+                    <div class="cell">${props.leftMotorNlZpp}</div>
                 </div>
             </div>
             <div class$="${this.commentsClass}">
                 <div class="label secondary-text">${props.textComments}</div>
-                <textarea id="comments" rows="1"></textarea>
+                <textarea id="comments" rows="1" value="${props.comments}"></textarea>
             </div>
         `;
     }
 
-    private comments: HTMLTextAreaElement;
+    private commentsElement: HTMLTextAreaElement;
     private commentsClass: string = 'comments-component';
+    
+    public static get observedAttributes(): string[] {
+        return ['comments'];
+    }
+
+    public get comments(): string { return this.commentsElement.value; }
+    public set comments(value: string) {
+        if (!value) {
+            this.removeAttribute('comments');
+            return;
+        }
+
+        this.setAttribute('comments', value);
+    }
 
     public static get properties(): any {
         return {
+            ais: { reflectToAttribute: true, type: String, value: '' },
+            completeIncomplete: { reflectToAttribute: true, type: String, value: '' },
+            dap: { reflectToAttribute: true, type: String, value: '' },
+            leftLowerMotor: { reflectToAttribute: true, type: String, value: '' },
+            leftMotorNl: { reflectToAttribute: true, type: String, value: '' },
+            leftMotorNlZpp: { reflectToAttribute: true, type: String, value: '' },
+            leftPrick: { reflectToAttribute: true, type: String, value: '' },
+            leftSensoryNl: { reflectToAttribute: true, type: String, value: '' },
+            leftSensoryNlZpp: { reflectToAttribute: true, type: String, value: '' },
+            leftTouch: { reflectToAttribute: true, type: String, value: '' },
+            leftUpperMotor: { reflectToAttribute: true, type: String, value: '' },
+            nli: { reflectToAttribute: true, type: String, value: '' },
+            rightLowerMotor: { reflectToAttribute: true, type: String, value: '' },
+            rightMotorNl: { reflectToAttribute: true, type: String, value: '' },
+            rightMotorNlZpp: { reflectToAttribute: true, type: String, value: '' },
+            rightPrick: { reflectToAttribute: true, type: String, value: '' },
+            rightSensoryNl: { reflectToAttribute: true, type: String, value: '' },
+            rightSensoryNlZpp: { reflectToAttribute: true, type: String, value: '' },
+            rightTouch: { reflectToAttribute: true, type: String, value: '' },
+            rightUpperMotor: { reflectToAttribute: true, type: String, value: '' },
             textAis: { reflectToAttribute: true, type: String, value: 'AIS' },
             textComments: { reflectToAttribute: true, type: String, value: 'General comments:' },
             textCompleteIncomplete: { reflectToAttribute: true, type: String, value: 'Complete or incomplete' },
@@ -269,7 +305,8 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
             textSensoryNlZpp: { reflectToAttribute: true, type: String, value: 'Sensory NL ZPP' },
             textUpperMotor: { reflectToAttribute: true, type: String, value: 'Upper motor' },
             textVac: { reflectToAttribute: true, type: String, value: 'VAC' },
-            textVacDescription: { reflectToAttribute: true, type: String, value: 'Voluntary anal contraction' }
+            textVacDescription: { reflectToAttribute: true, type: String, value: 'Voluntary anal contraction' },
+            vac: { reflectToAttribute: true, type: String, value: '' }
         };
     }
 
@@ -286,17 +323,40 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
     public ready(): void {
         super.ready();
 
-        this.comments = this['shadowRoot'].getElementById('comments');
-        this.comments.addEventListener('focus', (e) => { this.commentsClass = 'comments-component active';this.requestRender(); });
-        this.comments.addEventListener('blur', (e) => { this.commentsClass = 'comments-component';this.requestRender(); });
+        this.commentsElement = this['shadowRoot'].getElementById('comments');
+        this.commentsElement.addEventListener('focus', (e) => { this.commentsClass = 'comments-component active';this.requestRender(); });
+        this.commentsElement.addEventListener('blur', (e) => { this.commentsClass = 'comments-component';this.requestRender(); });
+        this.commentsElement.addEventListener('change', (e) => this.handleCommentsChange(e));
 
-        if (this.comments['textLength'] > 0) {
+        if (this.commentsElement['textLength'] > 0) {
             this.commentsClass = 'comments-component active';
         }
     }
 
+    public attributeChangedCallback(name, oldValue, newValue): void {
+        super.attributeChangedCallback(name, oldValue, newValue);
+
+
+        // if (oldValue === newValue || !/^(preview|value)$/.test(name)) {
+        //     return;
+        // }
+        
+        if (name === 'comments') {
+            this.commentsElement.value = newValue;
+        }
+
+        this.requestRender();
+    }
+
     private handleCellClick(e: MouseEvent, cellName: string): boolean {
         const event: CustomEvent = new CustomEvent('interactive-cell-clicked', {detail: {name: cellName}});
+        this['dispatchEvent'](event);
+
+        return true;
+    }
+
+    private handleCommentsChange(e): boolean {
+        const event: CustomEvent = new CustomEvent('comments-change', {detail: {comments: this.commentsElement.value}});
         this['dispatchEvent'](event);
 
         return true;

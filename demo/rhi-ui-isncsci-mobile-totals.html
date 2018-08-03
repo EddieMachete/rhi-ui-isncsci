@@ -50,7 +50,30 @@ Author: RhiTech <tech@rickhanseninstitute.org>
         <h3>&lt;rhi-ui-isncsci-mobile&gt;</h3>
         <div class="container">
             <h5>Default</h5>
-            <rhi-ui-isncsci-mobile-totals id="totals"></rhi-ui-isncsci-mobile-totals>
+            <rhi-ui-isncsci-mobile-totals id="totals"
+                                          ais="A"
+                                          comments="my two cents"
+                                          completeIncomplete="C"
+                                          dap="NT"
+                                          leftLowerMotor="C5"
+                                          leftMotorNl="T5"
+                                          leftMotorNlZpp="T9"
+                                          leftPrick="T1"
+                                          leftSensoryNl="T3"
+                                          leftSensoryNlZpp="T7"
+                                          leftTouch="C7"
+                                          leftUpperMotor="C3"
+                                          nli="T6"
+                                          rightLowerMotor="C4"
+                                          rightMotorNl="T4"
+                                          rightMotorNlZpp="T8"
+                                          rightPrick="C8"
+                                          rightSensoryNl="T2"
+                                          rightSensoryNlZpp="T6"
+                                          rightTouch="C6"
+                                          rightUpperMotor="C2"
+                                          vac="Yes"
+            ></rhi-ui-isncsci-mobile-totals>
         </div>
         <div class="container dark-theme">
             <h5>French</h5>
@@ -81,8 +104,16 @@ Author: RhiTech <tech@rickhanseninstitute.org>
     <script type="module">
         'use strict';
 
-        document.getElementById('totals')
-        .addEventListener('interactive-cell-clicked', (e) => { alert(`Interactive cell clicked "${e.detail.name}"`);});
+        const totals = document.getElementById('totals');
+
+        totals.addEventListener('interactive-cell-clicked', (e) => { alert(`Interactive cell clicked "${e.detail.name}"`);});
+        totals.addEventListener(
+            'comments-change',
+            (e) => {
+                alert(`Comments changed to  "${e.detail.comments}"`);
+                totals.comments = e.detail.comments;
+            }
+        );
 
         document.getElementById('totalsFr')
         .addEventListener('interactive-cell-clicked', (e) => { alert(`Interactive cell clicked "${e.detail.name}"`);});
