@@ -115,11 +115,14 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
 
                 .comments-component textarea {
                     border: none;
+                    background-color: transparent;
+                    color: var(--isncsci-primary-text-color, #000);
                     font-family: 'Roboto', 'Noto', sans-serif;
                     font-size: 14px;
                     height: 120px;
                     outline: none;
                     overflow: auto;
+                    padding: 0;
                     resize: none;
                     width: 100%;
                 }

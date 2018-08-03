@@ -10,9 +10,9 @@ Author: RhiTech <tech@rickhanseninstitute.org>
 import { html, LitElement } from '@polymer/lit-element';
 import { TemplateResult } from 'lit-html';
 import { SelectDermatomeUseCase, SetDermatomeValueUseCase, UpdateDermatomesInRangeUseCase } from 'rhi-core-isncsci-algorithm/usecases';
-import { connect } from '../helpers/connect-mixin';
-import { store } from '../store/store';
-import { AppStoreProvider } from '../providers';
+import { connect } from './helpers/connect-mixin';
+import { store } from './store/store';
+import { AppStoreProvider } from './providers';
 
 export class RhiUiIsncsciWide extends connect(store)(LitElement) {
     public static get is(): string { return 'rhi-ui-isncsci-wide'; }

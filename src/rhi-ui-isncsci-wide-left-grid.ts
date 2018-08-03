@@ -15,9 +15,9 @@ import {
     validSensoryNameRegExp,
     validSensoryValueRegExp
 } from 'rhi-core-isncsci-algorithm/usecases/src/regularExpressions'
-import { RhiUiIsncsciGrid } from '../rhi-ui-isncsci-grid/rhi-ui-isncsci-grid';
-import { connect } from '../helpers/connect-mixin';
-import { store } from '../store/store';
+import { RhiUiIsncsciGrid } from './rhi-ui-isncsci-grid';
+import { connect } from './helpers/connect-mixin';
+import { store } from './store/store';
 
 export class RhiUiIsncsciWideLeftGrid extends connect(store)(RhiUiIsncsciGrid) {
     public static get is(): string { return 'rhi-ui-isncsci-wide-left-grid'; }
