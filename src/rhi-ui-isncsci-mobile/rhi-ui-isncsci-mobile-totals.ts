@@ -24,6 +24,10 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                     color: var(--isncsci-secondary-text-color, #666);
                 }
 
+                .secondary-text.small {
+                    font-size: 9px;
+                }
+
                 .text-align-right {
                     text-align: right;
                 }
@@ -74,6 +78,41 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                 .cell.interactive {
                     background-color: var(--isncsci-interactive-cell-color, #DCDCDC);
                 }
+
+                .comments-component {
+                    border-bottom: solid 2px #CCC;
+                    width: 221px;
+                }
+
+                .comments-component::after {
+                    background-color: var(--isncsci-primary-color, #999);
+                    content: '';
+                    display: block;
+                    height: 2px;
+                    margin: 0 auto -1px auto;
+                    width: 0;
+
+                    transition: width 200ms ease;
+                }
+
+                .comments-component.active::after {
+                    width: 100%;
+                }
+
+                .comments-component .label {
+                    margin-bottom: 8px;
+                }
+
+                .comments-component textarea {
+                    border: none;
+                    font-family: 'Roboto', 'Noto', sans-serif;
+                    font-size: 14px;
+                    height: 120px;
+                    outline: none;
+                    overflow: auto;
+                    resize: none;
+                    width: 100%;
+                }
             </style>
             <div class="grid">
                 <div class="row header secondary-text">
@@ -99,6 +138,21 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                     <div class="label"><span class="text-align-right secondary-text">Pin prick</span></div>
                     <div class="cell interactive">&nbsp;</div>
                     <div class="cell interactive">&nbsp;</div>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="row">
+                    <div class="label">
+                        <span class="text-align-right secondary-text">VAC</span>
+                        <br/>
+                        <span class="text-align-right secondary-text small">Voluntary anal contraction</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="label">
+                        <div class="text-align-right secondary-text">VAC</div>
+                        <div class="text-align-right secondary-text small">Voluntary anal contraction</div>
+                    </div>
                 </div>
             </div>
             <div class="grid">
@@ -147,8 +201,15 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                     <div class="cell">&nbsp;</div>
                 </div>
             </div>
+            <div class$="${this.commentsClass}">
+                <div class="label secondary-text">General comments:</div>
+                <textarea id="comments" rows="1"></textarea>
+            </div>
         `;
     }
+
+    private comments: HTMLTextAreaElement;
+    private commentsClass: string = 'comments-component';
 
     public static get properties(): object {
         return {
@@ -163,6 +224,14 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
 
     public ready(): void {
         super.ready();
+
+        this.comments = this['shadowRoot'].getElementById('comments');
+        this.comments.addEventListener('focus', (e) => { this.commentsClass = 'comments-component active';this.requestRender(); });
+        this.comments.addEventListener('blur', (e) => { this.commentsClass = 'comments-component';this.requestRender(); });
+
+        if (this.comments['textLength'] > 0) {
+            this.commentsClass = 'comments-component active';
+        }
     }
 
     public stateChanged(state: any): void {
