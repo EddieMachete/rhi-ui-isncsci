@@ -12,7 +12,7 @@ import { TemplateResult } from 'lit-html';
 export class RhiUiIsncsciMobileTotals extends LitElement {
     public static get is(): string { return 'rhi-ui-isncsci-mobile-totals'; }
 
-    public _render(props: any): TemplateResult {
+    public _render(props): TemplateResult {
         return html`
             <!-- shadow DOM for your element -->
             <style>
@@ -126,26 +126,26 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
             </style>
             <div class="grid">
                 <div class="row header secondary-text">
-                    <div>Right</div>
-                    <div>Left</div>
+                    <div>${props.textRight}</div>
+                    <div>${props.textLeft}</div>
                 </div>
                 <div class="row">
-                    <div class="label"><span class="text-align-right secondary-text">Upper motor</span></div>
+                    <div class="label"><span class="text-align-right secondary-text">${props.textUpperMotor}</span></div>
                     <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-upper-motor')}">&nbsp;</div>
                     <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-upper-motor')}">&nbsp;</div>
                 </div>
                 <div class="row">
-                    <div class="label"><span class="text-align-right secondary-text">Lower motor</span></div>
+                    <div class="label"><span class="text-align-right secondary-text">${props.textLowerMotor}</span></div>
                     <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-lower-motor')}">&nbsp;</div>
                     <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-lower-motor')}">&nbsp;</div>
                 </div>
                 <div class="row">
-                    <div class="label"><span class="text-align-right secondary-text">Light touch</span></div>
+                    <div class="label"><span class="text-align-right secondary-text">${props.textLightTouch}</span></div>
                     <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-touch')}">&nbsp;</div>
                     <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-touch')}">&nbsp;</div>
                 </div>
                 <div class="row">
-                    <div class="label"><span class="text-align-right secondary-text">Pin prick</span></div>
+                    <div class="label"><span class="text-align-right secondary-text">${props.textPinPrick}</span></div>
                     <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-prick')}">&nbsp;</div>
                     <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-prick')}">&nbsp;</div>
                 </div>
@@ -154,8 +154,8 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                 <div class="row">
                     <div class="label">
                         <div class="text-align-right secondary-text">
-                            <div>VAC</div>
-                            <div class="small-text">Voluntary anal contraction</div>
+                            <div>${props.textVac}</div>
+                            <div class="small-text">${props.textVacDescription}</div>
                         </div>
                     </div>
                     <div>
@@ -163,17 +163,17 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                                 name="analContraction"
                                 class="cell-select">
                             <option value="None"></option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                            <option value="NT">NT</option>
+                            <option value="Yes">${props.textOptionYes}</option>
+                            <option value="No">${props.textOptionNo}</option>
+                            <option value="NT">${props.textOptionNt}</option>
                         </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="label">
                         <div class="text-align-right secondary-text">
-                            <div>DAP</div>
-                            <div class="small-text">Deep anal pressure</div>
+                            <div>${props.textDap}</div>
+                            <div class="small-text">${props.textDapDescription}</div>
                         </div>
                     </div>
                     <div>
@@ -181,61 +181,61 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                                 name="analSensation"
                                 class="cell-select">
                             <option value="None"></option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                            <option value="NT">NT</option>
+                            <option value="Yes">${props.textOptionYes}</option>
+                            <option value="No">${props.textOptionNo}</option>
+                            <option value="NT">${props.textOptionNt}</option>
                         </select>
                     </div>
                 </div>
             </div>
             <div class="grid">
                 <div class="row header secondary-text">
-                    <div>Right</div>
-                    <div>Left</div>
+                    <div>${props.textRight}</div>
+                    <div>${props.textLeft}</div>
                 </div>
                 <div class="row">
-                    <div class="label"><span class="text-align-right secondary-text">Sensory NL</span></div>
+                    <div class="label"><span class="text-align-right secondary-text">${props.textSensoryNl}</span></div>
                     <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-sensory-nl')}">&nbsp;</div>
                     <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-sensory-nl')}">&nbsp;</div>
                 </div>
                 <div class="row">
-                    <div class="label"><span class="text-align-right secondary-text">Motor NL</span></div>
+                    <div class="label"><span class="text-align-right secondary-text">${props.textMotorNl}</span></div>
                     <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-motor-nl')}">&nbsp;</div>
                     <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-motor-nl')}">&nbsp;</div>
                 </div>
             </div>
             <div class="grid">
                 <div class="row">
-                    <div class="label"><span class="text-align-right secondary-text">NLI</span></div>
+                    <div class="label"><span class="text-align-right secondary-text">${props.textNli}</span></div>
                     <div class="cell">&nbsp;</div>
                 </div>
                 <div class="row">
-                    <div class="label"><span class="text-align-right secondary-text">Complete or incomplete</span></div>
+                    <div class="label"><span class="text-align-right secondary-text">${props.textCompleteIncomplete}</span></div>
                     <div class="cell">&nbsp;</div>
                 </div>
                 <div class="row">
-                    <div class="label"><span class="text-align-right secondary-text">AIS</span></div>
+                    <div class="label"><span class="text-align-right secondary-text">${props.textAis}</span></div>
                     <div class="cell">&nbsp;</div>
                 </div>
             </div>
             <div class="grid">
                 <div class="row header secondary-text">
-                    <div>Right</div>
-                    <div>Left</div>
+                    <div>${props.textRight}</div>
+                    <div>${props.textLeft}</div>
                 </div>
                 <div class="row">
-                    <div class="label"><span class="text-align-right secondary-text">Sensory NL ZPP</span></div>
+                    <div class="label"><span class="text-align-right secondary-text">${props.textSensoryNlZpp}</span></div>
                     <div class="cell">&nbsp;</div>
                     <div class="cell">&nbsp;</div>
                 </div>
                 <div class="row">
-                    <div class="label"><span class="text-align-right secondary-text">Motor NL ZPP</span></div>
+                    <div class="label"><span class="text-align-right secondary-text">${props.textMotorNlZpp}</span></div>
                     <div class="cell">&nbsp;</div>
                     <div class="cell">&nbsp;</div>
                 </div>
             </div>
             <div class$="${this.commentsClass}">
-                <div class="label secondary-text">General comments:</div>
+                <div class="label secondary-text">${props.textComments}</div>
                 <textarea id="comments" rows="1"></textarea>
             </div>
         `;
@@ -244,15 +244,40 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
     private comments: HTMLTextAreaElement;
     private commentsClass: string = 'comments-component';
 
-    public static get properties(): object {
+    public static get properties(): any {
         return {
-            c2RightTouch: { type: String, value: '' },
-            c2RightPrick: { type: String, value: '' }
+            textAis: { reflectToAttribute: true, type: String, value: 'AIS' },
+            textComments: { reflectToAttribute: true, type: String, value: 'General comments:' },
+            textCompleteIncomplete: { reflectToAttribute: true, type: String, value: 'Complete or incomplete' },
+            textDap: { reflectToAttribute: true, type: String, value: 'DAP' },
+            textDapDescription: { reflectToAttribute: true, type: String, value: 'Deep anal pressure' },
+            textLeft: { reflectToAttribute: true, type: String, value: 'Left' },
+            textLightTouch: { reflectToAttribute: true, type: String, value: 'Light touch' },
+            textLowerMotor: { reflectToAttribute: true, type: String, value: 'Lower motor' },
+            textMotorNl: { reflectToAttribute: true, type: String, value: 'Motor NL' },
+            textMotorNlZpp: { reflectToAttribute: true, type: String, value: 'Motor NL ZPP' },
+            textNli: { reflectToAttribute: true, type: String, value: 'NLI' },
+            textOptionNo: { reflectToAttribute: true, type: String, value: 'No' },
+            textOptionNt: { reflectToAttribute: true, type: String, value: 'NT' },
+            textOptionYes: { reflectToAttribute: true, type: String, value: 'Yes' },
+            textPinPrick: { reflectToAttribute: true, type: String, value: 'Pin prick' },
+            textRight: { reflectToAttribute: true, type: String, value: 'Right' },
+            textSensoryNl: { reflectToAttribute: true, type: String, value: 'Sensory NL' },
+            textSensoryNlZpp: { reflectToAttribute: true, type: String, value: 'Sensory NL ZPP' },
+            textUpperMotor: { reflectToAttribute: true, type: String, value: 'Upper motor' },
+            textVac: { reflectToAttribute: true, type: String, value: 'VAC' },
+            textVacDescription: { reflectToAttribute: true, type: String, value: 'Voluntary anal contraction' }
         };
     }
 
     public constructor() {
         super();
+
+        // ToDo: For some reason the lit element is not initializing
+        const props: any = RhiUiIsncsciMobileTotals.properties;
+        for (let key in props) {
+            this[key] = props[key].value;
+        }
     }
 
     public ready(): void {
@@ -265,9 +290,6 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
         if (this.comments['textLength'] > 0) {
             this.commentsClass = 'comments-component active';
         }
-    }
-
-    public stateChanged(state: any): void {
     }
 
     private handleCellClick(e: MouseEvent, cellName: string): boolean {

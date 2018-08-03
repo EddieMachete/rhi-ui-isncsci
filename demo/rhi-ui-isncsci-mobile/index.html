@@ -31,13 +31,42 @@ Author: RhiTech <tech@rickhanseninstitute.org>
     <div class="main-content">
         <h3>&lt;rhi-ui-isncsci-mobile&gt;</h3>
         <div class="container">
+            <h5>Default</h5>
             <rhi-ui-isncsci-mobile-totals id="totals"></rhi-ui-isncsci-mobile-totals>
+            <br/>
+            <br/>
+            <h5>French</h5>
+            <rhi-ui-isncsci-mobile-totals id="totalsFr"
+                                          textAis="AIS"
+                                          textComments="Observations générales:"
+                                          textCompleteIncomplete="Complet ou incomplet"
+                                          textDap="PAP"
+                                          textDapDescription="Pression anale profonde"
+                                          textLeft="La gauche"
+                                          textLightTouch="LeLight touchft"
+                                          textLowerMotor="Moteur inférieur"
+                                          textMotorNl="NN moteur"
+                                          textMotorNlZpp="NN Motor ZCP"
+                                          textNli="NNB"
+                                          textOptionNo="Non"
+                                          textOptionNt="NT"
+                                          textOptionYes="Oui"
+                                          textPinPrick="Piqûre d'épingle"
+                                          textRight="droite"
+                                          textSensoryNl="NN sensoriel"
+                                          textSensoryNlZpp="NN sensoriel ZCP"
+                                          textUpperMotor="moteur supérieur"
+                                          textVac="CAV"
+                                          textVacDescription="Contraction anale volontaire"></rhi-ui-isncsci-mobile-totals>
         </div>
     </div>
     <script type="module">
         'use strict';
 
         document.getElementById('totals')
+        .addEventListener('interactive-cell-clicked', (e) => { alert(`Interactive cell clicked "${e.detail.name}"`);});
+
+        document.getElementById('totalsFr')
         .addEventListener('interactive-cell-clicked', (e) => { alert(`Interactive cell clicked "${e.detail.name}"`);});
     </script>
 </body>

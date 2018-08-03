@@ -206,7 +206,7 @@ export class RhiUiIsncsciWideLeftGrid extends connect(store)(RhiUiIsncsciGrid) {
         `;
     }
 
-    public static get properties(): object {
+    public static get properties(): any {
         return {
             c2RightTouch: { type: String, value: '' },
             c2RightPrick: { type: String, value: '' },
