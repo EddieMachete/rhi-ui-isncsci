@@ -114,6 +114,20 @@ Author: RhiTech <tech@rickhanseninstitute.org>
                 totals.comments = e.detail.comments;
             }
         );
+        totals.addEventListener(
+            'dap-change',
+            (e) => {
+                alert(`Dap changed to  "${e.detail.dap}"`);
+                totals.dap = e.detail.dap;
+            }
+        );
+        totals.addEventListener(
+            'vac-change',
+            (e) => {
+                alert(`Vac changed to  "${e.detail.vac}"`);
+                totals.vac = e.detail.vac;
+            }
+        );
 
         document.getElementById('totalsFr')
         .addEventListener('interactive-cell-clicked', (e) => { alert(`Interactive cell clicked "${e.detail.name}"`);});

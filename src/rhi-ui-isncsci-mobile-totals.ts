@@ -166,11 +166,12 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                     <div>
                         <select id="analContraction"
                                 name="analContraction"
-                                class="cell-select">
+                                class="cell-select"
+                                onchange="${(e) => this.handleVacChange(e)}">
                             <option value="None"></option>
-                            <option value="Yes">${props.textOptionYes}</option>
-                            <option value="No">${props.textOptionNo}</option>
-                            <option value="NT">${props.textOptionNt}</option>
+                            <option value="Yes" selected?="${props.vac == 'Yes'}">${props.textOptionYes}</option>
+                            <option value="No" selected?="${props.vac == 'No'}">${props.textOptionNo}</option>
+                            <option value="NT" selected?="${props.vac == 'NT'}">${props.textOptionNt}</option>
                         </select>
                     </div>
                 </div>
@@ -184,11 +185,12 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                     <div>
                         <select id="analSensation"
                                 name="analSensation"
-                                class="cell-select">
+                                class="cell-select"
+                                onchange="${(e) => this.handleDapChange(e)}">
                             <option value="None"></option>
-                            <option value="Yes">${props.textOptionYes}</option>
-                            <option value="No">${props.textOptionNo}</option>
-                            <option value="NT">${props.textOptionNt}</option>
+                            <option value="Yes" selected?="${(props.dap == 'Yes')}">${props.textOptionYes}</option>
+                            <option value="No" selected?="${(props.dap == 'No')}">${props.textOptionNo}</option>
+                            <option value="NT" selected?="${(props.dap == 'NT')}">${props.textOptionNt}</option>
                         </select>
                     </div>
                 </div>
@@ -241,7 +243,7 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
             </div>
             <div class$="${this.commentsClass}">
                 <div class="label secondary-text">${props.textComments}</div>
-                <textarea id="comments" rows="1" value="${props.comments}"></textarea>
+                <textarea id="comments" rows="1"></textarea>
             </div>
         `;
     }
@@ -249,9 +251,9 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
     private commentsElement: HTMLTextAreaElement;
     private commentsClass: string = 'comments-component';
     
-    public static get observedAttributes(): string[] {
-        return ['comments'];
-    }
+    // public static get observedAttributes(): string[] {
+    //     return ['comments'];
+    // }
 
     public get comments(): string { return this.commentsElement.value; }
     public set comments(value: string) {
@@ -267,6 +269,7 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
         return {
             ais: { reflectToAttribute: true, type: String, value: '' },
             completeIncomplete: { reflectToAttribute: true, type: String, value: '' },
+            comments: { reflectToAttribute: true, type: String, value: '' },
             dap: { reflectToAttribute: true, type: String, value: '' },
             leftLowerMotor: { reflectToAttribute: true, type: String, value: '' },
             leftMotorNl: { reflectToAttribute: true, type: String, value: '' },
@@ -357,6 +360,20 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
 
     private handleCommentsChange(e): boolean {
         const event: CustomEvent = new CustomEvent('comments-change', {detail: {comments: this.commentsElement.value}});
+        this['dispatchEvent'](event);
+
+        return true;
+    }
+
+    private handleDapChange(e) {
+        const event: CustomEvent = new CustomEvent('dap-change', {detail: {dap: e.target.value}});
+        this['dispatchEvent'](event);
+
+        return true;
+    }
+
+    private handleVacChange(e) {
+        const event: CustomEvent = new CustomEvent('vac-change', {detail: {vac: e.target.value}});
         this['dispatchEvent'](event);
 
         return true;
