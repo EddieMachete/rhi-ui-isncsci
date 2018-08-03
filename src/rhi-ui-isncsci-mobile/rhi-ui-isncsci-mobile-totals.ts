@@ -24,7 +24,7 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                     color: var(--isncsci-secondary-text-color, #666);
                 }
 
-                .secondary-text.small {
+                .small-text {
                     font-size: 9px;
                 }
 
@@ -79,6 +79,16 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                     background-color: var(--isncsci-interactive-cell-color, #DCDCDC);
                 }
 
+                .cell-select {
+                    background-color: var(--isncsci-interactive-cell-color, #DCDCDC);
+                    border: none;
+                    font-family: 'Roboto', 'Noto', sans-serif;
+                    font-size: 16px;
+                    height: 40px;
+                    margin-left: 8px;
+                    width: 104px;
+                }
+
                 .comments-component {
                     border-bottom: solid 2px #CCC;
                     width: 221px;
@@ -121,37 +131,60 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                 </div>
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">Upper motor</span></div>
-                    <div class="cell interactive">&nbsp;</div>
-                    <div class="cell interactive">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-upper-motor')}">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-upper-motor')}">&nbsp;</div>
                 </div>
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">Lower motor</span></div>
-                    <div class="cell interactive">&nbsp;</div>
-                    <div class="cell interactive">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-lower-motor')}">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-lower-motor')}">&nbsp;</div>
                 </div>
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">Light touch</span></div>
-                    <div class="cell interactive">&nbsp;</div>
-                    <div class="cell interactive">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-touch')}">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-touch')}">&nbsp;</div>
                 </div>
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">Pin prick</span></div>
-                    <div class="cell interactive">&nbsp;</div>
-                    <div class="cell interactive">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-prick')}">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-prick')}">&nbsp;</div>
                 </div>
             </div>
             <div class="grid">
                 <div class="row">
                     <div class="label">
-                        <span class="text-align-right secondary-text">VAC</span>
-                        <br/>
-                        <span class="text-align-right secondary-text small">Voluntary anal contraction</span>
+                        <div class="text-align-right secondary-text">
+                            <div>VAC</div>
+                            <div class="small-text">Voluntary anal contraction</div>
+                        </div>
+                    </div>
+                    <div>
+                        <select id="analContraction"
+                                name="analContraction"
+                                class="cell-select">
+                            <option value="None"></option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="NT">NT</option>
+                        </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="label">
-                        <div class="text-align-right secondary-text">VAC</div>
-                        <div class="text-align-right secondary-text small">Voluntary anal contraction</div>
+                        <div class="text-align-right secondary-text">
+                            <div>DAP</div>
+                            <div class="small-text">Deep anal pressure</div>
+                        </div>
+                    </div>
+                    <div>
+                        <select id="analSensation"
+                                name="analSensation"
+                                class="cell-select">
+                            <option value="None"></option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="NT">NT</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -162,13 +195,13 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
                 </div>
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">Sensory NL</span></div>
-                    <div class="cell interactive">&nbsp;</div>
-                    <div class="cell interactive">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-sensory-nl')}">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-sensory-nl')}">&nbsp;</div>
                 </div>
                 <div class="row">
                     <div class="label"><span class="text-align-right secondary-text">Motor NL</span></div>
-                    <div class="cell interactive">&nbsp;</div>
-                    <div class="cell interactive">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-motor-nl')}">&nbsp;</div>
+                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-motor-nl')}">&nbsp;</div>
                 </div>
             </div>
             <div class="grid">
@@ -235,6 +268,13 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
     }
 
     public stateChanged(state: any): void {
+    }
+
+    private handleCellClick(e: MouseEvent, cellName: string): boolean {
+        const event: CustomEvent = new CustomEvent('interactive-cell-clicked', {detail: {name: cellName}});
+        this['dispatchEvent'](event);
+
+        return true;
     }
 }
 

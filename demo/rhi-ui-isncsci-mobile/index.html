@@ -31,11 +31,14 @@ Author: RhiTech <tech@rickhanseninstitute.org>
     <div class="main-content">
         <h3>&lt;rhi-ui-isncsci-mobile&gt;</h3>
         <div class="container">
-            <rhi-ui-isncsci-mobile-totals></rhi-ui-isncsci-mobile-totals>
+            <rhi-ui-isncsci-mobile-totals id="totals"></rhi-ui-isncsci-mobile-totals>
         </div>
     </div>
     <script type="module">
         'use strict';
+
+        document.getElementById('totals')
+        .addEventListener('interactive-cell-clicked', (e) => { alert(`Interactive cell clicked "${e.detail.name}"`);});
     </script>
 </body>
 </html>
