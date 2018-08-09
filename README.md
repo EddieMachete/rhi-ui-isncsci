@@ -1,7 +1,7 @@
 > :warning: These components are still a work in progress. :warning:
 
 # Introduction
-*rhi-u-isncscii* contains reusable user interface [web components](https://www.webcomponents.org/introduction) for the ISNCSCI project.
+*rhi-ui-isncsci* contains reusable user interface [web components](https://www.webcomponents.org/introduction) for the ISNCSCI project.
 We are currently using [Google Polymer](https://www.polymer-project.org/) for our syntactic sugar.
 
 #Why do I (EE) make you suffer with this?

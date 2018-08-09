@@ -1,16 +1,26 @@
-/*
-@license
-Copyright (c) 2017 Rick Hansen Institute. All rights reserved.
-This code should not be modified and/or distributed without explicit permission from the Rick Hansen Institute.
-Author: RhiTech <tech@rickhanseninstitute.org>
+/**
+ * @license
+ * Copyright (c) 2018 Rick Hansen Institute. All rights reserved.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
 */
 'use strict';
 
-import { html, LitElement } from '@polymer/lit-element';
-import { TemplateResult } from 'lit-html';
+import { html, LitElement } from '@polymer/lit-element/lit-element.js';
+import { TemplateResult } from 'lit-html/lit-html.js';
 
-export class RhiUiIsncsciMobileTotals extends LitElement {
-    public static get is(): string { return 'rhi-ui-isncsci-mobile-totals'; }
+export class RhiIsncsciUiMobileTotals extends LitElement {
+    public static get is(): string { return 'rhi-isncsci-ui-mobile-totals'; }
 
     public _render(props): TemplateResult {
         return html`
@@ -317,7 +327,7 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
         super();
 
         // ToDo: For some reason the lit element is not initializing
-        const props: any = RhiUiIsncsciMobileTotals.properties;
+        const props: any = RhiIsncsciUiMobileTotals.properties;
         for (let key in props) {
             this[key] = props[key].value;
         }
@@ -326,7 +336,7 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
     public ready(): void {
         super.ready();
 
-        this.commentsElement = this['shadowRoot'].getElementById('comments');
+        this.commentsElement = <HTMLTextAreaElement>this['shadowRoot'].getElementById('comments');
         this.commentsElement.addEventListener('focus', (e) => { this.commentsClass = 'comments-component active';this.requestRender(); });
         this.commentsElement.addEventListener('blur', (e) => { this.commentsClass = 'comments-component';this.requestRender(); });
         this.commentsElement.addEventListener('change', (e) => this.handleCommentsChange(e));
@@ -336,8 +346,8 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
         }
     }
 
-    public attributeChangedCallback(name, oldValue, newValue): void {
-        super.attributeChangedCallback(name, oldValue, newValue);
+    public attributeChangedCallback(name: string, oldValue: string, newValue: string, namespace: string): void {
+        super.attributeChangedCallback(name, oldValue, newValue, namespace);
 
 
         // if (oldValue === newValue || !/^(preview|value)$/.test(name)) {
@@ -380,4 +390,4 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
     }
 }
 
-customElements.define(RhiUiIsncsciMobileTotals.is, RhiUiIsncsciMobileTotals);
+customElements.define(RhiIsncsciUiMobileTotals.is, RhiIsncsciUiMobileTotals);
