@@ -1,0 +1,136 @@
+<!--
+@license
+Copyright (c) 2017 Rick Hansen Institute. All rights reserved.
+This code should not be modified and/or distributed without explicit permission from the Rick Hansen Institute.
+Author: RhiTech <tech@rickhanseninstitute.org>
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <title>Demo :: rhi-ui-isncsci-mobile :: Rick Hansen Institute</title>
+    <script>
+        // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
+        // https://github.com/reactjs/redux/issues/2907
+        window.process = { env: { NODE_ENV: 'production' } };
+    </script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script type="module" src="scripts/rhi-ui-isncsci-mobile-totals.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', 'Noto', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            margin: 0;
+            padding: 16px;
+        }
+
+        .container {
+            border-bottom: solid 1px #666;
+            margin-bottom: 40px;
+        }
+
+        .container rhi-ui-isncsci-mobile-totals {
+            margin-bottom: 40px;
+        }
+
+        .container.dark-theme {
+            --isncsci-primary-text-color: #FFF;
+            --isncsci-secondary-text-color: #CCC;
+            --isncsci-cell-color: #333;
+            --isncsci-interactive-cell-color: #999;
+
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <h3>&lt;rhi-ui-isncsci-mobile&gt;</h3>
+        <div class="container">
+            <h5>Default</h5>
+            <rhi-ui-isncsci-mobile-totals id="totals"
+                                          ais="A"
+                                          comments="my two cents"
+                                          completeIncomplete="C"
+                                          dap="NT"
+                                          leftLowerMotor="C5"
+                                          leftMotorNl="T5"
+                                          leftMotorNlZpp="T9"
+                                          leftPrick="T1"
+                                          leftSensoryNl="T3"
+                                          leftSensoryNlZpp="T7"
+                                          leftTouch="C7"
+                                          leftUpperMotor="C3"
+                                          nli="T6"
+                                          rightLowerMotor="C4"
+                                          rightMotorNl="T4"
+                                          rightMotorNlZpp="T8"
+                                          rightPrick="C8"
+                                          rightSensoryNl="T2"
+                                          rightSensoryNlZpp="T6"
+                                          rightTouch="C6"
+                                          rightUpperMotor="C2"
+                                          vac="Yes"
+            ></rhi-ui-isncsci-mobile-totals>
+        </div>
+        <div class="container dark-theme">
+            <h5>French</h5>
+            <rhi-ui-isncsci-mobile-totals id="totalsFr"
+                                          textAis="AIS"
+                                          textComments="Observations générales:"
+                                          textCompleteIncomplete="Complet ou incomplet"
+                                          textDap="PAP"
+                                          textDapDescription="Pression anale profonde"
+                                          textLeft="La gauche"
+                                          textLightTouch="LeLight touchft"
+                                          textLowerMotor="Moteur inférieur"
+                                          textMotorNl="NN moteur"
+                                          textMotorNlZpp="NN Motor ZCP"
+                                          textNli="NNB"
+                                          textOptionNo="Non"
+                                          textOptionNt="NT"
+                                          textOptionYes="Oui"
+                                          textPinPrick="Piqûre d'épingle"
+                                          textRight="droite"
+                                          textSensoryNl="NN sensoriel"
+                                          textSensoryNlZpp="NN sensoriel ZCP"
+                                          textUpperMotor="moteur supérieur"
+                                          textVac="CAV"
+                                          textVacDescription="Contraction anale volontaire"></rhi-ui-isncsci-mobile-totals>
+        </div>
+    </div>
+    <script type="module">
+        'use strict';
+
+        const totals = document.getElementById('totals');
+
+        totals.addEventListener('interactive-cell-clicked', (e) => { alert(`Interactive cell clicked "${e.detail.name}"`);});
+        totals.addEventListener(
+            'comments-change',
+            (e) => {
+                alert(`Comments changed to  "${e.detail.comments}"`);
+                totals.comments = e.detail.comments;
+            }
+        );
+        totals.addEventListener(
+            'dap-change',
+            (e) => {
+                alert(`Dap changed to  "${e.detail.dap}"`);
+                totals.dap = e.detail.dap;
+            }
+        );
+        totals.addEventListener(
+            'vac-change',
+            (e) => {
+                alert(`Vac changed to  "${e.detail.vac}"`);
+                totals.vac = e.detail.vac;
+            }
+        );
+
+        document.getElementById('totalsFr')
+        .addEventListener('interactive-cell-clicked', (e) => { alert(`Interactive cell clicked "${e.detail.name}"`);});
+    </script>
+</body>
+</html>

@@ -1,4 +1,6 @@
-# Introduction 
+> :warning: These components are still a work in progress. :warning:
+
+# Introduction
 *rhi-u-isncscii* contains reusable user interface [web components](https://www.webcomponents.org/introduction) for the ISNCSCI project.
 We are currently using [Google Polymer](https://www.polymer-project.org/) for our syntactic sugar.
 
@@ -10,18 +12,18 @@ The recent [Custom Elements Specification](https://w3c.github.io/webcomponents/s
 If it runs on the web platform, it will work.
 By following *Clean Architecture* approaches and *web components* standards we can finally live up to our loftiest engineering goals.
 
-#Getting Started
-1. Make sure you have access to our npm stream by adding our key to your local *.npmrc* file.  Ask the team if you do not know what that means.
-2. *git clone https://github.com/rick-hansen-institute/rhi-ui-isncsci.git*
-3. *npm install*
-
 #Build
-There are currently no build steps required. When we move to HTML packages and ditch HTML imports we will probably start coding with *Type Script*.
+polymer build
 
 #Demo and Test
+<!--
 Each folder in this package contains an individual *web component* with its own *demo* and test *folder*.
 In your browser, open the *test/index.html* file to run the tests for a particular component.
 In your browser, open the *demo/index.html* file to view the demo for a particular component.
+-->
+1. In the root of the project folder run the ```tsc --p tsconfig-core.json``` command.
+2. In the root of the project folder run the ```npm run tsc``` command.
+3. Navigate to demo that you want to view to see the result (e.g. http://127.0.0.1:8081/demo/rhi-ui-isncsci-wide/)
 
 #Contribute
 When working on this project, follow these steps:

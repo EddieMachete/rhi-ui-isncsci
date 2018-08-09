@@ -11,8 +11,11 @@ Author: RhiTech <tech@rickhanseninstitute.org>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
     <title>Demo :: rhi-ui-isncsci-grid :: Rick Hansen Institute</title>
-    <link rel="import" href="../../../bower_components/iron-demo-helpers/demo-snippet.html" />
-    <link rel="import" href="../rhi-ui-isncsci-grid.html" />
+    <script>
+        // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
+        // https://github.com/reactjs/redux/issues/2907
+        window.process = { env: { NODE_ENV: 'production' } };
+    </script>
     <style>
         body {
             font-family: 'Roboto', 'Noto', sans-serif;
@@ -24,14 +27,14 @@ Author: RhiTech <tech@rickhanseninstitute.org>
 </head>
 <body>
     <div class="main-content">
-        <h3>&lt;rhi-ui-isncsci-grid&gt;</h3>
-        <demo-snippet>
-            <template>
-                <rhi-ui-isncsci-grid></rhi-ui-isncsci-grid>
-            </template>
-        </demo-snippet>
+        <h3>&lt;rhi-ui-isncsci&gt;</h3>
+        <div><a href="rhi-ui-isncsci-grid.html">rhi-ui-isncsci-grid</a></div>
+        <div><a href="#">rhi-ui-isncsci-grid-cell</a></div>
+        <div><a href="rhi-ui-isncsci-mobile-totals.html">rhi-ui-isncsci-mobile-totals</a></div>
+        <div><a href="rhi-ui-isncsci-wide.html">rhi-ui-isncsci-wide</a></div>
+        <div><a href="#">rhi-ui-isncsci-wide-left-grid</a></div>
     </div>
-    <script>
+    <script type="module">
         'use strict';
     </script>
 </body>

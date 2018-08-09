@@ -1,9 +1,16 @@
 {
   "author": "RhiTech <tech@rickhanseninstitute.org>",
-  "dependencies": {},
+  "dependencies": {
+    "@polymer/lit-element": "^0.5.2",
+    "@polymer/polymer": "^3.0.2",
+    "@webcomponents/webcomponentsjs": "^2.0.2",
+    "redux": "^4.0.0",
+    "rhi-core-isncsci-algorithm": "^3.1.0"
+  },
   "description": "Web components package for the ISNCSCI project.",
   "devDependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "typescript": "^2.9.2"
   },
   "homepage": "https://www.rickhanseninstitute.org/rhi-isncsci/",
   "license": "MIT",
@@ -12,7 +19,8 @@
   "private": false,
   "repository": "https://github.com/rick-hansen-institute/rhi-ui-isncsci.git",
   "scripts": {
+    "tsc": "tsc --watch",
     "start": "node server.js"
   },
-  "version": "0.0.1"
+  "version": "0.0.5"
 }
