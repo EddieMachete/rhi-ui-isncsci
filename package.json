@@ -3,8 +3,8 @@
   "dependencies": {
     "@polymer/lit-element": "^0.5.2",
     "@polymer/polymer": "^3.0.2",
-    "@rhi-ui/demo-snippet": "^1.0.0",
-    "@rhi-ui/markdown-viewer": "^1.0.0",
+    "@rhi-ui/demo-snippet": "^1.0.1",
+    "@rhi-ui/markdown-viewer": "^1.0.1",
     "@rhi-ui/selectable-grid": "^1.0.2",
     "@webcomponents/webcomponentsjs": "^2.0.2",
     "redux": "^4.0.0",
