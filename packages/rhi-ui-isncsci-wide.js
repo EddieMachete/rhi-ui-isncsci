@@ -1,13 +1,13 @@
 /**
  * @license
  * Copyright (c) 2018 Rick Hansen Institute. All rights reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,25 +15,21 @@
  * limitations under the License.
 */
 'use strict';
-
 import { html, LitElement } from '@polymer/lit-element/lit-element.js';
-import { TemplateResult } from 'lit-html/lit-html.js';
 import { SelectDermatomeUseCase, SetDermatomeValueUseCase, UpdateDermatomesInRangeUseCase } from 'rhi-core-isncsci-algorithm/usecases';
 import { connect } from './helpers/connect-mixin';
 import { store } from './store/store';
 import { AppStoreProvider } from './providers';
-
 export class RhiUiIsncsciWide extends connect(store)(LitElement) {
-    public static get is(): string { return 'rhi-ui-isncsci-wide'; }
-
-    private leftGrid: HTMLElement;
-    private appStoreProvider: AppStoreProvider;
-    private dermatomeSelected: string;
-    private dermatomeSelectedValue: string = '';
-
+    constructor() {
+        super();
+        this.dermatomeSelectedValue = '';
+        this.appStoreProvider = new AppStoreProvider();
+    }
+    static get is() { return 'rhi-ui-isncsci-wide'; }
     //public static get template(): html {
-    public _render(props: any): TemplateResult {
-        return html`
+    _render(props) {
+        return html `
             <style>
                 :host {
                     display: block;
@@ -83,53 +79,36 @@ export class RhiUiIsncsciWide extends connect(store)(LitElement) {
             <div class="totals">Totals</div>
         `;
     }
-
-    public static get properties(): object {
+    static get properties() {
         return {};
     }
-
-    public constructor() {
-        super();
-
-        this.appStoreProvider = new AppStoreProvider();
-    }
-
-    public ready(): void {
+    ready() {
         super.ready();
-
         this.leftGrid = this.shadowRoot.getElementById('leftGrid');
     }
-
     // Polymer
-    public disconnectedCallback(): void {
+    disconnectedCallback() {
         super.disconnectedCallback();
     }
-
-    public stateChanged(state: any): void {
+    stateChanged(state) {
         this.dermatomeSelected = state.uiState.dermatomeSelected;
         this.dermatomeSelectedValue = this.dermatomeSelected ? state.neurologyForm[this.dermatomeSelected] : '';
     }
-
-    private handleGridCellDown(e: CustomEvent): void {
+    handleGridCellDown(e) {
         new SelectDermatomeUseCase(this.appStoreProvider).execute(e.detail.name);
     }
-
-    private handleGridCellUp(e: CustomEvent): void {
-        const selectionRange: string[] = this.leftGrid['selectionRange']
-        ? this.leftGrid['selectionRange'].map((cell: HTMLElement) => cell.getAttribute('name')) : [];
+    handleGridCellUp(e) {
+        const selectionRange = this.leftGrid['selectionRange']
+            ? this.leftGrid['selectionRange'].map((cell) => cell.getAttribute('name')) : [];
         this.leftGrid['clearSelectionRange']();
-
         if (selectionRange.length === 0 || !this.dermatomeSelected) {
             return;
         }
-
         new UpdateDermatomesInRangeUseCase(this.appStoreProvider)
-        .execute(selectionRange, this.dermatomeSelectedValue);
+            .execute(selectionRange, this.dermatomeSelectedValue);
     }
-
-    public handleCellInput(e): void {
+    handleCellInput(e) {
         new SetDermatomeValueUseCase(this.appStoreProvider).execute(this.dermatomeSelected, e.target.value);
     }
 }
-
 customElements.define(RhiUiIsncsciWide.is, RhiUiIsncsciWide);

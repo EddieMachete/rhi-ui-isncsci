@@ -1,13 +1,13 @@
 /**
  * @license
  * Copyright (c) 2018 Rick Hansen Institute. All rights reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,25 +15,15 @@
  * limitations under the License.
 */
 'use strict';
-
 import { html } from '@polymer/lit-element/lit-element.js';
-import { TemplateResult } from 'lit-html/lit-html.js';
-import {
-    motorLevelNameRegExp,
-    validMotorNameRegExp,
-    validMotorValueRegExp,
-    validSensoryNameRegExp,
-    validSensoryValueRegExp
-} from 'rhi-core-isncsci-algorithm/usecases/src/regularExpressions.js';
+import { motorLevelNameRegExp, validMotorNameRegExp, validMotorValueRegExp, validSensoryNameRegExp, validSensoryValueRegExp } from 'rhi-core-isncsci-algorithm/usecases/src/regularExpressions.js';
 import { RhiUiSelectableGrid } from '@rhi-ui/selectable-grid/rhi-ui-selectable-grid.js';
 import { connect } from './helpers/connect-mixin.js';
 import { store } from './store/store.js';
-
 export class RhiUiIsncsciWideLeftGrid extends connect(store)(RhiUiSelectableGrid) {
-    public static get is(): string { return 'rhi-ui-isncsci-wide-left-grid'; }
-
-    public _render(props: any): TemplateResult {
-        return html`
+    static get is() { return 'rhi-ui-isncsci-wide-left-grid'; }
+    _render(props) {
+        return html `
             <!-- shadow DOM for your element -->
             <style>
                 :host {
@@ -215,8 +205,7 @@ export class RhiUiIsncsciWideLeftGrid extends connect(store)(RhiUiSelectableGrid
             </div>
         `;
     }
-
-    public static get properties(): any {
+    static get properties() {
         return {
             c2RightTouch: { type: String, value: '' },
             c2RightPrick: { type: String, value: '' },
@@ -286,62 +275,48 @@ export class RhiUiIsncsciWideLeftGrid extends connect(store)(RhiUiSelectableGrid
             s4_5RightPrick: { type: String, value: '' }
         };
     }
-
-    public constructor() {
+    constructor() {
         super();
     }
-
-    public ready(): void {
+    ready() {
         super.ready();
-        
         this['previewSelectedValueOnRange'] = true;
     }
-
-    public stateChanged(state: any): void {
-        const keyMap: { prefix: string, start: number, end: number }[] = [
-            { prefix: 'c', start: 2, end: 8},
-            { prefix: 't', start: 1, end: 12},
-            { prefix: 'l', start: 1, end: 5},
-            { prefix: 's', start: 1, end: 3},
-            { prefix: 's4_', start: 5, end: 5}
+    stateChanged(state) {
+        const keyMap = [
+            { prefix: 'c', start: 2, end: 8 },
+            { prefix: 't', start: 1, end: 12 },
+            { prefix: 'l', start: 1, end: 5 },
+            { prefix: 's', start: 1, end: 3 },
+            { prefix: 's4_', start: 5, end: 5 }
         ];
-
-        keyMap.forEach(
-            (key: { prefix: string, start: number, end: number }) => {
-                for (let i:number = key.start; i<=key.end; i++) {
-                    const levelName: string = `${key.prefix}${i}`;
-                    this[levelName + 'RightTouch'] = state.neurologyForm[levelName + 'RightTouch'];
-                    this[levelName + 'RightPrick'] = state.neurologyForm[levelName + 'RightPrick'];
-                    this[levelName + 'LeftTouch'] = state.neurologyForm[levelName + 'LeftTouch'];
-                    this[levelName + 'LeftPrick'] = state.neurologyForm[levelName + 'LeftPrick'];
-
-                    if (motorLevelNameRegExp.test(levelName)) {
-                        this[levelName + 'RightMotor'] = state.neurologyForm[levelName + 'RightMotor'];
-                        this[levelName + 'LeftMotor'] = state.neurologyForm[levelName + 'LeftMotor'];
-                    }
+        keyMap.forEach((key) => {
+            for (let i = key.start; i <= key.end; i++) {
+                const levelName = `${key.prefix}${i}`;
+                this[levelName + 'RightTouch'] = state.neurologyForm[levelName + 'RightTouch'];
+                this[levelName + 'RightPrick'] = state.neurologyForm[levelName + 'RightPrick'];
+                this[levelName + 'LeftTouch'] = state.neurologyForm[levelName + 'LeftTouch'];
+                this[levelName + 'LeftPrick'] = state.neurologyForm[levelName + 'LeftPrick'];
+                if (motorLevelNameRegExp.test(levelName)) {
+                    this[levelName + 'RightMotor'] = state.neurologyForm[levelName + 'RightMotor'];
+                    this[levelName + 'LeftMotor'] = state.neurologyForm[levelName + 'LeftMotor'];
                 }
             }
-        );
-
+        });
         if (this.cells) {
             this.selectCell(state.uiState.dermatomeSelected);
         }
     }
-
-    private isValidForRange(cell: HTMLElement): boolean {
+    isValidForRange(cell) {
         if (!this.selectedCell) {
             return false;
         }
-
-        const name: string = cell.getAttribute('name');
-        const cellValue: string = this.selectedCell.getAttribute('value');
-
+        const name = cell.getAttribute('name');
+        const cellValue = this.selectedCell.getAttribute('value');
         if (validMotorNameRegExp.test(name) && validMotorValueRegExp.test(cellValue)) {
             return true;
         }
-
         return validSensoryNameRegExp.test(name) && validSensoryValueRegExp.test(cellValue) ? true : false;
     }
 }
-
 customElements.define(RhiUiIsncsciWideLeftGrid.is, RhiUiIsncsciWideLeftGrid);

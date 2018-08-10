@@ -11,13 +11,14 @@
         "moduleResolution": "node",
         "noEmitOnError": true,
         "noImplicitAny": false,
-        "outDir": "./demo/scripts",
+        "outDir": "./packages",
         "removeComments": false,
-        "sourceMap": false,
+        "sourceMap": true,
         "target": "es6"
     },
     "include": [
-        "src/**/*"
+        "src/mobile-totals/**/*",
+        "src/helpers/**/*"
     ],
     "exclude": [
         "node_modules",

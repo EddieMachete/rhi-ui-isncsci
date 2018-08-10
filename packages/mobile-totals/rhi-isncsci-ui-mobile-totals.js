@@ -1,19 +1,34 @@
-/*
-@license
-Copyright (c) 2017 Rick Hansen Institute. All rights reserved.
-This code should not be modified and/or distributed without explicit permission from the Rick Hansen Institute.
-Author: RhiTech <tech@rickhanseninstitute.org>
+/**
+ * @license
+ * Copyright (c) 2018 Rick Hansen Institute. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
 */
 'use strict';
-
-import { html, LitElement } from '@polymer/lit-element';
-import { TemplateResult } from 'lit-html';
-
-export class RhiUiIsncsciMobileTotals extends LitElement {
-    public static get is(): string { return 'rhi-ui-isncsci-mobile-totals'; }
-
-    public _render(props): TemplateResult {
-        return html`
+import { html, LitElement } from '@polymer/lit-element/lit-element.js';
+export class RhiIsncsciUiMobileTotals extends LitElement {
+    constructor() {
+        super();
+        this.commentsClass = 'comments-component';
+        // ToDo: For some reason the lit element is not initializing
+        const props = RhiIsncsciUiMobileTotals.properties;
+        for (let key in props) {
+            this[key] = props[key].value;
+        }
+    }
+    static get is() { return 'rhi-isncsci-ui-mobile-totals'; }
+    _render(props) {
+        return html `
             <!-- shadow DOM for your element -->
             <style>
                 :host {
@@ -247,25 +262,18 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
             </div>
         `;
     }
-
-    private commentsElement: HTMLTextAreaElement;
-    private commentsClass: string = 'comments-component';
-    
     // public static get observedAttributes(): string[] {
     //     return ['comments'];
     // }
-
-    public get comments(): string { return this.commentsElement.value; }
-    public set comments(value: string) {
+    get comments() { return this.commentsElement.value; }
+    set comments(value) {
         if (!value) {
             this.removeAttribute('comments');
             return;
         }
-
         this.setAttribute('comments', value);
     }
-
-    public static get properties(): any {
+    static get properties() {
         return {
             ais: { reflectToAttribute: true, type: String, value: '' },
             completeIncomplete: { reflectToAttribute: true, type: String, value: '' },
@@ -312,72 +320,46 @@ export class RhiUiIsncsciMobileTotals extends LitElement {
             vac: { reflectToAttribute: true, type: String, value: '' }
         };
     }
-
-    public constructor() {
-        super();
-
-        // ToDo: For some reason the lit element is not initializing
-        const props: any = RhiUiIsncsciMobileTotals.properties;
-        for (let key in props) {
-            this[key] = props[key].value;
-        }
-    }
-
-    public ready(): void {
+    ready() {
         super.ready();
-
         this.commentsElement = this['shadowRoot'].getElementById('comments');
-        this.commentsElement.addEventListener('focus', (e) => { this.commentsClass = 'comments-component active';this.requestRender(); });
-        this.commentsElement.addEventListener('blur', (e) => { this.commentsClass = 'comments-component';this.requestRender(); });
+        this.commentsElement.addEventListener('focus', (e) => { this.commentsClass = 'comments-component active'; this.requestRender(); });
+        this.commentsElement.addEventListener('blur', (e) => { this.commentsClass = 'comments-component'; this.requestRender(); });
         this.commentsElement.addEventListener('change', (e) => this.handleCommentsChange(e));
-
         if (this.commentsElement['textLength'] > 0) {
             this.commentsClass = 'comments-component active';
         }
     }
-
-    public attributeChangedCallback(name, oldValue, newValue): void {
-        super.attributeChangedCallback(name, oldValue, newValue);
-
-
+    attributeChangedCallback(name, oldValue, newValue, namespace) {
+        super.attributeChangedCallback(name, oldValue, newValue, namespace);
         // if (oldValue === newValue || !/^(preview|value)$/.test(name)) {
         //     return;
         // }
-        
         if (name === 'comments') {
             this.commentsElement.value = newValue;
         }
-
         this.requestRender();
     }
-
-    private handleCellClick(e: MouseEvent, cellName: string): boolean {
-        const event: CustomEvent = new CustomEvent('interactive-cell-clicked', {detail: {name: cellName}});
+    handleCellClick(e, cellName) {
+        const event = new CustomEvent('interactive-cell-clicked', { detail: { name: cellName } });
         this['dispatchEvent'](event);
-
         return true;
     }
-
-    private handleCommentsChange(e): boolean {
-        const event: CustomEvent = new CustomEvent('comments-change', {detail: {comments: this.commentsElement.value}});
+    handleCommentsChange(e) {
+        const event = new CustomEvent('comments-change', { detail: { comments: this.commentsElement.value } });
         this['dispatchEvent'](event);
-
         return true;
     }
-
-    private handleDapChange(e) {
-        const event: CustomEvent = new CustomEvent('dap-change', {detail: {dap: e.target.value}});
+    handleDapChange(e) {
+        const event = new CustomEvent('dap-change', { detail: { dap: e.target.value } });
         this['dispatchEvent'](event);
-
         return true;
     }
-
-    private handleVacChange(e) {
-        const event: CustomEvent = new CustomEvent('vac-change', {detail: {vac: e.target.value}});
+    handleVacChange(e) {
+        const event = new CustomEvent('vac-change', { detail: { vac: e.target.value } });
         this['dispatchEvent'](event);
-
         return true;
     }
 }
-
-customElements.define(RhiUiIsncsciMobileTotals.is, RhiUiIsncsciMobileTotals);
+customElements.define(RhiIsncsciUiMobileTotals.is, RhiIsncsciUiMobileTotals);
+//# sourceMappingURL=rhi-isncsci-ui-mobile-totals.js.map
