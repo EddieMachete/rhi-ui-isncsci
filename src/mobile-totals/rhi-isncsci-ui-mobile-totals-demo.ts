@@ -18,6 +18,8 @@
 
 import { html, LitElement } from '@polymer/lit-element/lit-element.js';
 import { TemplateResult } from 'lit-html/lit-html.js';
+import { RhiUiDemoSnippet } from '@rhi-ui/demo-snippet/rhi-ui-demo-snippet.js';
+import { RhiUiMarkdownViewer } from '@rhi-ui/markdown-viewer/rhi-ui-markdown-viewer.js';
 import { RhiIsncsciUiMobileTotals } from './rhi-isncsci-ui-mobile-totals.js';
 
 export class RhiIsncsciUiMobileTotalsDemo extends LitElement {
@@ -26,32 +28,27 @@ export class RhiIsncsciUiMobileTotalsDemo extends LitElement {
     public _render(props): TemplateResult {
         return html`
             <!-- shadow DOM for your element -->
+            <!-- RHI Blue: #007DC2 -->
             <style>
                 :host {
                     display: block;
                 }
 
-                .container {
-                    border-bottom: solid 1px #666;
-                    margin-bottom: 40px;
+                rhi-ui-demo-snippet:first-of-type {
+                    margin-bottom: 48px;
+                }
+                
+                rhi-ui-markdown-viewer {
+                    margin: 0 16px 48px 16px;
                 }
 
-                .container rhi-isncsci-ui-mobile-totals {
-                    margin-bottom: 40px;
-                }
-
-                .container.dark-theme {
-                    --isncsci-primary-text-color: #FFF;
-                    --isncsci-secondary-text-color: #CCC;
-                    --isncsci-cell-color: #333;
-                    --isncsci-interactive-cell-color: #999;
-
+                .dark-theme {
                     background-color: #000;
                 }
             </style>
             <h3>&lt;rhi-ui-isncsci-mobile&gt;</h3>
-            <div class="container">
-                <h5>Default</h5>
+            <rhi-ui-markdown-viewer class="readme" fileUri="${props.readmeFile}"></rhi-ui-markdown-viewer>
+            <rhi-ui-demo-snippet snippetTitle="Default">
                 <rhi-isncsci-ui-mobile-totals id="totals"
                                               ais="A"
                                               comments="my two cents"
@@ -75,10 +72,20 @@ export class RhiIsncsciUiMobileTotalsDemo extends LitElement {
                                               rightTouch="C6"
                                               rightUpperMotor="C2"
                                               vac="Yes"></rhi-isncsci-ui-mobile-totals>
-            </div>
-            <div class="container dark-theme">
-                <h5>French</h5>
+            </rhi-ui-demo-snippet>
+            <rhi-ui-demo-snippet class="dark-theme" snippetTitle="Dark Theme in French">
+                <style>
+                    .dark-theme {
+                        --isncsci-primary-text-color: #FFF;
+                        --isncsci-secondary-text-color: #CCC;
+                        --isncsci-cell-color: #333;
+                        --isncsci-interactive-cell-color: #999;
+
+                        background-color: #000;
+                    }
+                </style>
                 <rhi-isncsci-ui-mobile-totals id="totalsFr"
+                                              class="dark-theme"
                                               textAis="AIS"
                                               textComments="Observations générales:"
                                               textCompleteIncomplete="Complet ou incomplet"
@@ -100,12 +107,16 @@ export class RhiIsncsciUiMobileTotalsDemo extends LitElement {
                                               textUpperMotor="moteur supérieur"
                                               textVac="CAV"
                                               textVacDescription="Contraction anale volontaire"></rhi-isncsci-ui-mobile-totals>
-            </div>
+            </rhi-ui-demo-snippet>
         `;
     }
 
+    private readme: string = '';
+
     public static get properties(): any {
-        return {};
+        return {
+            readmeFile: String
+        };
     }
 
     public constructor() {
@@ -115,9 +126,9 @@ export class RhiIsncsciUiMobileTotalsDemo extends LitElement {
     ready() {
         super.ready();
         // I'm forcing loading these two libraries without having to add the import script on the consuming html page.
-        console.log(`Loaded ${RhiIsncsciUiMobileTotals.is}`);
+        console.log(`Loaded ${RhiIsncsciUiMobileTotals.is} and ${RhiUiDemoSnippet.is} and ${RhiUiMarkdownViewer.is}`);
 
-        const totals = this['shadowRoot'].getElementById('totals');
+        const totals = this.shadowRoot.getElementById('totals');
 
         totals.addEventListener('interactive-cell-clicked', (e) => { alert(`Interactive cell clicked "${e['detail'].name}"`);});
         totals.addEventListener(
@@ -142,7 +153,7 @@ export class RhiIsncsciUiMobileTotalsDemo extends LitElement {
             }
         );
 
-        this['shadowRoot'].getElementById('totalsFr')
+        this.shadowRoot.getElementById('totalsFr')
         .addEventListener('interactive-cell-clicked', (e) => { alert(`Interactive cell clicked "${e['detail'].name}"`);});
     }
 }
