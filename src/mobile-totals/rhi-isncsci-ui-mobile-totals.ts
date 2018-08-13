@@ -89,6 +89,7 @@ export class RhiIsncsciUiMobileTotals extends LitElement {
                 /* The interactive cells can be tapped.  They need to express that affordance to the user.object */
                 .cell.interactive {
                     background-color: var(--isncsci-interactive-cell-color, #DCDCDC);
+                    cursor: pointer;
                 }
 
                 .cell-select {
@@ -265,7 +266,7 @@ export class RhiIsncsciUiMobileTotals extends LitElement {
     //     return ['comments'];
     // }
 
-    public get comments(): string { return this.commentsElement.value; }
+    public get comments(): string { return this.getAttribute('comments'); }
     public set comments(value: string) {
         if (!value) {
             this.removeAttribute('comments');
