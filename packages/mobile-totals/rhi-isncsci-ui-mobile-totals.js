@@ -322,12 +322,16 @@ export class RhiIsncsciUiMobileTotals extends LitElement {
     }
     ready() {
         super.ready();
+        // Wire up the comments events
         this.commentsElement = this['shadowRoot'].getElementById('comments');
         this.commentsElement.addEventListener('focus', (e) => { this.commentsClass = 'comments-component active'; this.requestRender(); });
         this.commentsElement.addEventListener('blur', (e) => { this.commentsClass = 'comments-component'; this.requestRender(); });
         this.commentsElement.addEventListener('change', (e) => this.handleCommentsChange(e));
-        if (this.commentsElement['textLength'] > 0) {
-            this.commentsClass = 'comments-component active';
+        // if the attribute for comments gets set right away, the TextArea may not get hydrated as it has not been created.
+        // Check here if there are comments set on the attribute and update the TextArea.
+        const comments = this.getAttribute('comments');
+        if (comments) {
+            this.commentsElement.value = comments;
         }
     }
     attributeChangedCallback(name, oldValue, newValue, namespace) {
@@ -335,7 +339,10 @@ export class RhiIsncsciUiMobileTotals extends LitElement {
         // if (oldValue === newValue || !/^(preview|value)$/.test(name)) {
         //     return;
         // }
-        if (name === 'comments') {
+        // Check if the comments element is available.
+        // When the commets attribute is set straight on the markup, this can be called before the
+        // corresponding TextArea is available.
+        if (name === 'comments' && this.commentsElement) {
             this.commentsElement.value = newValue;
         }
         this.requestRender();
@@ -362,4 +369,3 @@ export class RhiIsncsciUiMobileTotals extends LitElement {
     }
 }
 customElements.define(RhiIsncsciUiMobileTotals.is, RhiIsncsciUiMobileTotals);
-//# sourceMappingURL=rhi-isncsci-ui-mobile-totals.js.map
