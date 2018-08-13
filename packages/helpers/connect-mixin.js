@@ -30,4 +30,3 @@ export const connect = (store) => (baseElement) => class extends baseElement {
         throw new Error('stateChanged() not implemented');
     }
 };
-//# sourceMappingURL=connect-mixin.js.map

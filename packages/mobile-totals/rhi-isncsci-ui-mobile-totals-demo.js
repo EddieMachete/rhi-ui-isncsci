@@ -138,4 +138,3 @@ export class RhiIsncsciUiMobileTotalsDemo extends LitElement {
     }
 }
 customElements.define(RhiIsncsciUiMobileTotalsDemo.is, RhiIsncsciUiMobileTotalsDemo);
-//# sourceMappingURL=rhi-isncsci-ui-mobile-totals-demo.js.map
