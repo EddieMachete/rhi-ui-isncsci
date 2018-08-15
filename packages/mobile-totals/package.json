@@ -1,30 +1,38 @@
 {
     "author": "RhiTech <tech@rickhanseninstitute.org>",
     "bugs": {
-      "url": "https://github.com/rick-hansen-institute/ui/issues"
+        "url": "https://github.com/rick-hansen-institute/ui/issues"
     },
     "dependencies": {
-      "@polymer/lit-element": "^0.5.2",
-      "@polymer/polymer": "^3.0.2",
-      "@webcomponents/webcomponentsjs": "^2.0.2"
+        "@polymer/lit-element": "^0.5.2",
+        "@polymer/polymer": "^3.0.2",
+        "@webcomponents/webcomponentsjs": "^2.0.2"
     },
     "description": "Component to display the ISNCSCI totals on a mobile device.",
     "devDependencies": {
-        "@rhi-ui/demo-snippet": "^1.0.1",
-        "@rhi-ui/markdown-viewer": "^1.0.1"
+        "@polymer/iron-demo-helpers": "^3.0.0-pre.21",
+        "@polymer/marked-element": "^3.0.0-pre.21"
     },
     "homepage": "https://www.rickhanseninstitute.org",
+    "keywords": [
+        "Rick",
+        "Hansen",
+        "Institute",
+        "custom elements",
+        "components",
+        "isncsci",
+        "totals"
+    ],
     "license": "Apache-2.0",
     "main": "rhi-isncsci-ui-mobile-totals.js",
     "name": "@rhi-isncsci-ui/mobile-totals",
     "private": false,
     "repository": {
-      "type": "git",
-      "url": "https://github.com/rhi-isncsci/ui.git"
+        "type": "git",
+        "url": "https://github.com/rhi-isncsci/ui.git"
     },
     "scripts": {
-      "prepublishOnly": "tsc -p ../../"
+        "prepublishOnly": "tsc -p ../../"
     },
-    "version": "1.0.2"
-  }
-  
+    "version": "1.0.3"
+}

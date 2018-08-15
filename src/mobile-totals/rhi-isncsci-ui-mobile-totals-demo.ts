@@ -18,8 +18,6 @@
 
 import { html, LitElement } from '@polymer/lit-element/lit-element.js';
 import { TemplateResult } from 'lit-html/lit-html.js';
-import { RhiUiDemoSnippet } from '@rhi-ui/demo-snippet/rhi-ui-demo-snippet.js';
-import { RhiUiMarkdownViewer } from '@rhi-ui/markdown-viewer/rhi-ui-markdown-viewer.js';
 import { RhiIsncsciUiMobileTotals } from './rhi-isncsci-ui-mobile-totals.js';
 
 export class RhiIsncsciUiMobileTotalsDemo extends LitElement {
@@ -33,85 +31,93 @@ export class RhiIsncsciUiMobileTotalsDemo extends LitElement {
                 :host {
                     display: block;
                 }
+                
+                .example h4 {
+                    background-color: var(--snippet-title-background-color, #8baec1);
+                    color: var(--snippet-title-color, #003a59);
+                    padding: 12px 16px;
+                }
 
-                rhi-ui-demo-snippet:first-of-type {
+                marked-element {
                     margin-bottom: 48px;
                 }
-                
-                rhi-ui-markdown-viewer {
-                    margin: 0 16px 48px 16px;
-                }
-
-                .dark-theme {
-                    background-color: #000;
-                }
             </style>
-            <h3>&lt;rhi-ui-isncsci-mobile&gt;</h3>
-            <rhi-ui-markdown-viewer class="readme" fileUri="${props.readmeFile}"></rhi-ui-markdown-viewer>
-            <rhi-ui-demo-snippet snippetTitle="Default">
-                <rhi-isncsci-ui-mobile-totals id="totals"
-                                              ais="A"
-                                              comments="my two cents"
-                                              completeIncomplete="C"
-                                              dap="NT"
-                                              leftLowerMotor="C5"
-                                              leftMotorNl="T5"
-                                              leftMotorNlZpp="T9"
-                                              leftPrick="T1"
-                                              leftSensoryNl="T3"
-                                              leftSensoryNlZpp="T7"
-                                              leftTouch="C7"
-                                              leftUpperMotor="C3"
-                                              nli="T6"
-                                              rightLowerMotor="C4"
-                                              rightMotorNl="T4"
-                                              rightMotorNlZpp="T8"
-                                              rightPrick="C8"
-                                              rightSensoryNl="T2"
-                                              rightSensoryNlZpp="T6"
-                                              rightTouch="C6"
-                                              rightUpperMotor="C2"
-                                              vac="Yes"></rhi-isncsci-ui-mobile-totals>
-            </rhi-ui-demo-snippet>
-            <rhi-ui-demo-snippet class="dark-theme" snippetTitle="Dark Theme in French">
-                <style>
-                    .dark-theme {
-                        --isncsci-primary-text-color: #FFF;
-                        --isncsci-secondary-text-color: #CCC;
-                        --isncsci-cell-color: #333;
-                        --isncsci-interactive-cell-color: #999;
+            <marked-element>
+                <div slot="markdown-html"></div>
+                <script id="marked-element" type="text/markdown"></script>
+            </marked-element>
+            <div class="example">
+                <h4>Default</h4>
+                <demo-snippet id="snippet-default">
+                    <template>
+                        <rhi-isncsci-ui-mobile-totals id="totals"
+                                                      ais="A"
+                                                      comments="my two cents"
+                                                      completeIncomplete="C"
+                                                      dap="NT"
+                                                      leftLowerMotor="C5"
+                                                      leftMotorNl="T5"
+                                                      leftMotorNlZpp="T9"
+                                                      leftPrick="T1"
+                                                      leftSensoryNl="T3"
+                                                      leftSensoryNlZpp="T7"
+                                                      leftTouch="C7"
+                                                      leftUpperMotor="C3"
+                                                      nli="T6"
+                                                      rightLowerMotor="C4"
+                                                      rightMotorNl="T4"
+                                                      rightMotorNlZpp="T8"
+                                                      rightPrick="C8"
+                                                      rightSensoryNl="T2"
+                                                      rightSensoryNlZpp="T6"
+                                                      rightTouch="C6"
+                                                      rightUpperMotor="C2"
+                                                      vac="Yes"></rhi-isncsci-ui-mobile-totals>
+                    </template>
+                </demo-snippet>
+            </div>
+            <div class="example background-black">
+                <h4>Dark Theme in French</h4>
+                <demo-snippet>
+                    <template>
+                        <style>
+                            .dark-theme {
+                                --isncsci-primary-text-color: #FFF;
+                                --isncsci-secondary-text-color: #CCC;
+                                --isncsci-cell-color: #333;
+                                --isncsci-interactive-cell-color: #999;
 
-                        background-color: #000;
-                    }
-                </style>
-                <rhi-isncsci-ui-mobile-totals id="totalsFr"
-                                              class="dark-theme"
-                                              textAis="AIS"
-                                              textComments="Observations générales:"
-                                              textCompleteIncomplete="Complet ou incomplet"
-                                              textDap="PAP"
-                                              textDapDescription="Pression anale profonde"
-                                              textLeft="La gauche"
-                                              textLightTouch="LeLight touchft"
-                                              textLowerMotor="Moteur inférieur"
-                                              textMotorNl="NN moteur"
-                                              textMotorNlZpp="NN Motor ZCP"
-                                              textNli="NNB"
-                                              textOptionNo="Non"
-                                              textOptionNt="NT"
-                                              textOptionYes="Oui"
-                                              textPinPrick="Piqûre d'épingle"
-                                              textRight="droite"
-                                              textSensoryNl="NN sensoriel"
-                                              textSensoryNlZpp="NN sensoriel ZCP"
-                                              textUpperMotor="moteur supérieur"
-                                              textVac="CAV"
-                                              textVacDescription="Contraction anale volontaire"></rhi-isncsci-ui-mobile-totals>
-            </rhi-ui-demo-snippet>
+                                background-color: #000;
+                            }
+                        </style>
+                        <rhi-isncsci-ui-mobile-totals id="totalsFr"
+                                                      class="dark-theme"
+                                                      textAis="AIS"
+                                                      textComments="Observations générales:"
+                                                      textCompleteIncomplete="Complet ou incomplet"
+                                                      textDap="PAP"
+                                                      textDapDescription="Pression anale profonde"
+                                                      textLeft="La gauche"
+                                                      textLightTouch="LeLight touchft"
+                                                      textLowerMotor="Moteur inférieur"
+                                                      textMotorNl="NN moteur"
+                                                      textMotorNlZpp="NN Motor ZCP"
+                                                      textNli="NNB"
+                                                      textOptionNo="Non"
+                                                      textOptionNt="NT"
+                                                      textOptionYes="Oui"
+                                                      textPinPrick="Piqûre d'épingle"
+                                                      textRight="droite"
+                                                      textSensoryNl="NN sensoriel"
+                                                      textSensoryNlZpp="NN sensoriel ZCP"
+                                                      textUpperMotor="moteur supérieur"
+                                                      textVac="CAV"
+                                                      textVacDescription="Contraction anale volontaire"></rhi-isncsci-ui-mobile-totals>
+                    </template>
+                </demo-snippet>
+            </div>
         `;
     }
-
-    private readme: string = '';
 
     public static get properties(): any {
         return {
@@ -123,13 +129,34 @@ export class RhiIsncsciUiMobileTotalsDemo extends LitElement {
         super();
     }
 
-    ready() {
+    public ready(): void {
         super.ready();
         // I'm forcing loading these two libraries without having to add the import script on the consuming html page.
-        console.log(`Loaded ${RhiIsncsciUiMobileTotals.is} and ${RhiUiDemoSnippet.is} and ${RhiUiMarkdownViewer.is}`);
+        console.log(`Loaded ${RhiIsncsciUiMobileTotals.is}`);
+        
+        this.shadowRoot.getElementById('marked-element').setAttribute('src', this['readmeFile']);
 
+        let timeElapsed: number = 0;
+        const intervalSpeed: number = 60;
+
+        const intervalId: number = setInterval(() => {
+            timeElapsed += intervalSpeed;
+
+            if (timeElapsed >= 10000) {
+                clearInterval(intervalId);
+                console.log('Event binding timed out');
+            }
+
+            if (this.shadowRoot.getElementById('totals')) {
+                this.bindToEvents();
+                clearInterval(intervalId);
+                console.log('Events have been binded');
+            }
+        }, intervalSpeed);
+    }
+
+    private bindToEvents(): void {
         const totals = this.shadowRoot.getElementById('totals');
-
         totals.addEventListener('interactive-cell-clicked', (e) => { alert(`Interactive cell clicked "${e['detail'].name}"`);});
         totals.addEventListener(
             'comments-change',
