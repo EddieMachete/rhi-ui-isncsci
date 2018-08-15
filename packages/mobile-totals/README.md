@@ -41,23 +41,23 @@
 | comments               | String |                       |
 | completeIncomplete     | String | C, I                  |
 | dap                    | String | Yes, No, NT           |
-| leftLowerMotor         | String | C2 - S4_5, UT         |
-| leftMotorNl            | String | C2 - S4_5, UT         |
-| leftMotorNlZpp         | String | C2 - S4_5, UT         |
-| leftPrick              | String | C2 - S4_5, UT         |
-| leftSensoryNl          | String | C2 - S4_5, UT         |
-| leftSensoryNlZpp       | String | C2 - S4_5, UT         |
-| leftTouch              | String | C2 - S4_5, UT         |
-| leftUpperMotor         | String | C2 - S4_5, UT         |
-| nli                    | String | C2 - S4_5, UT         |
-| rightLowerMotor        | String | C2 - S4_5, UT         |
-| rightMotorNl           | String | C2 - S4_5, UT         |
-| rightMotorNlZpp        | String | C2 - S4_5, UT         |
-| rightPrick             | String | C2 - S4_5, UT         |
-| rightSensoryNl         | String | C2 - S4_5, UT         |
-| rightSensoryNlZpp      | String | C2 - S4_5, UT         |
-| rightTouch             | String | C2 - S4_5, UT         |
-| rightUpperMotor        | String | C2 - S4_5, UT         |
+| leftLowerMotor         | String | C2 - S4_5, UD         |
+| leftMotorNl            | String | C2 - S4_5, UD         |
+| leftMotorNlZpp         | String | C2 - S4_5, UD         |
+| leftPrick              | String | C2 - S4_5, UD         |
+| leftSensoryNl          | String | C2 - S4_5, UD         |
+| leftSensoryNlZpp       | String | C2 - S4_5, UD         |
+| leftTouch              | String | C2 - S4_5, UD         |
+| leftUpperMotor         | String | C2 - S4_5, UD         |
+| nli                    | String | C2 - S4_5, UD         |
+| rightLowerMotor        | String | C2 - S4_5, UD         |
+| rightMotorNl           | String | C2 - S4_5, UD         |
+| rightMotorNlZpp        | String | C2 - S4_5, UD         |
+| rightPrick             | String | C2 - S4_5, UD         |
+| rightSensoryNl         | String | C2 - S4_5, UD         |
+| rightSensoryNlZpp      | String | C2 - S4_5, UD         |
+| rightTouch             | String | C2 - S4_5, UD         |
+| rightUpperMotor        | String | C2 - S4_5, UD         |
 | textAis                | String |                       |
 | textComments           | String |                       |
 | textCompleteIncomplete | String |                       |
