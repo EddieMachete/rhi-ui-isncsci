@@ -19,3 +19,5 @@ src/rhi-ui-isncsci-wide/demo/scripts
 
 build/
 demo/scripts
+packages/@rhi-isncsci-ui/**/*.js
+packages/@rhi-isncsci-ui/**/*.d.ts
