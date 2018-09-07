@@ -14,40 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 'use strict';
-
-import { html, render, TemplateResult } from '../../../node_modules/lit-html/lit-html.js';
-
+import { html, render } from '../../../node_modules/lit-html/lit-html.js';
 export class RhiIsncsciUiMobileTotals extends HTMLElement {
-    private static getOptionTemplate(label: string, value: string, selectedValue: string) {
-        return value === selectedValue
-            ? html`<option value="${value}" selected>${label}</option>`
-            : html`<option value="${value}">${label}</option>`;
-    }
-
-    private props = {};
-    private commentsElement: HTMLTextAreaElement;
-    private commentsClass: string = 'comments-component';
-
-    public constructor() {
+    constructor() {
         super();
-
+        this.props = {};
+        this.commentsClass = 'comments-component';
         this.attachShadow({ mode: 'open' });
-
         // ToDo: For some reason the lit element is not initializing
         const props = RhiIsncsciUiMobileTotals.properties;
-
         // tslint:disable-next-line:forin
         for (const key in props) {
             this.props[key] = props[key].value;
         }
     }
-
-    public static get is(): string { return 'rhi-isncsci-ui-mobile-totals'; }
-
-    public _render(props): TemplateResult {
-        return html`
+    static getOptionTemplate(label, value, selectedValue) {
+        return value === selectedValue
+            ? html `<option value="${value}" selected>${label}</option>`
+            : html `<option value="${value}">${label}</option>`;
+    }
+    static get is() { return 'rhi-isncsci-ui-mobile-totals'; }
+    _render(props) {
+        return html `
             <!-- shadow DOM for your element -->
             <style>
                 :host {
@@ -323,19 +312,15 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
             </div>
         `;
     }
-
-    public static get observedAttributes(): string[] {
-        const attributes: string[] = [];
-
+    static get observedAttributes() {
+        const attributes = [];
         // tslint:disable-next-line:forin
         for (const key in RhiIsncsciUiMobileTotals.properties) {
             attributes.push(key.toLowerCase());
         }
-
         return attributes;
     }
-
-    public static get properties() {
+    static get properties() {
         return {
             'ais': { reflectToAttribute: true, type: String, value: '' },
             'comments': { reflectToAttribute: true, type: String, value: '' },
@@ -382,24 +367,20 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
             'vac': { reflectToAttribute: true, type: String, value: '' }
         };
     }
-
-    public ready(): void {
+    ready() {
         // Wire up Voluntary Anal Contraction events
-        const vac: HTMLSelectElement = this.shadowRoot.getElementById('anal-contraction') as HTMLSelectElement;
+        const vac = this.shadowRoot.getElementById('anal-contraction');
         vac.addEventListener('change', (e) => this.handleVacChange(e));
-
         // Wire up Deep Anal Pressure events
-        const dap: HTMLSelectElement = this.shadowRoot.getElementById('anal-sensation') as HTMLSelectElement;
+        const dap = this.shadowRoot.getElementById('anal-sensation');
         dap.addEventListener('change', (e) => this.handleDapChange(e));
-
         // Wire up the comments events
-        this.commentsElement = this.shadowRoot.getElementById('comments') as HTMLTextAreaElement;
+        this.commentsElement = this.shadowRoot.getElementById('comments');
         this.commentsElement
-        .addEventListener('focus', (e) => { this.commentsClass = 'comments-component active'; this.requestRender(); });
+            .addEventListener('focus', (e) => { this.commentsClass = 'comments-component active'; this.requestRender(); });
         this.commentsElement
-        .addEventListener('blur', (e) => { this.commentsClass = 'comments-component'; this.requestRender(); });
+            .addEventListener('blur', (e) => { this.commentsClass = 'comments-component'; this.requestRender(); });
         this.commentsElement.addEventListener('change', (e) => this.handleCommentsChange(e));
-
         // // if the attribute for comments gets set right away,
         // // the TextArea may not get hydrated as it has not been created.
         // // Check here if there are comments set on the attribute and update the TextArea.
@@ -407,74 +388,58 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
         // if (comments) {
         //     this.commentsElement.value = comments;
         // }
-
-        const clickables: NodeListOf<Element> = this.shadowRoot.querySelectorAll('[on-click]');
-
+        const clickables = this.shadowRoot.querySelectorAll('[on-click]');
         // NodeListOf<T> currently does not have an iterator and forEach cannot be called on it.
         // tslint:disable-next-line:prefer-for-of
-        for (let i: number = 0; i < clickables.length; i++) {
-            const value: Element = clickables[i];
+        for (let i = 0; i < clickables.length; i++) {
+            const value = clickables[i];
             // tslint:disable-next-line:no-eval
             value.addEventListener('click', eval(value.getAttribute('on-click')));
         }
     }
-
-    public connectedCallback(): void {
+    connectedCallback() {
         this.ready();
         // this.requestRender();
     }
-
-    public attributeChangedCallback(name: string, oldValue: string, newValue: string, namespace: string): void {
+    attributeChangedCallback(name, oldValue, newValue, namespace) {
         if (oldValue === newValue) {
             return;
         }
-
         // Check if the comments element is available.
         // When the commets attribute is set straight on the markup, this can be called before the
         // corresponding TextArea is available.
         if (name === 'comments' && this.commentsElement && this.commentsElement.value !== newValue) {
             this.commentsElement.value = newValue;
-        } else {
+        }
+        else {
             this.props[name] = newValue;
         }
-
         this.requestRender();
     }
-
-    private requestRender(): void {
+    requestRender() {
         render(this._render(this.props), this.shadowRoot);
     }
-
-    private handleCellClick(e: MouseEvent, cellName: string): boolean {
-        const event: CustomEvent = new CustomEvent('interactive-cell-clicked', { detail: { name: cellName } });
+    handleCellClick(e, cellName) {
+        const event = new CustomEvent('interactive-cell-clicked', { detail: { name: cellName } });
         this.dispatchEvent(event);
-
         return true;
     }
-
-    private handleCommentsChange(e: Event): boolean {
-        const event: CustomEvent =
-            new CustomEvent('comments-change', { detail: { comments: this.commentsElement.value } });
+    handleCommentsChange(e) {
+        const event = new CustomEvent('comments-change', { detail: { comments: this.commentsElement.value } });
         this.dispatchEvent(event);
-
         return true;
     }
-
-    private handleDapChange(e: Event): boolean {
-        const target: HTMLSelectElement = e.target as HTMLSelectElement;
-        const event: CustomEvent = new CustomEvent('dap-change', { detail: { dap: target.value } });
+    handleDapChange(e) {
+        const target = e.target;
+        const event = new CustomEvent('dap-change', { detail: { dap: target.value } });
         this.dispatchEvent(event);
-
         return true;
     }
-
-    private handleVacChange(e: Event): boolean {
-        const target: HTMLSelectElement = e.target as HTMLSelectElement;
-        const event: CustomEvent = new CustomEvent('vac-change', { detail: { vac: target.value } });
+    handleVacChange(e) {
+        const target = e.target;
+        const event = new CustomEvent('vac-change', { detail: { vac: target.value } });
         this.dispatchEvent(event);
-
         return true;
     }
 }
-
 customElements.define(RhiIsncsciUiMobileTotals.is, RhiIsncsciUiMobileTotals);

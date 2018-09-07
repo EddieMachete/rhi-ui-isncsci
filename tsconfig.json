@@ -11,14 +11,13 @@
         "moduleResolution": "node",
         "noEmitOnError": true,
         "noImplicitAny": false,
-        "outDir": "./packages",
+        "outDir": "./build/@rhi-isncsci-ui",
         "removeComments": false,
         "sourceMap": false,
         "target": "es6"
     },
     "include": [
-        "src/mobile-totals/**/*",
-        "src/helpers/**/*"
+        "src/@rhi-isncsci-ui/**/*"
     ],
     "exclude": [
         "node_modules",

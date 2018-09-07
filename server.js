@@ -25,5 +25,5 @@ app.get('*', function(req, res) {
 
 // Tell the app to listen for requests on port 3000
 app.listen(port, function () {
-  console.log('rhi-ui-isncsci Web Components');
+  console.log('rhi-isncsci-ui Web Components');
 });

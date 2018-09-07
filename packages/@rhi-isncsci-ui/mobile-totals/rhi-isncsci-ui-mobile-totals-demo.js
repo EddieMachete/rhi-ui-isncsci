@@ -1,13 +1,13 @@
 /**
  * @license
  * Copyright (c) 2018 Rick Hansen Institute. All rights reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,15 +15,21 @@
  * limitations under the License.
 */
 'use strict';
-
 import { RhiUiDemoSnippet } from '../../../node_modules/@rhi-ui/demo-snippet/rhi-ui-demo-snippet.js';
 import { html } from '../../../node_modules/@rhi-ui/html/html.js';
 import { RhiUiMarkdownViewer } from '../../../node_modules/@rhi-ui/markdown-viewer/rhi-ui-markdown-viewer.js';
 import { RhiIsncsciUiMobileTotals } from './rhi-isncsci-ui-mobile-totals.js';
-
 export class RhiIsncsciUiMobileTotalsDemo extends HTMLElement {
-    public static getTemplate(props): string {
-        return html`
+    constructor() {
+        super();
+        this.props = {};
+        this.attachShadow({ mode: 'open' });
+        // I'm forcing loading these two libraries without having to add the import script on the consuming html page.
+        console.log(`${RhiIsncsciUiMobileTotals.is}, ${RhiUiDemoSnippet.is}, and ${RhiUiMarkdownViewer.is}`);
+        this.requestRender();
+    }
+    static getTemplate(props) {
+        return html `
             <!-- shadow DOM for your element -->
             <!-- RHI Blue: #007DC2 -->
             <style>
@@ -101,34 +107,16 @@ export class RhiIsncsciUiMobileTotalsDemo extends HTMLElement {
             </rhi-ui-demo-snippet>
         `;
     }
-
-    public static get observedAttributes(): string[] {
-        const attributes: string[] = [];
-
+    static get observedAttributes() {
+        const attributes = [];
         // tslint:disable-next-line:forin
         for (const key in RhiIsncsciUiMobileTotalsDemo.properties) {
             attributes.push(key.toLowerCase());
         }
-
         return attributes;
     }
-
-    private props = {};
-
-    public constructor() {
-        super();
-
-        this.attachShadow({ mode: 'open' });
-
-        // I'm forcing loading these two libraries without having to add the import script on the consuming html page.
-        console.log(`${RhiIsncsciUiMobileTotals.is}, ${RhiUiDemoSnippet.is}, and ${RhiUiMarkdownViewer.is}`);
-
-        this.requestRender();
-    }
-
-    public static get is(): string { return 'rhi-isncsci-ui-mobile-totals-demo'; }
-
-    public static get properties() {
+    static get is() { return 'rhi-isncsci-ui-mobile-totals-demo'; }
+    static get properties() {
         return {
             'file-uri': {
                 type: String,
@@ -136,25 +124,19 @@ export class RhiIsncsciUiMobileTotalsDemo extends HTMLElement {
             }
         };
     }
-
-    public connectedCallback(): void {
+    connectedCallback() {
         // I'm forcing loading these two libraries without having to add the import script on the consuming html page.
         // tslint:disable-next-line:no-console
         console.log(`Loaded ${RhiIsncsciUiMobileTotals.is} and ${RhiUiDemoSnippet.is} and ${RhiUiMarkdownViewer.is}`);
-
         this.shadowRoot.getElementById('readme-viewer').setAttribute('src', this['file-uri']);
-
-        let timeElapsed: number = 0;
-        const intervalSpeed: number = 60;
-
-        const intervalId: number = setInterval(() => {
+        let timeElapsed = 0;
+        const intervalSpeed = 60;
+        const intervalId = setInterval(() => {
             timeElapsed += intervalSpeed;
-
             if (timeElapsed >= 10000) {
                 clearInterval(intervalId);
                 console.log('Event binding timed out');
             }
-
             if (this.shadowRoot.getElementById('totals')) {
                 this.bindToEvents();
                 clearInterval(intervalId);
@@ -162,67 +144,40 @@ export class RhiIsncsciUiMobileTotalsDemo extends HTMLElement {
             }
         }, intervalSpeed);
     }
-
-    public attributeChangedCallback(name: string, oldValue: string, newValue: string, namespace: string): void {
+    attributeChangedCallback(name, oldValue, newValue, namespace) {
         if (oldValue === newValue) {
             return;
         }
-
         this.props[name] = newValue;
-
         if (name === 'file-uri' && newValue) {
-            const readmeViewer: HTMLElement = this.shadowRoot.getElementById('readme-viewer');
-
+            const readmeViewer = this.shadowRoot.getElementById('readme-viewer');
             if (readmeViewer) {
                 readmeViewer.setAttribute('file-uri', newValue);
             }
         }
     }
-
-    private requestRender(): void {
-        const template: HTMLTemplateElement = document.createElement('template') as HTMLTemplateElement;
+    requestRender() {
+        const template = document.createElement('template');
         template.innerHTML = RhiIsncsciUiMobileTotalsDemo.getTemplate({});
         this.shadowRoot.appendChild(template.content.cloneNode(true));
     }
-
-    private bindToEvents(): void {
+    bindToEvents() {
         const totals = this.shadowRoot.getElementById('totals');
-
-        totals.addEventListener(
-            'interactive-cell-clicked',
-            (e: CustomEvent) => { alert(`Interactive cell clicked "${e.detail.name}"`); }
-        );
-
-        totals.addEventListener(
-            'comments-change',
-            (e: CustomEvent) => {
-                alert(`Comments changed to  "${e.detail.comments}"`);
-                totals.setAttribute('comments', e.detail.comments);
-            }
-        );
-
-        totals.addEventListener(
-            'dap-change',
-            (e: CustomEvent) => {
-                alert(`Dap changed to  "${e.detail.dap}"`);
-                totals.setAttribute('dap', e.detail.dap);
-            }
-        );
-
-        totals.addEventListener(
-            'vac-change',
-            (e: CustomEvent) => {
-                alert(`Vac changed to  "${e.detail.vac}"`);
-                totals.setAttribute('vac', e.detail.vac);
-            }
-        );
-
+        totals.addEventListener('interactive-cell-clicked', (e) => { alert(`Interactive cell clicked "${e.detail.name}"`); });
+        totals.addEventListener('comments-change', (e) => {
+            alert(`Comments changed to  "${e.detail.comments}"`);
+            totals.setAttribute('comments', e.detail.comments);
+        });
+        totals.addEventListener('dap-change', (e) => {
+            alert(`Dap changed to  "${e.detail.dap}"`);
+            totals.setAttribute('dap', e.detail.dap);
+        });
+        totals.addEventListener('vac-change', (e) => {
+            alert(`Vac changed to  "${e.detail.vac}"`);
+            totals.setAttribute('vac', e.detail.vac);
+        });
         this.shadowRoot.getElementById('totalsFr')
-        .addEventListener(
-            'interactive-cell-clicked',
-            (e: CustomEvent) => { alert(`Interactive cell clicked "${e.detail.name}"`); }
-        );
+            .addEventListener('interactive-cell-clicked', (e) => { alert(`Interactive cell clicked "${e.detail.name}"`); });
     }
 }
-
 customElements.define(RhiIsncsciUiMobileTotalsDemo.is, RhiIsncsciUiMobileTotalsDemo);
