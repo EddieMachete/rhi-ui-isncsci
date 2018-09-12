@@ -17,7 +17,7 @@
 
 'use strict';
 
-import { html, render, TemplateResult } from '../../../node_modules/lit-html/lit-html.js';
+import { html, render, TemplateResult } from 'lit-html';
 
 export class RhiIsncsciUiMobileTotals extends HTMLElement {
     private static getOptionTemplate(label: string, value: string, selectedValue: string) {

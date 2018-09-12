@@ -16,14 +16,13 @@
  */
 'use strict';
 
-// import { html } from '../../node_modules/@polymer/lit-element/lit-element.js';
-import { html, render, TemplateResult } from '../../../node_modules/lit-html/lit-html.js';
+import { html } from '@rhi-ui/html';
 
 export class RhiIsncsciUiMobileSensory extends HTMLElement {
     public static get is(): string { return 'rhi-isncsci-ui-mobile-sensory'; }
 
-    public get template() {
-        return (props): TemplateResult => html`
+    public static getTemplate(): string {
+        return html`
             <!-- shadow DOM for your element -->
             <style>
                 :host {
@@ -40,22 +39,14 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
         };
     }
 
-    private commentsClass: string = '';
+    private uiBindings: {};
 
     public constructor() {
         super();
 
         this.attachShadow({ mode: 'open' });
-
-        console.log(this.shadowRoot);
-        render(this.template({ vac: 'Yes', dap: 'Yes' }), this.shadowRoot);
-        // render(this._render({}), this.shadowRoot);
-
-        // // ToDo: For some reason the lit element is not initializing
-        // const props: any = RhiIsncsciUiMobileSensory.properties;
-        // for (let key in props) {
-        //     this[key] = props[key].value;
-        // }
+        this.requestRender();
+        this.updateUiBindings();
     }
 
     public connectedCallback() {
@@ -66,28 +57,16 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
         console.log('Custom square element removed from page.');
     }
 
-    public adoptedCallback() {
-        console.log('Custom square element moved to new page.');
+    private requestRender(): void {
+        const template: HTMLTemplateElement = document.createElement('template') as HTMLTemplateElement;
+        template.innerHTML = RhiIsncsciUiMobileSensory.getTemplate();
+        this.shadowRoot.appendChild(template.content.cloneNode(true));
     }
 
-    // static get observedAttributes() {return ['w', 'l']; }
-    // public attributeChangedCallback(name: string, oldValue: string, newValue: string, namespace: string): void {
-    //     super.attributeChangedCallback(name, oldValue, newValue, namespace);
-
-
-    //     // if (oldValue === newValue || !/^(preview|value)$/.test(name)) {
-    //     //     return;
-    //     // }
-
-    //     // Check if the comments element is available.
-    //     // When the commets attribute is set straight on the markup, this can be called before the
-    //     // corresponding TextArea is available.
-    //     if (name === 'comments' && this.commentsElement) {
-    //         this.commentsElement.value = newValue;
-    //     }
-
-    //     this.requestRender();
-    // }
+    private updateUiBindings(): void {
+        const bindings = this.shadowRoot.querySelectorAll('[bind-to]');
+        console.log(bindings);
+    }
 }
 
 customElements.define(RhiIsncsciUiMobileSensory.is, RhiIsncsciUiMobileSensory);

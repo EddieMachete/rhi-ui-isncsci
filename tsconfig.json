@@ -3,18 +3,15 @@
     "compilerOptions": {
         "declaration": true,
         "lib": [
-          "dom",
-          "es6",
-          "scripthost"
+            "dom",
+            "es6",
+            "scripthost"
         ],
-        "module": "es6",
-        "moduleResolution": "node",
-        "noEmitOnError": true,
-        "noImplicitAny": false,
-        "outDir": "./build/@rhi-isncsci-ui",
+        "module": "commonjs",
+        "outDir": "./build/umd/@rhi-isncsci-ui",
         "removeComments": false,
-        "sourceMap": false,
-        "target": "es6"
+        "strict": false,
+        "target": "es5"
     },
     "include": [
         "src/@rhi-isncsci-ui/**/*"

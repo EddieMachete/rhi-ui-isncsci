@@ -17,7 +17,7 @@
 'use strict';
 
 import { RhiUiDemoSnippet } from '../../../node_modules/@rhi-ui/demo-snippet/rhi-ui-demo-snippet.js';
-import { html } from '../../../node_modules/@rhi-ui/html/html.js';
+import { html } from '../../../node_modules/@rhi-ui/html/rhi-ui-html.js';
 import { RhiUiMarkdownViewer } from '../../../node_modules/@rhi-ui/markdown-viewer/rhi-ui-markdown-viewer.js';
 import { RhiIsncsciUiMobileTotals } from './rhi-isncsci-ui-mobile-totals.js';
 
