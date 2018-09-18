@@ -24,8 +24,8 @@
         "input"
     ],
     "license": "Apache-2.0",
-    "main": "rhi-isncsci-ui-mobile-sensory.js",
-    "module": "rhi-isncsci-ui-mobile-sensory.esm.js",
+    "main": "index.js",
+    "module": "index.esm.js",
     "name": "@rhi-isncsci-ui/mobile-sensory",
     "private": false,
     "repository": {
@@ -34,6 +34,6 @@
     },
     "scripts": {
     },
-    "types": "rhi-isncsci-ui-mobile-sensory.d.ts",
+    "types": "index.d.ts",
     "version": "1.0.0"
 }

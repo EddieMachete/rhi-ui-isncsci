@@ -1,5 +1,5 @@
 {
-    "compileOnSave": true,
+    "compileOnSave": false,
     "compilerOptions": {
         "declaration": true,
         "lib": [
@@ -8,19 +8,15 @@
           "scripthost"
         ],
         "module": "es6",
-        "moduleResolution": "node",
+        "moduleResolution": "classic",
         "noEmitOnError": true,
         "noImplicitAny": false,
-        "outDir": "./build/esm/@rhi-isncsci-ui",
-        "removeComments": false,
+        "removeComments": true,
         "sourceMap": false,
         "target": "es6"
     },
-    "include": [
-        "src/@rhi-isncsci-ui/**/*"
-    ],
-    "exclude": [
-        "node_modules",
-        "**/*.spec.ts"
+    "files": [
+        "../../src/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory.ts",
+        "../../src/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory-demo.ts"
     ]
 }

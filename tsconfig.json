@@ -7,7 +7,8 @@
             "es6",
             "scripthost"
         ],
-        "module": "commonjs",
+        "module": "UMD",
+        "moduleResolution": "Classic",
         "outDir": "./build/umd/@rhi-isncsci-ui",
         "removeComments": false,
         "strict": false,
@@ -16,6 +17,10 @@
     "include": [
         "src/@rhi-isncsci-ui/**/*"
     ],
+    "paths": {
+        "@rhi-ui/html": ["@rhi-ui/html/rhi-ui-html.d.ts"],
+        "lit-html": ["node_modules/lit-html"]
+    },
     "exclude": [
         "node_modules",
         "**/*.spec.ts"
