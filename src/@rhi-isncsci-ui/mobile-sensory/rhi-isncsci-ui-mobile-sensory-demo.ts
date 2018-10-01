@@ -42,23 +42,24 @@ export class RhiIsncsciUiMobileSensoryDemo extends HTMLElement {
 
                 .container rhi-isncsci-ui-mobile-sensory {
                     bottom: 0;
+                    overflow: hidden;
                     position: absolute;
                     left: 0;
                     right: 0;
                     top: 0;
                 }
             </style>
-            <rhi-ui-markdown-viewer id="readme-viewer" class="readme"></rhi-ui-markdown-viewer>
+            <rhi-ui-markdown-viewer bind-to="readme-viewer" class="readme"></rhi-ui-markdown-viewer>
             <rhi-ui-demo-snippet class="snippet default" snippet-title="Default">
                 <div class="container">
-                    <rhi-isncsci-ui-mobile-sensory id="sensory-input"
+                    <rhi-isncsci-ui-mobile-sensory bind-to="sensory"
                                                    nl="int"
                                                    total="56"></rhi-isncsci-ui-mobile-sensory>
                 </div>
             </rhi-ui-demo-snippet>
             <rhi-ui-demo-snippet class="snippet default" snippet-title="Default">
                 <div class="container">
-                    <rhi-isncsci-ui-mobile-sensory id="motor-input"
+                    <rhi-isncsci-ui-mobile-sensory bind-to="motor"
                                                    nl="int"
                                                    total="56"
                                                    input-type="motor-top"></rhi-isncsci-ui-mobile-sensory>
@@ -79,6 +80,7 @@ export class RhiIsncsciUiMobileSensoryDemo extends HTMLElement {
     }
 
     private props = {};
+    private uiBindings;
 
     public constructor() {
         super();
@@ -100,7 +102,22 @@ export class RhiIsncsciUiMobileSensoryDemo extends HTMLElement {
     }
 
     public connectedCallback(): void {
-        this.shadowRoot.getElementById('readme-viewer').setAttribute('src', this['file-uri']);
+        this.uiBindings = {};
+        const elements: NodeListOf<Element> = this.shadowRoot.querySelectorAll('[bind-to]');
+
+        for (let i: number = 0; i < elements.length; i++) {
+            const element: Element = elements[i];
+            const bindTo: string = element.getAttribute('bind-to');
+            this.uiBindings[bindTo] = element;
+        }
+
+        this.uiBindings['readme-viewer'].setAttribute('src', this['file-uri']);
+        
+        this.uiBindings.motor
+        .addEventListener('dermatome-selected', (e: CustomEvent) => this.dermatomeSelected(e, this.uiBindings.motor));
+        
+        this.uiBindings.sensory
+        .addEventListener('dermatome-selected', (e: CustomEvent) => this.dermatomeSelected(e, this.uiBindings.sensory));
     }
 
     public attributeChangedCallback(name: string, oldValue: string, newValue: string, namespace: string): void {
@@ -111,7 +128,7 @@ export class RhiIsncsciUiMobileSensoryDemo extends HTMLElement {
         this.props[name] = newValue;
 
         if (name === 'file-uri' && newValue) {
-            const readmeViewer: HTMLElement = this.shadowRoot.getElementById('readme-viewer');
+            const readmeViewer: HTMLElement = this.uiBindings['file-uri'];
 
             if (readmeViewer) {
                 readmeViewer.setAttribute('file-uri', newValue);
@@ -123,6 +140,11 @@ export class RhiIsncsciUiMobileSensoryDemo extends HTMLElement {
         const template: HTMLTemplateElement = document.createElement('template') as HTMLTemplateElement;
         template.innerHTML = RhiIsncsciUiMobileSensoryDemo.getTemplate({});
         this.shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+
+    private dermatomeSelected(e: CustomEvent, target: Element): boolean {
+        target.setAttribute('dermatome', e.detail.name);
+        return true;
     }
 }
 

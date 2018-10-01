@@ -8,7 +8,7 @@
             "scripthost"
         ],
         "module": "UMD",
-        "moduleResolution": "Classic",
+        "moduleResolution": "Node",
         "outDir": "./build/umd/@rhi-isncsci-ui",
         "removeComments": false,
         "strict": false,
