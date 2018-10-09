@@ -3,25 +3,24 @@
     "compilerOptions": {
         "declaration": true,
         "lib": [
-          "dom",
-          "es6",
-          "scripthost"
+            "dom",
+            "es6",
+            "scripthost"
         ],
         "module": "es6",
         "moduleResolution": "node",
         "noEmitOnError": true,
         "noImplicitAny": false,
-        "outDir": "./packages",
+        "outDir": "./build/umd/@rhi-isncsci-ui",
         "removeComments": false,
         "sourceMap": false,
         "target": "es6"
     },
     "include": [
-        "src/mobile-totals/**/*",
-        "src/helpers/**/*"
+        "src/@rhi-isncsci-ui/**/*"
     ],
     "exclude": [
-        "node_modules",
+        "./node_modules",
         "**/*.spec.ts"
     ]
 }

@@ -1,31 +1,31 @@
 {
-  "author": "RhiTech <tech@rickhanseninstitute.org>",
-  "dependencies": {
-    "@polymer/iron-demo-helpers": "^3.0.0-pre.21",
-    "@polymer/lit-element": "^0.5.2",
-    "@polymer/marked-element": "^3.0.0-pre.21",
-    "@polymer/polymer": "^3.0.2",
-    "@rhi-ui/demo-snippet": "^1.0.1",
-    "@rhi-ui/markdown-viewer": "^1.0.1",
-    "@rhi-ui/selectable-grid": "^1.0.2",
-    "@webcomponents/webcomponentsjs": "^2.0.2",
-    "redux": "^4.0.0",
-    "rhi-core-isncsci-algorithm": "^3.1.0"
-  },
-  "description": "Web components package for the ISNCSCI project.",
-  "devDependencies": {
-    "express": "^4.16.2",
-    "typescript": "^2.9.2"
-  },
-  "homepage": "https://www.rickhanseninstitute.org/rhi-isncsci/",
-  "license": "Apache-2.0",
-  "main": "index.js",
-  "name": "rhi-ui-isncsci",
-  "private": false,
-  "repository": "https://github.com/rick-hansen-institute/rhi-ui-isncsci.git",
-  "scripts": {
-    "tsc": "tsc --watch",
-    "start": "node server.js"
-  },
-  "version": "0.0.5"
+    "author": "RhiTech <tech@rickhanseninstitute.org>",
+    "dependencies": {
+        "@material/mwc-switch": "^0.3.1",
+        "@rhi-ui/html": "^1.0.6",
+        "@webcomponents/webcomponentsjs": "^2.1.3"
+    },
+    "description": "Web components package for the ISNCSCI project.",
+    "devDependencies": {
+        "cpx": "^1.5.0",
+        "express": "^4.16.3",
+        "rollup-plugin-node-resolve": "^3.4.0",
+        "rollup-plugin-typescript2": "^0.17.0",
+        "typescript": "^2.9.2"
+    },
+    "homepage": "https://www.rickhanseninstitute.org/rhi-isncsci/",
+    "license": "Apache-2.0",
+    "main": "index.js",
+    "name": "rhi-ui-isncsci",
+    "private": false,
+    "repository": "https://github.com/rick-hansen-institute/rhi-ui-isncsci.git",
+    "scripts": {
+        "build:demo": "rollup -c ./rollup.config.js",
+        "build:lib": "rollup -c ./build-configs/lib/rollup.config.js",
+        "build:mobile-sensory": "rollup -c ./build-configs/mobile-sensory/rollup.config.js && cpx \"./src/@rhi-isncsci-ui/mobile-sensory/*.{md,json}\" ./packages/@rhi-isncsci-ui/mobile-sensory",
+        "publish:mobile-sensory": "npm run build:mobile-sensory && npm publish ./packages/@rhi-isncsci-ui/mobile-sensory --access public",
+        "start": "npm run start:express",
+        "start:express": "node server.js"
+    },
+    "version": "0.0.5"
 }

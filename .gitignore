@@ -17,4 +17,8 @@ package-lock.json
 src/rhi-ui-isncsci-grid/demo/scripts
 src/rhi-ui-isncsci-wide/demo/scripts
 
+.rpt2_cache/
+build/
 demo/scripts
+lib/
+packages/

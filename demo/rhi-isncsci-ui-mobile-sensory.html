@@ -16,34 +16,42 @@
 -->
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-    <title>Demo :: rhi-ui-isncsci-grid :: Rick Hansen Institute</title>
-    <script>
-        // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
-        // https://github.com/reactjs/redux/issues/2907
-        window.process = { env: { NODE_ENV: 'production' } };
-    </script>
+    <title>Demo :: rhi-ui-isncsci-mobile-sensory :: Rick Hansen Institute</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="scripts/bundle.js"></script>
     <style>
         body {
-            font-family: 'Roboto', 'Noto', sans-serif;
-            -webkit-font-smoothing: antialiased;
+            --isncsci-font-common-base-font-family: 'Roboto', 'Noto', sans-serif;
+            --isncsci-font-common-base-webkit-font-smoothing: antialiased;
+
+            font-family: var(--isncsci-font-common-base-font-family, 'Roboto', 'Noto', sans-serif);
+            -webkit-font-smoothing: var(--isncsci-font-common-base-webkit-font-smoothing, antialiased);
             margin: 0;
             padding: 16px;
+
+            /*--mdc-theme-secondary: red;*/
+        }
+
+        rhi-isncsci-ui-mobile-sensory {
+            height: 630px;
         }
     </style>
 </head>
+
 <body>
     <div class="main-content">
-        <h3>&lt;rhi-ui-isncsci&gt;</h3>
-        <div><a href="rhi-isncsci-ui-mobile-sensory.html">rhi-isncsci-ui-mobile-sensory</a></div>
-        <div><a href="rhi-isncsci-ui-mobile-totals.html">rhi-isncsci-ui-mobile-totals</a></div>
-        <div><a href="rhi-ui-isncsci-wide.html">rhi-ui-isncsci-wide</a></div>
+        <rhi-isncsci-ui-mobile-sensory input-type="motor-top"></rhi-isncsci-ui-mobile-sensory>
     </div>
-    <script type="module">
+    <script>
         'use strict';
+
+        const sensory = document.getElementsByTagName('rhi-isncsci-ui-mobile-sensory')[0];
     </script>
 </body>
+
 </html>

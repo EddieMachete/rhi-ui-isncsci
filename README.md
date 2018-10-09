@@ -39,3 +39,7 @@ To update the npm package, so that the changes can be consumed by the apps:
 ..* If the changes enhance functionality and won't break any of the apps, just increase the patch version.
 ..* Once we have a production build, stick to [Semantic Versioning](http://semver.org/).
 2. Run *npm publish*
+
+## Publish mobile-sensory
+1. run `tsc` for the files under the build folder to be updated.
+2. run `rollup -c ./rollup-configs/mobile-sensory/rollup.config.js`.
