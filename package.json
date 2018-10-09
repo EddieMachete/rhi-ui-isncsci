@@ -23,7 +23,7 @@
         "build:demo": "rollup -c ./rollup.config.js",
         "build:lib": "rollup -c ./build-configs/lib/rollup.config.js",
         "build:mobile-sensory": "rollup -c ./build-configs/mobile-sensory/rollup.config.js && cpx \"./src/@rhi-isncsci-ui/mobile-sensory/*.{md,json}\" ./packages/@rhi-isncsci-ui/mobile-sensory",
-        "publish:mobile-sensory": "npm run build:mobile-sensory && npm publish ./packages/@rhi-isncsci-ui/mobile-sensory",
+        "publish:mobile-sensory": "npm run build:mobile-sensory && npm publish ./packages/@rhi-isncsci-ui/mobile-sensory --access public",
         "start": "npm run start:express",
         "start:express": "node server.js"
     },
