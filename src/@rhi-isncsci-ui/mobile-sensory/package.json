@@ -4,7 +4,6 @@
         "url": "https://github.com/rick-hansen-institute/ui/issues"
     },
     "dependencies": {
-        "@material/mwc-switch": "^0.2.0",
         "@rhi-ui/html": "^1.0.0",
         "@webcomponents/webcomponentsjs": "^2.0.2"
     },
@@ -33,5 +32,5 @@
     "scripts": {
     },
     "types": "index.d.ts",
-    "version": "1.0.0"
+    "version": "0.1.0"
 }

@@ -1,6 +1,6 @@
 // Node.js notation for importing packages
 const express = require('express');
-const port = process.argv[2] || 9000;
+const port = process.argv[2] || 9090;
 
 // Spin up a server
 const app = express();

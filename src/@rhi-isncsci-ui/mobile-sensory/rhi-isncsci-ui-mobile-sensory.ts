@@ -27,14 +27,25 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
 
     public static get properties() {
         return {
-            'dermatome': { reflectToAttribute: true, type: String, value: '' },
+            dermatome: { reflectToAttribute: true, type: String, value: '' },
             'dermatome-score': { reflectToAttribute: true, type: String, value: '' },
+            instructions: { reflectToAttribute: true, type: String, value: 'Use the ! and * symbols to indicate impairment not due to SCI.' },
             'non-sci-impairment-reason': { reflectToAttribute: true, type: String, value: '' },
             'non-sci-impairment-comments': { reflectToAttribute: true, type: String, value: '' },
-            'nl': { reflectToAttribute: true, type: String, value: '' },
+            nl: { reflectToAttribute: true, type: String, value: '' },
             'nl-label': { reflectToAttribute: true, type: String, value: 'NL:' },
-            'propagate-value-label': { reflectToAttribute: true, type: String, value: 'Propagate values down:' },
-            'total': { reflectToAttribute: true, type: String, value: '' },
+            'non-sci-impairment-comments-label': { reflectToAttribute: true, type: String, value: 'Specify:' },
+            'non-sci-impairment-label': { reflectToAttribute: true, type: String, value: 'If sensory impairment not due to SCI, please indicate the reason:' },
+            'non-sci-impairment-reason-none': { reflectToAttribute: true, type: String, value: 'Select one' },
+            'non-sci-impairment-reason-plexopathy': { reflectToAttribute: true, type: String, value: 'Plexopathy' },
+            'non-sci-impairment-reason-neuropathy': { reflectToAttribute: true, type: String, value: 'Peripheral neuropathy' },
+            'non-sci-impairment-reason-myoneural': { reflectToAttribute: true, type: String, value: 'Pre-existing myoneural disease (e.g. Stroke, MS, etc.)' },
+            'non-sci-impairment-reason-pain': { reflectToAttribute: true, type: String, value: 'Pain' },
+            'non-sci-impairment-reason-atrophy': { reflectToAttribute: true, type: String, value: 'Disuse atrophy' },
+            'non-sci-impairment-reason-other': { reflectToAttribute: true, type: String, value: 'Other (specify:)' },
+            'propagate-value': { reflectToAttribute: true, type: Boolean, value: false },
+            'propagate-value-label': { reflectToAttribute: true, type: String, value: 'Propagate values down' },
+            total: { reflectToAttribute: true, type: String, value: '' },
             'total-label': { reflectToAttribute: true, type: String, value: 'Total:' }
         };
     }
@@ -61,6 +72,7 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
     private props = {};
     private selectedDermatome: HTMLElement;
     private dermatomeClickHandler;
+    private propagateValueChangeHandler;
     private scoreChangeHandler;
     private nonSciImpairmentReasonChangeHandler;
     private nonSciImpairmentCommentsChangeHandler;
@@ -69,6 +81,7 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
         super();
 
         this.dermatomeClickHandler = (e) => this.onDermatomeClick(e);
+        this.propagateValueChangeHandler = (e) => this.onPropagateValueChange(e);
         this.scoreChangeHandler = (e) => this.onScoreChange(e);
         this.nonSciImpairmentReasonChangeHandler = (e) => this.onNonSciImpairmentReasonChange(e);
         this.nonSciImpairmentCommentsChangeHandler = (e) => this.onNonSciImpairmentCommentsChange(e);
@@ -81,6 +94,7 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
 
     public connectedCallback() {
         this.uiBindings.dermatomes.addEventListener('click', this.dermatomeClickHandler);
+        this.uiBindings['propagate-value'].addEventListener('change', this.propagateValueChangeHandler);
         this.uiBindings['dermatome-score'].addEventListener('change', this.scoreChangeHandler);
         this.uiBindings['non-sci-impairment-reason'].addEventListener('change', this.nonSciImpairmentReasonChangeHandler);
         this.uiBindings['non-sci-impairment-comments'].addEventListener('change', this.nonSciImpairmentCommentsChangeHandler);
@@ -88,6 +102,7 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
 
     public disconnectedCallback() {
         this.uiBindings.dermatomes.removeEventListener('click', this.dermatomeClickHandler);
+        this.uiBindings['propagate-value'].removeEventListener('change', this.propagateValueChangeHandler);
         this.uiBindings['dermatome-score'].removeEventListener('change', this.scoreChangeHandler);
         this.uiBindings['non-sci-impairment-reason'].removeEventListener('change', this.onNonSciImpairmentReasonChange);
         this.uiBindings['non-sci-impairment-comments'].removeEventListener('change', this.onNonSciImpairmentCommentsChange);
@@ -118,7 +133,11 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
             const property = RhiIsncsciUiMobileSensory.properties[bindTo]
 
             if (property && property.value) {
-                element.innerHTML = property.value;
+                if (property.useProperty) {
+                    element[property.useProperty] = property.value;
+                } else {
+                    element.innerHTML = property.value;
+                }
             }
         }
     }
@@ -154,6 +173,22 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
         }
 
         const event: CustomEvent = new CustomEvent('dermatome-selected', { detail: { dermatome: e.target.innerHTML.toUpperCase() } });
+        this['dispatchEvent'](event);
+
+        return true;
+    }
+
+    public onPropagateValueChange(e: Event): boolean {
+        const event: CustomEvent =
+            new CustomEvent(
+                'propagate-value-changed',
+                { 
+                    detail: {
+                        propagateValue: this.uiBindings['propagate-value'].checked
+                    }
+                }
+            );
+
         this['dispatchEvent'](event);
 
         return true;
@@ -233,6 +268,14 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
 
         if (name === 'non-sci-impairment-comments') {
             this.uiBindings['non-sci-impairment-comments'].value = newValue;
+
+            return;
+        }
+
+        if (name === 'propagate-value') {
+            this.uiBindings['propagate-value'].checked = newValue !== null;
+            this.onPropagateValueChange(null);
+            
             return;
         }
 

@@ -16,7 +16,8 @@
  */
 'use strict';
 
-import "@material/mwc-switch";
+// Currently, this material design component sucks.
+// import "@material/mwc-switch";
 import { html } from '@rhi-ui/html';
 
 export const template: string =
@@ -94,6 +95,11 @@ export const template: string =
 
         .totals-bar .label.right {
             margin-left: 8px;
+            margin-right: 0;
+        }
+
+        .totals-bar .label.for-checkbox {
+            margin-left: 4px;
             margin-right: 0;
         }
 
@@ -205,9 +211,13 @@ export const template: string =
         <div class="label" bind-to="nl-label"></div>
         <div class="value" bind-to="nl"></div>
         <div>
-            <mwc-switch>sentiment_very_satisfied</mwc-switch>
+            <!--<mwc-switch bind-to="propagate-value">sentiment_very_satisfied</mwc-switch>-->
+            <input type="checkbox"
+                   id="propagate-value"
+                   name="propagate-value"
+                   bind-to="propagate-value" />
         </div>
-        <div class="label right" bind-to="propagate-value-label"></div>
+        <label for="propagate-value" bind-to="propagate-value-label" class="label for-checkbox">&nbsp;</label>
     </div>
     <div class="content">
         <div class="dermatomes" bind-to="dermatomes">
@@ -242,7 +252,7 @@ export const template: string =
         </div>
         <div class="dermatome-details">
             <div class="section">
-                <div class="label">Use the ! and * symbols to indicate impairment not due to SCI.</div>
+                <div class="label" bind-to="instructions"></div>
                 <div class="row value">
                     <div class="label"><span bind-to="dermatome"></span>:</div>
                     <div>
@@ -268,22 +278,22 @@ export const template: string =
                 </div>
             </div>
             <div class="section">
-                <div class="label">If sensory impairment not due to SCI, please indicate the reason:</div>
+                <div class="label" bind-to="non-sci-impairment-label"></div>
                 <div class="row">
                     <select class="cell-select" bind-to="non-sci-impairment-reason">
-                        <option value="">Select one</option>
-                        <option value="1">Plexopathy</option>
-                        <option value="2">Peripheral neuropathy</option>
-                        <option value="3">Pre-existing myoneural disease (e.g. Stroke, MS, etc.)</option>
+                        <option value="" bind-to="non-sci-impairment-reason-none"></option>
+                        <option value="1" bind-to="non-sci-impairment-reason-plexopathy"></option>
+                        <option value="2" bind-to="non-sci-impairment-reason-neuropathy"></option>
+                        <option value="3" bind-to="non-sci-impairment-reason-myoneural"></option>
                         <!-- 5* Motor -->
                         <!-- If motor impairment due to inhibiting factors, please indicate reason: -->
-                        <option value="4">Pain</option>
-                        <option value="5">Disuse atrophy</option>
-                        <option value="6">Other (specify:)</option>
+                        <option value="4" bind-to="non-sci-impairment-reason-pain"></option>
+                        <option value="5" bind-to="non-sci-impairment-reason-atrophy"></option>
+                        <option value="6" bind-to="non-sci-impairment-reason-other"></option>
                     </select>
                 </div>
                 <div class="row comments">
-                    <div class="label">Specify:</div>
+                    <div class="label" bind-to="non-sci-impairment-comments-label"></div>
                     <textarea bind-to="non-sci-impairment-comments"></textarea>
                 </div>
             </div>
