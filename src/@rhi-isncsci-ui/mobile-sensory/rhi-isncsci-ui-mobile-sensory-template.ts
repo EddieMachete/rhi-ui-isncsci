@@ -40,21 +40,21 @@ export const template: string =
         }
 
         :host([input-type="motor"]) .content .dermatomes .dermatome.motor {
-            display: block;
+            display: flex;
         }
 
         :host([input-type="motor-bottom"]) .content .dermatomes .dermatome.motor.bottom {
-            display: block;
+            display: flex;
         }
 
         :host([input-type="motor-top"]) .content .dermatomes .dermatome.motor.top {
-            display: block;
+            display: flex;
         }
 
         /*
-            * The :host notation with CSS variables did not work on MS Edge.
-            * The code below has been added so that the component works on Edge just as on FireFox, Safari, and Chrome,
-            */
+         * The :host notation with CSS variables did not work on MS Edge.
+         * The code below has been added so that the component works on Edge just as on FireFox, Safari, and Chrome,
+         */
 
         [input-type="motor"] .content .dermatomes .dermatome,
         [input-type="motor-top"] .content .dermatomes .dermatome,
@@ -63,15 +63,15 @@ export const template: string =
         }
 
         [input-type="motor"] .content .dermatomes .dermatome.motor {
-            display: block;
+            display: flex;
         }
 
         [input-type="motor-bottom"] .content .dermatomes .dermatome.motor.bottom {
-            display: block;
+            display: flex;
         }
 
         [input-type="motor-top"] .content .dermatomes .dermatome.motor.top {
-            display: block;
+            display: flex;
         }
 
         .totals-bar {
@@ -130,12 +130,24 @@ export const template: string =
 
         .content .dermatomes .dermatome {
             color: var(--isncsci-on-secondary-color, #333);
+            display: flex;
             line-height: 48px;
             padding-left: 56px;
         }
 
         .content .dermatomes .dermatome.selected {
             background-color: rgba(51, 51, 51, .2);
+        }
+
+        .content .dermatomes .dermatome .name,
+        .content .dermatomes .dermatome .score {
+            font-size: 14px;
+            width: 32px;
+        }
+
+        .content .dermatomes .dermatome .score {
+            color: var(--isncsci-on-secondary-highlight, #FFF);
+            text-align: center;
         }
 
         .content .dermatome-details {
@@ -204,6 +216,26 @@ export const template: string =
         .content .dermatome-details textarea[bind-to='non-sci-impairment-comments'] {
             margin: 8px 0;
         }
+
+        @media only screen and (min-width: 680px)  {
+            .totals-bar {
+                justify-content: flex-end;
+            }
+
+            .content .dermatome-details {
+                width: 304px;
+            }
+
+            .content .dermatomes .dermatome {
+                padding-left: 280px;
+            }
+
+            .content .dermatomes .dermatome .name,
+            .content .dermatomes .dermatome .score {
+                flex-grow: 0;
+                width: 48px;
+            }
+        }
     </style>
     <div class="totals-bar">
         <div class="label" bind-to="total-label"></div>
@@ -221,34 +253,118 @@ export const template: string =
     </div>
     <div class="content">
         <div class="dermatomes" bind-to="dermatomes">
-            <div class="dermatome">C2</div>
-            <div class="dermatome">C3</div>
-            <div class="dermatome">C4</div>
-            <div class="dermatome motor top">C5</div>
-            <div class="dermatome motor top">C6</div>
-            <div class="dermatome motor top">C7</div>
-            <div class="dermatome motor top">C8</div>
-            <div class="dermatome motor top">T1</div>
-            <div class="dermatome">T2</div>
-            <div class="dermatome">T3</div>
-            <div class="dermatome">T4</div>
-            <div class="dermatome">T5</div>
-            <div class="dermatome">T6</div>
-            <div class="dermatome">T7</div>
-            <div class="dermatome">T8</div>
-            <div class="dermatome">T9</div>
-            <div class="dermatome">T10</div>
-            <div class="dermatome">T11</div>
-            <div class="dermatome">T12</div>
-            <div class="dermatome">L1</div>
-            <div class="dermatome motor bottom">L2</div>
-            <div class="dermatome motor bottom">L3</div>
-            <div class="dermatome motor bottom">L4</div>
-            <div class="dermatome motor bottom">L5</div>
-            <div class="dermatome motor bottom">S1</div>
-            <div class="dermatome">S2</div>
-            <div class="dermatome">S3</div>
-            <div class="dermatome">S4-5</div>
+            <div class="dermatome">
+                <div class="name">C2</div>
+                <div class="score" bind-to="c2">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">C3</div>
+                <div class="score" bind-to="c3">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">C4</div>
+                <div class="score" bind-to="c4">&nbsp;</div>
+            </div>
+            <div class="dermatome motor top">
+                <div class="name">C5</div>
+                <div class="score" bind-to="c5">&nbsp;</div>
+            </div>
+            <div class="dermatome motor top">
+                <div class="name">C6</div>
+                <div class="score" bind-to="c6">&nbsp;</div>
+            </div>
+            <div class="dermatome motor top">
+                <div class="name">C7</div>
+                <div class="score" bind-to="c7">&nbsp;</div>
+            </div>
+            <div class="dermatome motor top">
+                <div class="name">C8</div>
+                <div class="score" bind-to="c8">&nbsp;</div>
+            </div>
+            <div class="dermatome motor top">
+                <div class="name">T1</div>
+                <div class="score" bind-to="t1">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">T2</div>
+                <div class="score" bind-to="t2">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">T3</div>
+                <div class="score" bind-to="t3">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">T4</div>
+                <div class="score" bind-to="t4">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">T5</div>
+                <div class="score" bind-to="t5">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">T6</div>
+                <div class="score" bind-to="t6">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">T7</div>
+                <div class="score" bind-to="t7">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">T8</div>
+                <div class="score" bind-to="t8">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">T9</div>
+                <div class="score" bind-to="t9">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">T10</div>
+                <div class="score" bind-to="t10">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">T11</div>
+                <div class="score" bind-to="t11">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">T12</div>
+                <div class="score" bind-to="t12">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">L1</div>
+                <div class="score" bind-to="l1">&nbsp;</div>
+            </div>
+            <div class="dermatome motor bottom">
+                <div class="name">L2</div>
+                <div class="score" bind-to="l2">&nbsp;</div>
+            </div>
+            <div class="dermatome motor bottom">
+                <div class="name">L3</div>
+                <div class="score" bind-to="l3">&nbsp;</div>
+            </div>
+            <div class="dermatome motor bottom">
+                <div class="name">L4</div>
+                <div class="score" bind-to="l4">&nbsp;</div>
+            </div>
+            <div class="dermatome motor bottom">
+                <div class="name">L5</div>
+                <div class="score" bind-to="l5">&nbsp;</div>
+            </div>
+            <div class="dermatome motor bottom">
+                <div class="name">S1</div>
+                <div class="score" bind-to="s1">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">S2</div>
+                <div class="score" bind-to="s2">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">S3</div>
+                <div class="score" bind-to="s3">&nbsp;</div>
+            </div>
+            <div class="dermatome">
+                <div class="name">S4-5</div>
+                <div class="score" bind-to="s4-5">&nbsp;</div>
+            </div>
         </div>
         <div class="dermatome-details">
             <div class="section">

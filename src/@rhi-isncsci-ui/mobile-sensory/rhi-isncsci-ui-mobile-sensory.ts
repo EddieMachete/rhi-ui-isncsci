@@ -27,9 +27,21 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
 
     public static get properties() {
         return {
+            c2: { reflectToAttribute: true, type: String, value: '' },
+            c3: { reflectToAttribute: true, type: String, value: '' },
+            c4: { reflectToAttribute: true, type: String, value: '' },
+            c5: { reflectToAttribute: true, type: String, value: '' },
+            c6: { reflectToAttribute: true, type: String, value: '' },
+            c7: { reflectToAttribute: true, type: String, value: '' },
+            c8: { reflectToAttribute: true, type: String, value: '' },
             dermatome: { reflectToAttribute: true, type: String, value: '' },
             'dermatome-score': { reflectToAttribute: true, type: String, value: '' },
             instructions: { reflectToAttribute: true, type: String, value: 'Use the ! and * symbols to indicate impairment not due to SCI.' },
+            l1: { reflectToAttribute: true, type: String, value: '' },
+            l2: { reflectToAttribute: true, type: String, value: '' },
+            l3: { reflectToAttribute: true, type: String, value: '' },
+            l4: { reflectToAttribute: true, type: String, value: '' },
+            l5: { reflectToAttribute: true, type: String, value: '' },
             'non-sci-impairment-reason': { reflectToAttribute: true, type: String, value: '' },
             'non-sci-impairment-comments': { reflectToAttribute: true, type: String, value: '' },
             nl: { reflectToAttribute: true, type: String, value: '' },
@@ -45,6 +57,22 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
             'non-sci-impairment-reason-other': { reflectToAttribute: true, type: String, value: 'Other (specify:)' },
             'propagate-value': { reflectToAttribute: true, type: Boolean, value: false },
             'propagate-value-label': { reflectToAttribute: true, type: String, value: 'Propagate values down' },
+            s1: { reflectToAttribute: true, type: String, value: '' },
+            s2: { reflectToAttribute: true, type: String, value: '' },
+            s3: { reflectToAttribute: true, type: String, value: '' },
+            's4-5': { reflectToAttribute: true, type: String, value: '' },
+            t1: { reflectToAttribute: true, type: String, value: '' },
+            t2: { reflectToAttribute: true, type: String, value: '' },
+            t3: { reflectToAttribute: true, type: String, value: '' },
+            t4: { reflectToAttribute: true, type: String, value: '' },
+            t5: { reflectToAttribute: true, type: String, value: '' },
+            t6: { reflectToAttribute: true, type: String, value: '' },
+            t7: { reflectToAttribute: true, type: String, value: '' },
+            t8: { reflectToAttribute: true, type: String, value: '' },
+            t9: { reflectToAttribute: true, type: String, value: '' },
+            t10: { reflectToAttribute: true, type: String, value: '' },
+            t11: { reflectToAttribute: true, type: String, value: '' },
+            t12: { reflectToAttribute: true, type: String, value: '' },
             total: { reflectToAttribute: true, type: String, value: '' },
             'total-label': { reflectToAttribute: true, type: String, value: 'Total:' }
         };
@@ -158,7 +186,7 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
         while (index < this.uiBindings.dermatomes.childElementCount && !this.selectedDermatome) {
             const dermatome: HTMLElement = this.uiBindings.dermatomes.children[index] as HTMLElement;
 
-            if (dermatome.innerText === nameToUpper) {
+            if (dermatome.firstElementChild.innerHTML === nameToUpper) {
                 this.selectedDermatome = dermatome;
                 dermatome.classList.add('selected');
             }
@@ -168,11 +196,21 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
     }
 
     public onDermatomeClick(e): boolean {
-        if (!e.target.classList.contains('dermatome')) {
+        if (e.target.classList.contains('dermatomes')) {
             return true;
         }
 
-        const event: CustomEvent = new CustomEvent('dermatome-selected', { detail: { dermatome: e.target.innerHTML.toUpperCase() } });
+        let dermatomeName;
+
+        if (e.target.classList.contains('score')) {
+            dermatomeName = e.target.getAttribute('bind-to').toUpperCase();
+        } else if (e.target.classList.contains('name')) {
+            dermatomeName = e.target.innerHTML.toUpperCase();
+        } else if (e.target.classList.contains('dermatome')) {
+            dermatomeName = e.target.firstElementChild.innerHTML.toUpperCase();
+        }
+
+        const event: CustomEvent = new CustomEvent('dermatome-selected', { detail: { dermatome: dermatomeName } });
         this['dispatchEvent'](event);
 
         return true;
