@@ -142,7 +142,7 @@ export class RhiIsncsciUiMobileTotalsDemo extends HTMLElement {
         // tslint:disable-next-line:no-console
         console.log(`Loaded ${RhiIsncsciUiMobileTotals.is} and ${RhiUiDemoSnippet.is} and ${RhiUiMarkdownViewer.is}`);
 
-        this.shadowRoot.getElementById('readme-viewer').setAttribute('src', this['file-uri']);
+        this.shadowRoot.getElementById('readme-viewer').setAttribute('file-uri', this['file-uri']);
 
         let timeElapsed: number = 0;
         const intervalSpeed: number = 60;

@@ -16,6 +16,7 @@
  */
 'use strict';
 
+import "@material/mwc-switch";
 import { html } from '@rhi-ui/html';
 
 export const template: string =
@@ -209,7 +210,7 @@ export const template: string =
         <div class="label right" bind-to="propagate-value-label"></div>
     </div>
     <div class="content">
-        <div class="dermatomes">
+        <div class="dermatomes" bind-to="dermatomes">
             <div class="dermatome">C2</div>
             <div class="dermatome">C3</div>
             <div class="dermatome">C4</div>
@@ -243,9 +244,9 @@ export const template: string =
             <div class="section">
                 <div class="label">Use the ! and * symbols to indicate impairment not due to SCI.</div>
                 <div class="row value">
-                    <div class="label">C2:</div>
+                    <div class="label"><span bind-to="dermatome"></span>:</div>
                     <div>
-                        <select class="cell-select">
+                        <select class="cell-select" bind-to="dermatome-score">
                             <option></option>
                             <option>0</option>
                             <option>0!</option>

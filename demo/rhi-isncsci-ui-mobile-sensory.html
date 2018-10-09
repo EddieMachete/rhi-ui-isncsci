@@ -23,13 +23,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
     <title>Demo :: rhi-ui-isncsci-mobile-sensory :: Rick Hansen Institute</title>
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="../lib/bundle.js"></script>
-    <script src="../node_modules/markdown-it/dist/markdown-it.min.js"></script>
-    <script src="../node_modules/@rhi-ui/html/rhi-ui-html.js"></script>
-    <script src="../node_modules/@rhi-ui/demo-snippet/rhi-ui-demo-snippet.js"></script>
-    <script src="../node_modules/@rhi-ui/markdown-viewer/rhi-ui-markdown-viewer.js"></script>
-    <script src="../packages/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory.js"></script>
-    <script src="../packages/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory-demo.js"></script>
+    <script src="scripts/bundle.js"></script>
     <style>
         body {
             --isncsci-font-common-base-font-family: 'Roboto', 'Noto', sans-serif;
@@ -42,15 +36,23 @@
 
             /*--mdc-theme-secondary: red;*/
         }
+
+        rhi-isncsci-ui-mobile-sensory {
+            height: 630px;
+        }
     </style>
 </head>
 
 <body>
     <div class="main-content">
-        <rhi-isncsci-ui-mobile-sensory-demo file-uri="../packages/@rhi-isncsci-ui/mobile-sensory/README.md"></rhi-isncsci-ui-mobile-sensory-demo>
+        <rhi-isncsci-ui-mobile-sensory></rhi-isncsci-ui-mobile-sensory>
     </div>
-    <script type="module">
+    <script>
         'use strict';
+
+        const sensory = document.getElementsByTagName('rhi-isncsci-ui-mobile-sensory')[0];
+        
+        sensory.addEventListener()
     </script>
 </body>
 

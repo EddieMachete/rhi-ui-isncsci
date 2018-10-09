@@ -28,6 +28,9 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
     public static get properties() {
         return {
             'dermatome': { reflectToAttribute: true, type: String, value: '' },
+            'dermatome-score': { reflectToAttribute: true, type: String, value: '' },
+            'non-sci-impairment-reason': { reflectToAttribute: true, type: String, value: '' },
+            'non-sci-impairment-comments': { reflectToAttribute: true, type: String, value: '' },
             'nl': { reflectToAttribute: true, type: String, value: '' },
             'nl-label': { reflectToAttribute: true, type: String, value: 'NL:' },
             'propagate-value-label': { reflectToAttribute: true, type: String, value: 'Propagate values down:' },
@@ -47,28 +50,47 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
         return attributes;
     }
 
-    private uiBindings: {};
-    private dermatomeClickHandler;
-    private dermatomes: HTMLElement;
+    private uiBindings = {
+        dermatome: null,
+        dermatomes: null,
+        'dermatome-score': null,
+        'non-sci-impairment-reason': null,
+        'non-sci-impairment-comments': null
+    };
+    
+    private props = {};
     private selectedDermatome: HTMLElement;
+    private dermatomeClickHandler;
+    private scoreChangeHandler;
+    private nonSciImpairmentReasonChangeHandler;
+    private nonSciImpairmentCommentsChangeHandler;
 
     public constructor() {
         super();
 
         this.dermatomeClickHandler = (e) => this.onDermatomeClick(e);
+        this.scoreChangeHandler = (e) => this.onScoreChange(e);
+        this.nonSciImpairmentReasonChangeHandler = (e) => this.onNonSciImpairmentReasonChange(e);
+        this.nonSciImpairmentCommentsChangeHandler = (e) => this.onNonSciImpairmentCommentsChange(e);
 
         this.attachShadow({ mode: 'open' });
         this.requestRender();
+        this.initializeDeclaredProperties();
         this.updateUiBindings();
     }
 
     public connectedCallback() {
-        this.dermatomes = this.shadowRoot.querySelector('.dermatomes');
-        this.dermatomes.addEventListener('click', this.dermatomeClickHandler);
+        this.uiBindings.dermatomes.addEventListener('click', this.dermatomeClickHandler);
+        this.uiBindings['dermatome-score'].addEventListener('change', this.scoreChangeHandler);
+        this.uiBindings['non-sci-impairment-reason'].addEventListener('change', this.nonSciImpairmentReasonChangeHandler);
+        this.uiBindings['non-sci-impairment-comments'].addEventListener('change', this.nonSciImpairmentCommentsChangeHandler);
     }
 
     public disconnectedCallback() {
-        this.dermatomes.removeEventListener('click', this.dermatomeClickHandler);
+        this.uiBindings.dermatomes.removeEventListener('click', this.dermatomeClickHandler);
+        this.uiBindings['dermatome-score'].removeEventListener('change', this.scoreChangeHandler);
+        this.uiBindings['non-sci-impairment-reason'].removeEventListener('change', this.onNonSciImpairmentReasonChange);
+        this.uiBindings['non-sci-impairment-comments'].removeEventListener('change', this.onNonSciImpairmentCommentsChange);
     }
 
     private requestRender(): void {
@@ -77,8 +99,15 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
         this.shadowRoot.appendChild(template.content.cloneNode(true));
     }
 
+    private initializeDeclaredProperties(): void {
+        const props: any = RhiIsncsciUiMobileSensory.properties;
+
+        for (let key in props) {
+            this.props[key] = props[key].value;
+        }
+    }
+
     private updateUiBindings(): void {
-        this.uiBindings = {};
         const elements: NodeListOf<Element> = this.shadowRoot.querySelectorAll('[bind-to]');
 
         for (let i: number = 0; i < elements.length; i++) {
@@ -95,7 +124,7 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
     }
 
     private selectDermatome(dermatomeName: string): void {
-        if (!this.dermatomes) {
+        if (!this.uiBindings.dermatomes) {
             return;
         }
 
@@ -107,8 +136,8 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
         const nameToUpper: string = dermatomeName.toUpperCase();
         let index: number = 0;
 
-        while (index < this.dermatomes.childElementCount && !this.selectedDermatome) {
-            const dermatome: HTMLElement = this.dermatomes.children[index] as HTMLElement;
+        while (index < this.uiBindings.dermatomes.childElementCount && !this.selectedDermatome) {
+            const dermatome: HTMLElement = this.uiBindings.dermatomes.children[index] as HTMLElement;
 
             if (dermatome.innerText === nameToUpper) {
                 this.selectedDermatome = dermatome;
@@ -124,7 +153,58 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
             return true;
         }
 
-        const event: CustomEvent = new CustomEvent('dermatome-selected', { detail: { name: e.target.innerHTML.toLowerCase() } });
+        const event: CustomEvent = new CustomEvent('dermatome-selected', { detail: { dermatome: e.target.innerHTML.toUpperCase() } });
+        this['dispatchEvent'](event);
+
+        return true;
+    }
+
+    public onScoreChange(e: Event): boolean {
+        const event: CustomEvent =
+            new CustomEvent(
+                'dermatome-score-changed',
+                { 
+                    detail: {
+                        dermatome: this.getAttribute('dermatome'),
+                        score: this.uiBindings['dermatome-score'].value
+                    }
+                }
+            );
+
+        this['dispatchEvent'](event);
+
+        return true;
+    }
+
+    public onNonSciImpairmentReasonChange(e: Event): boolean {
+        const event: CustomEvent =
+            new CustomEvent(
+                'non-sci-impairment-reason-changed',
+                { 
+                    detail: {
+                        dermatome: this.getAttribute('dermatome'),
+                        reason: this.uiBindings['non-sci-impairment-reason'].value
+                    }
+                }
+            );
+
+        this['dispatchEvent'](event);
+
+        return true;
+    }
+
+    public onNonSciImpairmentCommentsChange(e: Event): boolean {
+        const event: CustomEvent =
+            new CustomEvent(
+                'non-sci-impairment-comments-changed',
+                { 
+                    detail: {
+                        dermatome: this.getAttribute('dermatome'),
+                        comments: this.uiBindings['non-sci-impairment-comments'].value
+                    }
+                }
+            );
+
         this['dispatchEvent'](event);
 
         return true;
@@ -137,6 +217,22 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
 
         if (name === 'dermatome') {
             this.selectDermatome(newValue);
+            this.uiBindings.dermatome.innerHTML = newValue.toUpperCase();
+            return;
+        }
+
+        if (name === 'dermatome-score') {
+            this.uiBindings['dermatome-score'].value = newValue;
+            return;
+        }
+
+        if (name === 'non-sci-impairment-reason') {
+            this.uiBindings['non-sci-impairment-reason'].value = newValue;
+            return;
+        }
+
+        if (name === 'non-sci-impairment-comments') {
+            this.uiBindings['non-sci-impairment-comments'].value = newValue;
             return;
         }
 

@@ -4,14 +4,12 @@
         "url": "https://github.com/rick-hansen-institute/ui/issues"
     },
     "dependencies": {
+        "@material/mwc-switch": "^0.2.0",
         "@rhi-ui/html": "^1.0.0",
         "@webcomponents/webcomponentsjs": "^2.0.2"
     },
     "description": "Component to display the ISNCSCI totals on a mobile device.",
-    "devDependencies": {
-        "@polymer/iron-demo-helpers": "^3.0.0-pre.21",
-        "@polymer/marked-element": "^3.0.0-pre.21"
-    },
+    "devDependencies": {},
     "homepage": "https://www.rickhanseninstitute.org",
     "keywords": [
         "Rick",
@@ -24,8 +22,8 @@
         "input"
     ],
     "license": "Apache-2.0",
-    "main": "index.js",
-    "module": "index.esm.js",
+    "main": "./umd/index.js",
+    "module": "./esm/index.js",
     "name": "@rhi-isncsci-ui/mobile-sensory",
     "private": false,
     "repository": {

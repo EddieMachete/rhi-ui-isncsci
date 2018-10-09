@@ -17,6 +17,6 @@
     },
     "files": [
         "../../src/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory.ts",
-        "../../src/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory-demo.ts"
+        "../../src/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory-template.ts"
     ]
 }

@@ -7,22 +7,20 @@
             "es6",
             "scripthost"
         ],
-        "module": "UMD",
-        "moduleResolution": "Node",
+        "module": "es6",
+        "moduleResolution": "node",
+        "noEmitOnError": true,
+        "noImplicitAny": false,
         "outDir": "./build/umd/@rhi-isncsci-ui",
         "removeComments": false,
-        "strict": false,
-        "target": "es5"
+        "sourceMap": false,
+        "target": "es6"
     },
     "include": [
         "src/@rhi-isncsci-ui/**/*"
     ],
-    "paths": {
-        "@rhi-ui/html": ["@rhi-ui/html/rhi-ui-html.d.ts"],
-        "lit-html": ["node_modules/lit-html"]
-    },
     "exclude": [
-        "node_modules",
+        "./node_modules",
         "**/*.spec.ts"
     ]
 }

@@ -37,8 +37,8 @@ const mobileSensoryPath =
     path.resolve('src/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory.js')
         .replace('.js', '');
 
-const mobileSensoryDemoPath =
-    path.resolve('src/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory-demo.js')
+const mobileSensoryTemplatePath =
+    path.resolve('src/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory-template.js')
         .replace('.js', '');
 
 function config({ input = '', context = undefined, output = {}, external = [] }) {
@@ -66,71 +66,63 @@ function config({ input = '', context = undefined, output = {}, external = [] })
 export default [
     // INDEX
     config({
-        external: ['./rhi-isncsci-ui-mobile-sensory', './rhi-isncsci-ui-mobile-sensory-demo'],
+        external: ['./rhi-isncsci-ui-mobile-sensory', './rhi-isncsci-ui-mobile-sensory-template'],
         input: 'src/@rhi-isncsci-ui/mobile-sensory/index.ts',
         output: {
-            file: 'packages/@rhi-isncsci-ui/mobile-sensory/index.js',
+            file: 'packages/@rhi-isncsci-ui/mobile-sensory/umd/index.js',
             format: 'umd',
             globals: {
                 [mobileSensoryPath]: 'RHI_ISNCSCI_UI_MOBILE_SENSORY',
-                [mobileSensoryDemoPath]: "RHI_ISNCSCI_UI_MOBILE_SENSORY_DEMO"
+                [mobileSensoryTemplatePath]: 'RHI_ISNCSCI_UI_MOBILE_SENSORY_TEMPLATE'
             },
-            name: 'RHI_ISNCSCI_UI_MOBILE_SENSORY',
+            name: 'RHI_ISNCSCI_UI_MOBILE_SENSORY_INDEX',
         }
     }),
     config({
-        external: ['./rhi-isncsci-ui-mobile-sensory', './rhi-isncsci-ui-mobile-sensory-demo'],
+        external: ['./rhi-isncsci-ui-mobile-sensory', './rhi-isncsci-ui-mobile-sensory-template'],
         input: 'src/@rhi-isncsci-ui/mobile-sensory/index.ts',
         output: {
-            file: 'packages/@rhi-isncsci-ui/mobile-sensory/index.esm.js',
+            file: 'packages/@rhi-isncsci-ui/mobile-sensory/esm/index.js',
             format: 'esm'
         }
     }),
     // RHI_ISNCSCI_UI_MOBILE_SENSORY
     config({
-        external: ['@rhi-ui/html'],
+        external: ['./rhi-isncsci-ui-mobile-sensory-template'],
         input: 'src/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory.ts',
         output: {
-            file: 'packages/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory.js',
+            file: 'packages/@rhi-isncsci-ui/mobile-sensory/umd/rhi-isncsci-ui-mobile-sensory.js',
             format: 'umd',
-            globals: { '@rhi-ui/html': 'RHI_UI_HTML' },
+            globals: {
+                [mobileSensoryTemplatePath]: 'RHI_ISNCSCI_UI_MOBILE_SENSORY_TEMPLATE'
+            },
             name: 'RHI_ISNCSCI_UI_MOBILE_SENSORY',
         }
     }),
     config({
-        external: ['@rhi-ui/html'],
+        external: ['./rhi-isncsci-ui-mobile-sensory-template'],
         input: 'src/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory.ts',
         output: {
-            file: 'packages/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory.esm.js',
+            file: 'packages/@rhi-isncsci-ui/mobile-sensory/esm/rhi-isncsci-ui-mobile-sensory.js',
             format: 'esm'
         }
     }),
-    // RHI_ISNCSCI_UI_MOBILE_SENSORY_DEMO
+    // RHI_ISNCSCI_UI_MOBILE_SENSORY_TEMPLATE
     config({
-        external: [
-            '@rhi-ui/html',
-            '@rhi-ui/demo-snippet',
-            '@rhi-ui/markdown-viewer',
-            './rhi-isncsci-ui-mobile-sensory'
-        ],
-        input: 'src/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory-demo.ts',
+        external: ['@rhi-ui/html', '@material/mwc-switch'],
+        input: 'src/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory-template.ts',
         output: {
-            file: 'packages/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory-demo.js',
+            file: 'packages/@rhi-isncsci-ui/mobile-sensory/umd/rhi-isncsci-ui-mobile-sensory-template.js',
             format: 'umd',
             globals: { '@rhi-ui/html': 'RHI_UI_HTML' },
-            name: 'RHI_ISNCSCI_UI_MOBILE_SENSORY_DEMO'
+            name: 'RHI_ISNCSCI_UI_MOBILE_SENSORY_TEMPLATE'
         }
     }),
     config({
-        external: [
-            '@rhi-ui/html',
-            '@rhi-ui/demo-snippet',
-            '@rhi-ui/markdown-viewer',
-            './rhi-isncsci-ui-mobile-sensory'
-        ],
-        input: 'src/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory-demo.ts',
+        external: ['@rhi-ui/html', '@material/mwc-switch'],
+        input: 'src/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory-template.ts',
         output: {
-            file: 'packages/@rhi-isncsci-ui/mobile-sensory/rhi-isncsci-ui-mobile-sensory-demo.esm.js',
+            file: 'packages/@rhi-isncsci-ui/mobile-sensory/esm/rhi-isncsci-ui-mobile-sensory-template.js',
             format: 'esm'
         }
     })

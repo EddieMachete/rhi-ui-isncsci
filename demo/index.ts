@@ -16,5 +16,5 @@
 */
 'use strict';
 
-export { RhiIsncsciUiMobileSensory } from './rhi-isncsci-ui-mobile-sensory';
-export { template } from './rhi-isncsci-ui-mobile-sensory-template';
+// import "@material/mwc-switch";
+import '../src/@rhi-isncsci-ui/mobile-sensory';
