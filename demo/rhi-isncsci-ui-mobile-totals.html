@@ -22,8 +22,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
     <title>Demo :: rhi-ui-isncsci-mobile :: Rick Hansen Institute</title>
-    <script src="../node_modules/markdown-it/dist/markdown-it.min.js"></script>
-    <script type="module" src="../node_modules/@rhi-isncsci-ui/mobile-totals/rhi-isncsci-ui-mobile-totals-demo.js"></script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="scripts/bundle.js"></script>
     <style>
         body {
             font-family: 'Roboto', 'Noto', sans-serif;
@@ -36,7 +36,28 @@
 
 <body>
     <div class="main-content">
-        <rhi-isncsci-ui-mobile-totals-demo file-uri="../packages/mobile-totals/README.md"></rhi-isncsci-ui-mobile-totals-demo>
+        <rhi-isncsci-ui-mobile-totals text-ais="AIS"
+                                      text-comments="Observations générales:"
+                                      text-complete-incomplete="Complet ou incomplet"
+                                      text-dap="PAP"
+                                      text-dap-description="Pression anale profonde"
+                                      text-left="La gauche"
+                                      text-light-touch="Touche légère"
+                                      text-lower-motor="Moteur inférieur"
+                                      text-motor-nl="NN moteur"
+                                      text-motor-nl-zpp="NN Motor ZCP"
+                                      text-nli="NNB"
+                                      text-option-no="Non"
+                                      text-option-nt="NT"
+                                      text-option-yes="Oui"
+                                      text-pin-prick="Piqûre d'épingle"
+                                      text-right="droite"
+                                      text-sensory-nl="NN sensoriel"
+                                      text-sensory-nl-zpp="NN sensoriel ZCP"
+                                      text-upper-motor="moteur supérieur"
+                                      text-vac="CAV"
+                                      text-vac-description="Contraction anale volontaire">
+        </rhi-isncsci-ui-mobile-totals>
     </div>
     <script type="module">
         'use strict';

@@ -14,325 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 'use strict';
 
-import { html, render, TemplateResult } from 'lit-html';
+import { template } from './rhi-isncsci-ui-mobile-totals-template';
+
+interface iEventDetails {
+    eventName: string,
+    target: Element,
+    handler: EventListener
+}
 
 export class RhiIsncsciUiMobileTotals extends HTMLElement {
-    private static getOptionTemplate(label: string, value: string, selectedValue: string) {
-        return value === selectedValue
-            ? html`<option value="${value}" selected>${label}</option>`
-            : html`<option value="${value}">${label}</option>`;
-    }
-
-    private props = {};
-    private commentsElement: HTMLTextAreaElement;
-    private commentsClass: string = 'comments-component';
-
-    public constructor() {
-        super();
-
-        this.attachShadow({ mode: 'open' });
-
-        // ToDo: For some reason the lit element is not initializing
-        const props = RhiIsncsciUiMobileTotals.properties;
-
-        // tslint:disable-next-line:forin
-        for (const key in props) {
-            this.props[key] = props[key].value;
-        }
-    }
-
     public static get is(): string { return 'rhi-isncsci-ui-mobile-totals'; }
 
-    public _render(props): TemplateResult {
-        return html`
-            <!-- shadow DOM for your element -->
-            <style>
-                :host {
-                    display: block;
-                }
-
-                .secondary-text {
-                    color: var(--isncsci-secondary-text-color, #666);
-                }
-
-                .small-text {
-                    font-size: 9px;
-                }
-
-                .text-align-right {
-                    text-align: right;
-                }
-
-                .grid {
-                    margin-bottom: 32px;
-                }
-
-                .row {
-                    display: flex;
-                    margin-top: 8px;
-                }
-
-                .row.header div {
-                    margin-left: 8px;
-                    text-align: center;
-                    width: 48px;
-                }
-
-                .row.header div:first-child {
-                    margin-left: 128px;
-                }
-
-                .row .label {
-                    align-items: center;
-                    display: flex;
-                    height: 40px;
-                    text-align: right;
-                    width: 120px;
-                }
-
-                /**
-                * The label is to be aligned center-right.
-                * For the text align right, we need the content to expand to fill the entire label width.
-                */
-                .row .label .text-align-right {
-                    flex: 1;
-                }
-
-                .cell {
-                    background-color: var(--isncsci-cell-color, #F2F2F2);
-                    height: 40px;
-                    line-height: 40px;
-                    margin-left: 8px;
-                    text-align: center;
-                    width: 48px;
-                }
-
-                /* The interactive cells can be tapped.  They need to express that affordance to the user.object */
-                .cell.interactive {
-                    background-color: var(--isncsci-interactive-cell-color, #DCDCDC);
-                    cursor: pointer;
-                }
-
-                .cell-select {
-                    background-color: var(--isncsci-interactive-cell-color, #DCDCDC);
-                    border: none;
-                    font-family: 'Roboto', 'Noto', sans-serif;
-                    font-size: 16px;
-                    height: 40px;
-                    margin-left: 8px;
-                    width: 104px;
-                }
-
-                .comments-component {
-                    border-bottom: solid 2px #CCC;
-                    width: 221px;
-                }
-
-                .comments-component::after {
-                    background-color: var(--isncsci-primary-color, #999);
-                    content: '';
-                    display: block;
-                    height: 2px;
-                    margin: 0 auto -1px auto;
-                    width: 0;
-
-                    transition: width 200ms ease;
-                }
-
-                .comments-component.active::after {
-                    width: 100%;
-                }
-
-                .comments-component .label {
-                    margin-bottom: 8px;
-                }
-
-                .comments-component textarea {
-                    border: none;
-                    background-color: transparent;
-                    color: var(--isncsci-primary-text-color, #000);
-                    font-family: 'Roboto', 'Noto', sans-serif;
-                    font-size: 14px;
-                    height: 120px;
-                    outline: none;
-                    overflow: auto;
-                    padding: 0;
-                    resize: none;
-                    width: 100%;
-                }
-            </style>
-            <div class="grid">
-                <div class="row header secondary-text">
-                    <div>${props['text-right']}</div>
-                    <div>${props['text-left']}</div>
-                </div>
-                <div class="row">
-                    <div class="label">
-                        <span class="text-align-right secondary-text">${props['text-upper-motor']}</span>
-                    </div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-upper-motor')}">
-                        ${props['right-upper-motor']}
-                    </div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-upper-motor')}">
-                        ${props['left-upper-motor']}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="label">
-                        <span class="text-align-right secondary-text">${props['text-lower-motor']}</span>
-                    </div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-lower-motor')}">
-                        ${props['right-lower-motor']}
-                    </div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-lower-motor')}">
-                        ${props['left-lower-motor']}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="label">
-                        <span class="text-align-right secondary-text">${props['text-light-touch']}</span>
-                    </div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-touch')}">
-                        ${props['right-touch']}
-                    </div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-touch')}">
-                        ${props['left-touch']}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="label">
-                        <span class="text-align-right secondary-text">${props['text-pin-prick']}</span>
-                    </div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-prick')}">
-                        ${props['right-prick']}
-                    </div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-prick')}">
-                        ${props['left-prick']}
-                    </div>
-                </div>
-            </div>
-            <div class="grid">
-                <div class="row">
-                    <div class="label">
-                        <div class="text-align-right secondary-text">
-                            <div>${props['text-vac']}</div>
-                            <div class="small-text">${props['text-vac-description']}</div>
-                        </div>
-                    </div>
-                    <div>
-                        <select id="anal-contraction"
-                                name="analContraction"
-                                class="cell-select">
-                            <option value="None"></option>
-                            ${RhiIsncsciUiMobileTotals.getOptionTemplate(props['text-option-yes'], 'Yes', props.vac)}
-                            ${RhiIsncsciUiMobileTotals.getOptionTemplate(props['text-option-no'], 'No', props.vac)}
-                            ${RhiIsncsciUiMobileTotals.getOptionTemplate(props['text-option-nt'], 'NT', props.vac)}
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="label">
-                        <div class="text-align-right secondary-text">
-                            <div>${props['text-dap']}</div>
-                            <div class="small-text">${props['text-dap-description']}</div>
-                        </div>
-                    </div>
-                    <div>
-                        <select id="anal-sensation"
-                                name="analSensation"
-                                class="cell-select"
-                                onchange="${(e) => this.handleDapChange(e)}">
-                            <option value="None"></option>
-                            ${RhiIsncsciUiMobileTotals.getOptionTemplate(props['text-option-yes'], 'Yes', props.dap)}
-                            ${RhiIsncsciUiMobileTotals.getOptionTemplate(props['text-option-no'], 'No', props.dap)}
-                            ${RhiIsncsciUiMobileTotals.getOptionTemplate(props['text-option-nt'], 'NT', props.dap)}
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="grid">
-                <div class="row header secondary-text">
-                    <div>${props['text-right']}</div>
-                    <div>${props['text-left']}</div>
-                </div>
-                <div class="row">
-                    <div class="label">
-                        <span class="text-align-right secondary-text">${props['text-sensory-nl']}</span>
-                    </div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-sensory-nl')}">
-                        ${props['right-sensory-nl']}
-                    </div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-sensory-nl')}">
-                        ${props['left-sensory-nl']}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="label">
-                        <span class="text-align-right secondary-text">${props['text-motor-nl']}</span>
-                    </div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'right-motor-nl')}">
-                        ${props['right-motor-nl']}
-                    </div>
-                    <div class="cell interactive" on-click="${(e) => this.handleCellClick(e, 'left-motor-nl')}">
-                        ${props['left-motor-nl']}
-                    </div>
-                </div>
-            </div>
-            <div class="grid">
-                <div class="row">
-                    <div class="label"><span class="text-align-right secondary-text">${props['text-nli']}</span></div>
-                    <div class="cell">${props.nli}</div>
-                </div>
-                <div class="row">
-                    <div class="label">
-                        <span class="text-align-right secondary-text">${props['text-complete-incomplete']}</span>
-                    </div>
-                    <div class="cell">${props['complete-incomplete']}</div>
-                </div>
-                <div class="row">
-                    <div class="label"><span class="text-align-right secondary-text">${props['text-ais']}</span></div>
-                    <div class="cell">${props.ais}</div>
-                </div>
-            </div>
-            <div class="grid">
-                <div class="row header secondary-text">
-                    <div>${props['text-right']}</div>
-                    <div>${props['text-left']}</div>
-                </div>
-                <div class="row">
-                    <div class="label">
-                        <span class="text-align-right secondary-text">${props['text-sensory-nl-zpp']}</span>
-                    </div>
-                    <div class="cell">${props['right-sensory-nl-zpp']}</div>
-                    <div class="cell">${props['left-sensory-nl-zpp']}</div>
-                </div>
-                <div class="row">
-                    <div class="label">
-                        <span class="text-align-right secondary-text">${props['text-motor-nl-zpp']}</span>
-                    </div>
-                    <div class="cell">${props['right-motor-nl-zpp']}</div>
-                    <div class="cell">${props['left-motor-nl-zpp']}</div>
-                </div>
-            </div>
-            <div class="${this.commentsClass}">
-                <div class="label secondary-text">${props['text-comments']}</div>
-                <textarea id="comments" rows="1">${props.comments}</textarea>
-            </div>
-        `;
+    public static getTemplate(): string {
+        return template;
     }
 
-    public static get observedAttributes(): string[] {
-        const attributes: string[] = [];
-
-        // tslint:disable-next-line:forin
-        for (const key in RhiIsncsciUiMobileTotals.properties) {
-            attributes.push(key.toLowerCase());
-        }
-
-        return attributes;
+    private static getOptionTemplate(label: string, value: string, selectedValue: string) {
+        return value === selectedValue
+            ? `<option value="${value}" selected>${label}</option>`
+            : `<option value="${value}">${label}</option>`;
     }
 
     public static get properties() {
@@ -383,45 +85,143 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
         };
     }
 
-    public ready(): void {
+    public static get observedAttributes(): string[] {
+        const attributes: string[] = [];
+
+        // tslint:disable-next-line:forin
+        for (const key in RhiIsncsciUiMobileTotals.properties) {
+            attributes.push(key.toLowerCase());
+        }
+
+        return attributes;
+    }
+
+    private uiBindings = {
+        comments: null
+    };
+    private eventBindings: iEventDetails[] = [];
+    private props = {};
+
+    // private commentsClass: string = 'comments-component';
+
+    public constructor() {
+        super();
+
+        this.attachShadow({ mode: 'open' });
+        this.requestRender();
+        this.initializeDeclaredProperties();
+        this.updateUiBindings();
+    }
+
+    public connectedCallback() {
+        console.log(this.uiBindings);
         // Wire up Voluntary Anal Contraction events
-        const vac: HTMLSelectElement = this.shadowRoot.getElementById('anal-contraction') as HTMLSelectElement;
-        vac.addEventListener('change', (e) => this.handleVacChange(e));
+        const analContractionChangeHandler = (e) => this.handleVacChange(e);
+        const analContraction: Element = this.uiBindings['anal-contraction'][0];
+        analContraction.addEventListener('change', analContractionChangeHandler);
+        this.eventBindings.push({
+            eventName: 'change',
+            target: analContraction,
+            handler: analContractionChangeHandler
+        });
 
         // Wire up Deep Anal Pressure events
-        const dap: HTMLSelectElement = this.shadowRoot.getElementById('anal-sensation') as HTMLSelectElement;
-        dap.addEventListener('change', (e) => this.handleDapChange(e));
+        const analSensationChangeHandler = (e) => this.handleDapChange(e);
+        const analSensation: Element = this.uiBindings['anal-sensation'][0];
+        analSensation.addEventListener('change', analSensationChangeHandler);
+        this.eventBindings.push({
+            eventName: 'change',
+            target: analSensation,
+            handler: analSensationChangeHandler
+        });
 
         // Wire up the comments events
-        this.commentsElement = this.shadowRoot.getElementById('comments') as HTMLTextAreaElement;
-        this.commentsElement
-        .addEventListener('focus', (e) => { this.commentsClass = 'comments-component active'; this.requestRender(); });
-        this.commentsElement
-        .addEventListener('blur', (e) => { this.commentsClass = 'comments-component'; this.requestRender(); });
-        this.commentsElement.addEventListener('change', (e) => this.handleCommentsChange(e));
+        const commentsElement: Element = this.uiBindings.comments[0];
+        const commentsComponent: Element = this.uiBindings['comments-component'][0];
+        const commentsChangeHandler: EventListener = (e) => this.handleCommentsChange(e);
+        const commentsFocusHandler: EventListener = (e) => { commentsComponent.classList.add('active') };
+        const commentsBlurHandler: EventListener = (e) => { commentsComponent.classList.remove('active') };
+        commentsElement.addEventListener('change', commentsChangeHandler);
+        commentsElement.addEventListener('focus', commentsFocusHandler);
+        commentsElement.addEventListener('blur', commentsBlurHandler);
 
-        // // if the attribute for comments gets set right away,
-        // // the TextArea may not get hydrated as it has not been created.
-        // // Check here if there are comments set on the attribute and update the TextArea.
-        // const comments = this.getAttribute('comments');
-        // if (comments) {
-        //     this.commentsElement.value = comments;
-        // }
+        this.eventBindings.push({
+            eventName: 'change',
+            target: commentsElement,
+            handler: commentsChangeHandler
+        });
 
-        const clickables: NodeListOf<Element> = this.shadowRoot.querySelectorAll('[on-click]');
+        this.eventBindings.push({
+            eventName: 'focus',
+            target: commentsElement,
+            handler: commentsFocusHandler
+        });
 
-        // NodeListOf<T> currently does not have an iterator and forEach cannot be called on it.
-        // tslint:disable-next-line:prefer-for-of
-        for (let i: number = 0; i < clickables.length; i++) {
-            const value: Element = clickables[i];
-            // tslint:disable-next-line:no-eval
-            value.addEventListener('click', eval(value.getAttribute('on-click')));
+        this.eventBindings.push({
+            eventName: 'blur',
+            target: commentsElement,
+            handler: commentsBlurHandler
+        });
+    }
+
+    public disconnectedCallback() {
+        this.eventBindings.forEach((eventDetails) => {
+            eventDetails.target
+                .removeEventListener(eventDetails.eventName, eventDetails.handler);
+        });
+    }
+
+    private requestRender(): void {
+        const template: HTMLTemplateElement = document.createElement('template') as HTMLTemplateElement;
+        template.innerHTML = RhiIsncsciUiMobileTotals.getTemplate();
+        this.shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+
+    private initializeDeclaredProperties(): void {
+        const props: any = RhiIsncsciUiMobileTotals.properties;
+
+        for (let key in props) {
+            this.props[key] = props[key].value;
         }
     }
 
-    public connectedCallback(): void {
-        this.ready();
-        // this.requestRender();
+    private updateUiBindings(): void {
+        const elements: NodeListOf<Element> = this.shadowRoot.querySelectorAll('[bind-to]');
+
+        for (let i: number = 0; i < elements.length; i++) {
+            const element: Element = elements[i];
+            const bindTo: string = element.getAttribute('bind-to');
+
+            // In rare cases, we may want to share a binding.
+            // It happens with UI Labels that repeat in a template, like the word 'right' repeated more than once.
+            if (this.uiBindings[bindTo]) {
+                this.uiBindings[bindTo].push(element);
+            } else {
+                this.uiBindings[bindTo] = [element];
+            }
+
+            const property = RhiIsncsciUiMobileTotals.properties[bindTo]
+
+            if (property && property.value) {
+                if (property.useProperty) {
+                    element[property.useProperty] = property.value;
+                } else {
+                    element.innerHTML = property.value;
+                }
+            }
+
+            // Add event listeners to interactive cells
+            if (element.classList.contains('cell') && element.classList.contains('interactive')) {
+                const clickEventHandler = (e) => this.handleCellClick(e, bindTo);
+                element.addEventListener('click', clickEventHandler);
+
+                this.eventBindings.push({
+                    eventName: 'click',
+                    target: element,
+                    handler: clickEventHandler
+                });
+            }
+        }
     }
 
     public attributeChangedCallback(name: string, oldValue: string, newValue: string, namespace: string): void {
@@ -429,20 +229,19 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
             return;
         }
 
-        // Check if the comments element is available.
-        // When the commets attribute is set straight on the markup, this can be called before the
-        // corresponding TextArea is available.
-        if (name === 'comments' && this.commentsElement && this.commentsElement.value !== newValue) {
-            this.commentsElement.value = newValue;
-        } else {
-            this.props[name] = newValue;
+        const commentsElement = this.uiBindings['comments'][0];
+        if (name === 'comments' && commentsElement && commentsElement.value !== newValue) {
+            commentsElement.value = newValue;
+            return;
         }
 
-        this.requestRender();
-    }
+        const elements: Element[] = this.uiBindings[name];
 
-    private requestRender(): void {
-        render(this._render(this.props), this.shadowRoot);
+        if (elements) {
+            elements.forEach((element: Element) => {
+                element.innerHTML = newValue;
+            });
+        }
     }
 
     private handleCellClick(e: MouseEvent, cellName: string): boolean {
@@ -454,7 +253,7 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
 
     private handleCommentsChange(e: Event): boolean {
         const event: CustomEvent =
-            new CustomEvent('comments-change', { detail: { comments: this.commentsElement.value } });
+            new CustomEvent('comments-change', { detail: { comments: this.uiBindings.comments[0].value } });
         this.dispatchEvent(event);
 
         return true;
