@@ -4,29 +4,29 @@
         "url": "https://github.com/rick-hansen-institute/ui/issues"
     },
     "dependencies": {
-        "@rhi-ui/html": "^1.0.0",
-        "@webcomponents/webcomponentsjs": "^2.0.2"
+        "@rhi-ui/html": "^1.0.6"
     },
-    "description": "Component to display the ISNCSCI totals on a mobile device.",
-    "devDependencies": {},
+    "description": "SVG Rick Hansen Institute logo",
     "homepage": "https://www.rickhanseninstitute.org",
     "keywords": [
         "Rick",
         "Hansen",
         "Institute",
+        "ISNCSCI",
+        "Alrogithm",
+        "Logo",
         "custom elements",
         "components",
-        "isncsci",
-        "totals"
+        "svg"
     ],
     "license": "Apache-2.0",
     "main": "./umd/index.js",
     "module": "./esm/index.js",
-    "name": "@rhi-isncsci-ui/mobile-totals",
+    "name": "@rhi-isncsci-ui/logo",
     "private": false,
     "repository": {
         "type": "git",
-        "url": "https://github.com/rhi-isncsci/ui.git"
+        "url": "git+https://github.com/rick-hansen-institute/ui.git"
     },
-    "version": "1.0.6"
+    "version": "1.0.0"
 }
