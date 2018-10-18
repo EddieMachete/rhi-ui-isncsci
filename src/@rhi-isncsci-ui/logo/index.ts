@@ -16,6 +16,5 @@
 */
 'use strict';
 
-import '../src/@rhi-isncsci-ui/logo'
-import '../src/@rhi-isncsci-ui/mobile-sensory';
-import '../src/@rhi-isncsci-ui/mobile-totals';
+export { RhiIsncsciUiLogoSmall } from './rhi-isncsci-ui-logo-small';
+export { RhiIsncsciUiLogo } from './rhi-isncsci-ui-logo';

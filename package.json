@@ -22,8 +22,10 @@
     "scripts": {
         "build:demo": "rollup -c ./rollup.config.js",
         "build:lib": "rollup -c ./build-configs/lib/rollup.config.js",
+        "build:logo": "rollup -c ./build-configs/logo/rollup.config.js && cpx \"./src/@rhi-isncsci-ui/logo/*.{md,json}\" ./packages/@rhi-isncsci-ui/logo",
         "build:mobile-sensory": "rollup -c ./build-configs/mobile-sensory/rollup.config.js && cpx \"./src/@rhi-isncsci-ui/mobile-sensory/*.{md,json}\" ./packages/@rhi-isncsci-ui/mobile-sensory",
         "build:mobile-totals": "rollup -c ./build-configs/mobile-totals/rollup.config.js && cpx \"./src/@rhi-isncsci-ui/mobile-totals/*.{md,json}\" ./packages/@rhi-isncsci-ui/mobile-totals",
+        "publish:logo": "npm run build:logo && npm publish ./packages/@rhi-isncsci-ui/logo --access public",
         "publish:mobile-sensory": "npm run build:mobile-sensory && npm publish ./packages/@rhi-isncsci-ui/mobile-sensory --access public",
         "publish:mobile-totals": "npm run build:mobile-totals && npm publish ./packages/@rhi-isncsci-ui/mobile-totals --access public",
         "start": "npm run start:express",
