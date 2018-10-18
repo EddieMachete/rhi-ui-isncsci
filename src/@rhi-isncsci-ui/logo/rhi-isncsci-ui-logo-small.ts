@@ -47,16 +47,16 @@ export class RhiIsncsciUiLogoSmall extends HTMLElement {
                     --rhi-isncsci-ui-logo-shadow: rgba(255, 255, 255, .15);
                 }
 
-                .c-s {
+                .shadow {
                     fill: var(--rhi-isncsci-ui-logo-shadow, rgba(0, 0, 0, .15));
                 }
 
-                .c-o {
-                    fill: var(--rhi-isncsci-ui-logo-orange, #F15A24);
+                .gray {
+                    fill: var(--rhi-isncsci-ui-logo-gray, #999);
                 }
                 
-                .c-g {
-                    fill: var(--rhi-isncsci-ui-logo-gray, #999);
+                .orange {
+                    fill: var(--rhi-isncsci-ui-logo-orange, #F15A24);
                 }
 
                 /*
@@ -64,25 +64,25 @@ export class RhiIsncsciUiLogoSmall extends HTMLElement {
                  * The code below has been added so that the component works on Edge just as on FireFox, Safari, and Chrome,
                  */
 
-                [color-palette="black"] .c-g,
-                [color-palette="black"] .c-o {
+                [color-palette="black"] .orange,
+                [color-palette="black"] .gray {
                     fill: #000;
                 }
 
-                [color-palette="grayscale"] .c-o {
-                    fill: #BBB;
-                }
-
-                [color-palette="grayscale"] .c-g {
+                [color-palette="grayscale"] .gray {
                     fill: #999;
                 }
 
-                [color-palette="white"] .c-g,
-                [color-palette="white"] .c-o {
+                [color-palette="grayscale"] .orange {
+                    fill: #BBB;
+                }
+
+                [color-palette="white"] .orange,
+                [color-palette="white"] .gray {
                     fill: #FFF;
                 }
 
-                [color-palette="white"] .c-s {
+                [color-palette="white"] .shadow {
                     fill: rgba(255, 255, 255, .15);
                 }
             </style>
@@ -92,24 +92,24 @@ export class RhiIsncsciUiLogoSmall extends HTMLElement {
                  xmlns="http://www.w3.org/2000/svg"
                  viewBox="0 0 126 126">
                 <title>rhi-isncsci-ui-logo-small</title>
-                <rect class="c-s" x="57.82" y="37.84" width="15.37" height="15.37"/>
-                <rect class="c-s" x="37.84" y="37.84" width="15.37" height="15.37"/>
-                <rect class="c-s" x="57.82" y="57.82" width="15.37" height="15.37"/>
-                <rect class="c-s" x="37.84" y="57.82" width="15.37" height="15.37"/>
-                <rect class="c-s" x="77.8" y="37.84" width="15.37" height="15.37"/>
-                <rect class="c-s" x="57.82" y="77.8" width="15.37" height="15.37"/>
-                <rect class="c-s" x="37.84" y="77.8" width="15.37" height="15.37"/>
-                <rect class="c-s" x="77.8" y="77.8" width="15.37" height="15.37"/>
-                <rect class="c-s" x="77.8" y="57.82" width="15.37" height="15.37"/>
-                <rect class="c-o" x="55.98" y="36" width="15.37" height="15.37"/>
-                <rect class="c-o" x="36" y="36" width="15.37" height="15.37"/>
-                <rect class="c-o" x="55.98" y="55.98" width="15.37" height="15.37"/>
-                <rect class="c-o" x="36" y="55.98" width="15.37" height="15.37"/>
-                <rect class="c-o" x="75.96" y="36" width="15.37" height="15.37"/>
-                <rect class="c-o" x="55.98" y="75.96" width="15.37" height="15.37"/>
-                <rect class="c-o" x="36" y="75.96" width="15.37" height="15.37"/>
-                <rect class="c-g" x="75.96" y="75.96" width="15.37" height="15.37"/>
-                <rect class="c-o" x="75.96" y="55.98" width="15.37" height="15.37"/>
+                <rect class="shadow" x="57.82" y="37.84" width="15.37" height="15.37"/>
+                <rect class="shadow" x="37.84" y="37.84" width="15.37" height="15.37"/>
+                <rect class="shadow" x="57.82" y="57.82" width="15.37" height="15.37"/>
+                <rect class="shadow" x="37.84" y="57.82" width="15.37" height="15.37"/>
+                <rect class="shadow" x="77.8" y="37.84" width="15.37" height="15.37"/>
+                <rect class="shadow" x="57.82" y="77.8" width="15.37" height="15.37"/>
+                <rect class="shadow" x="37.84" y="77.8" width="15.37" height="15.37"/>
+                <rect class="shadow" x="77.8" y="77.8" width="15.37" height="15.37"/>
+                <rect class="shadow" x="77.8" y="57.82" width="15.37" height="15.37"/>
+                <rect class="gray" x="55.98" y="36" width="15.37" height="15.37"/>
+                <rect class="gray" x="36" y="36" width="15.37" height="15.37"/>
+                <rect class="gray" x="55.98" y="55.98" width="15.37" height="15.37"/>
+                <rect class="gray" x="36" y="55.98" width="15.37" height="15.37"/>
+                <rect class="gray" x="75.96" y="36" width="15.37" height="15.37"/>
+                <rect class="gray" x="55.98" y="75.96" width="15.37" height="15.37"/>
+                <rect class="gray" x="36" y="75.96" width="15.37" height="15.37"/>
+                <rect class="orange" x="75.96" y="75.96" width="15.37" height="15.37"/>
+                <rect class="gray" x="75.96" y="55.98" width="15.37" height="15.37"/>
             </svg>
         `;
     }
