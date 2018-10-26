@@ -291,6 +291,12 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
         if (name === 'dermatome') {
             this.selectDermatome(newValue);
             this.uiBindings.dermatome.innerHTML = newValue.toUpperCase();
+
+            // Force refresh of other input controls.
+            // There are issues when the controls request an update but the dermatome changes right after.
+            // Occurs when selecting the next dermatome after updating the current one.
+            const score: string = this.getAttribute('dermatome-score');
+            this.uiBindings['dermatome-score'].value = score || '';
             return;
         }
 
