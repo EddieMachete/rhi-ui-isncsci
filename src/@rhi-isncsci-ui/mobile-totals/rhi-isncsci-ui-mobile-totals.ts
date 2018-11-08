@@ -16,19 +16,19 @@
  */
 'use strict';
 
-import { template } from './rhi-isncsci-ui-mobile-totals-template';
+import { template as RhiIsncsciUiMobileTotalsTemplate} from './rhi-isncsci-ui-mobile-totals-template';
 
-interface iEventDetails {
-    eventName: string,
-    target: Element,
-    handler: EventListener
+interface IEventDetails {
+    eventName: string;
+    target: Element;
+    handler: EventListener;
 }
 
 export class RhiIsncsciUiMobileTotals extends HTMLElement {
     public static get is(): string { return 'rhi-isncsci-ui-mobile-totals'; }
 
     public static getTemplate(): string {
-        return template;
+        return RhiIsncsciUiMobileTotalsTemplate;
     }
 
     private static getOptionTemplate(label: string, value: string, selectedValue: string) {
@@ -37,7 +37,7 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
             : `<option value="${value}">${label}</option>`;
     }
 
-    public static get properties() {
+    public static get properties(): any {
         return {
             'ais': { reflectToAttribute: true, type: String, value: '' },
             'comments': { reflectToAttribute: true, type: String, value: '' },
@@ -81,26 +81,27 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
             'text-upper-motor': { reflectToAttribute: true, type: String, value: 'Upper motor' },
             'text-vac': { reflectToAttribute: true, type: String, value: 'VAC' },
             'text-vac-description': { reflectToAttribute: true, type: String, value: 'Voluntary anal contraction' },
-            'vac': { reflectToAttribute: true, type: String, value: '' }
+            'vac': { reflectToAttribute: true, type: String, value: '' },
         };
     }
 
     public static get observedAttributes(): string[] {
         const attributes: string[] = [];
 
-        // tslint:disable-next-line:forin
         for (const key in RhiIsncsciUiMobileTotals.properties) {
-            attributes.push(key.toLowerCase());
+            if (RhiIsncsciUiMobileTotals.properties.hasOwnProperty(key)) {
+                attributes.push(key.toLowerCase());
+            }
         }
 
         return attributes;
     }
 
-    private uiBindings = {
-        comments: null
+    private uiBindings: any = {
+        comments: null,
     };
-    private eventBindings: iEventDetails[] = [];
-    private props = {};
+    private eventBindings: IEventDetails[] = [];
+    private props: any = {};
 
     // private commentsClass: string = 'comments-component';
 
@@ -114,53 +115,53 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
     }
 
     public connectedCallback() {
-        console.log(this.uiBindings);
+        // console.log(this.uiBindings);
         // Wire up Voluntary Anal Contraction events
-        const analContractionChangeHandler = (e) => this.handleVacChange(e);
+        const analContractionChangeHandler = (e: Event) => this.handleVacChange(e);
         const analContraction: Element = this.uiBindings['anal-contraction'][0];
         analContraction.addEventListener('change', analContractionChangeHandler);
         this.eventBindings.push({
             eventName: 'change',
+            handler: analContractionChangeHandler,
             target: analContraction,
-            handler: analContractionChangeHandler
         });
 
         // Wire up Deep Anal Pressure events
-        const analSensationChangeHandler = (e) => this.handleDapChange(e);
+        const analSensationChangeHandler = (e: Event) => this.handleDapChange(e);
         const analSensation: Element = this.uiBindings['anal-sensation'][0];
         analSensation.addEventListener('change', analSensationChangeHandler);
         this.eventBindings.push({
             eventName: 'change',
+            handler: analSensationChangeHandler,
             target: analSensation,
-            handler: analSensationChangeHandler
         });
 
         // Wire up the comments events
         const commentsElement: Element = this.uiBindings.comments[0];
         const commentsComponent: Element = this.uiBindings['comments-component'][0];
-        const commentsChangeHandler: EventListener = (e) => this.handleCommentsChange(e);
-        const commentsFocusHandler: EventListener = (e) => { commentsComponent.classList.add('active') };
-        const commentsBlurHandler: EventListener = (e) => { commentsComponent.classList.remove('active') };
+        const commentsChangeHandler: EventListener = () => this.handleCommentsChange();
+        const commentsFocusHandler: EventListener = () => commentsComponent.classList.add('active');
+        const commentsBlurHandler: EventListener = () => commentsComponent.classList.remove('active');
         commentsElement.addEventListener('change', commentsChangeHandler);
         commentsElement.addEventListener('focus', commentsFocusHandler);
         commentsElement.addEventListener('blur', commentsBlurHandler);
 
         this.eventBindings.push({
             eventName: 'change',
+            handler: commentsChangeHandler,
             target: commentsElement,
-            handler: commentsChangeHandler
         });
 
         this.eventBindings.push({
             eventName: 'focus',
+            handler: commentsFocusHandler,
             target: commentsElement,
-            handler: commentsFocusHandler
         });
 
         this.eventBindings.push({
             eventName: 'blur',
+            handler: commentsBlurHandler,
             target: commentsElement,
-            handler: commentsBlurHandler
         });
     }
 
@@ -171,65 +172,12 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
         });
     }
 
-    private requestRender(): void {
-        const template: HTMLTemplateElement = document.createElement('template') as HTMLTemplateElement;
-        template.innerHTML = RhiIsncsciUiMobileTotals.getTemplate();
-        this.shadowRoot.appendChild(template.content.cloneNode(true));
-    }
-
-    private initializeDeclaredProperties(): void {
-        const props: any = RhiIsncsciUiMobileTotals.properties;
-
-        for (let key in props) {
-            this.props[key] = props[key].value;
-        }
-    }
-
-    private updateUiBindings(): void {
-        const elements: NodeListOf<Element> = this.shadowRoot.querySelectorAll('[bind-to]');
-
-        for (let i: number = 0; i < elements.length; i++) {
-            const element: Element = elements[i];
-            const bindTo: string = element.getAttribute('bind-to');
-
-            // In rare cases, we may want to share a binding.
-            // It happens with UI Labels that repeat in a template, like the word 'right' repeated more than once.
-            if (this.uiBindings[bindTo]) {
-                this.uiBindings[bindTo].push(element);
-            } else {
-                this.uiBindings[bindTo] = [element];
-            }
-
-            const property = RhiIsncsciUiMobileTotals.properties[bindTo]
-
-            if (property && property.value) {
-                if (property.useProperty) {
-                    element[property.useProperty] = property.value;
-                } else {
-                    element.innerHTML = property.value;
-                }
-            }
-
-            // Add event listeners to interactive cells
-            if (element.classList.contains('cell') && element.classList.contains('interactive')) {
-                const clickEventHandler = (e) => this.handleCellClick(e, bindTo);
-                element.addEventListener('click', clickEventHandler);
-
-                this.eventBindings.push({
-                    eventName: 'click',
-                    target: element,
-                    handler: clickEventHandler
-                });
-            }
-        }
-    }
-
     public attributeChangedCallback(name: string, oldValue: string, newValue: string, namespace: string): void {
         if (oldValue === newValue) {
             return;
         }
 
-        const commentsElement = this.uiBindings['comments'][0];
+        const commentsElement = this.uiBindings.comments[0];
         if (name === 'comments' && commentsElement && commentsElement.value !== newValue) {
             commentsElement.value = newValue;
             return;
@@ -244,14 +192,68 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
         }
     }
 
-    private handleCellClick(e: MouseEvent, cellName: string): boolean {
+    private requestRender(): void {
+        const template: HTMLTemplateElement = document.createElement('template') as HTMLTemplateElement;
+        template.innerHTML = RhiIsncsciUiMobileTotals.getTemplate();
+        this.shadowRoot!.appendChild(template.content.cloneNode(true));
+    }
+
+    private initializeDeclaredProperties(): void {
+        const props: any = RhiIsncsciUiMobileTotals.properties;
+
+        for (const key in props) {
+            if (props.hasOwnProperty(key)) {
+                this.props[key] = props[key].value;
+            }
+        }
+    }
+
+    private updateUiBindings(): void {
+        const elements: Element[] = Array.from(this.shadowRoot!.querySelectorAll('[bind-to]'));
+
+        for (const element of elements) {
+            const bindTo: string = element.getAttribute('bind-to') as string;
+
+            // In rare cases, we may want to share a binding.
+            // It happens with UI Labels that repeat in a template, like the word 'right' repeated more than once.
+            if (this.uiBindings[bindTo]) {
+                this.uiBindings[bindTo].push(element);
+            } else {
+                this.uiBindings[bindTo] = [element];
+            }
+
+            const property = RhiIsncsciUiMobileTotals.properties[bindTo];
+
+            if (property && property.value) {
+                if (property.useProperty) {
+                    (element as  any)[property.useProperty] = property.value;
+                } else {
+                    element.innerHTML = property.value;
+                }
+            }
+
+            // Add event listeners to interactive cells
+            if (element.classList.contains('cell') && element.classList.contains('interactive') && bindTo) {
+                const clickEventHandler = () => this.handleCellClick(bindTo);
+                element.addEventListener('click', clickEventHandler);
+
+                this.eventBindings.push({
+                    eventName: 'click',
+                    handler: clickEventHandler,
+                    target: element,
+                });
+            }
+        }
+    }
+
+    private handleCellClick(cellName: string): boolean {
         const event: CustomEvent = new CustomEvent('interactive-cell-clicked', { detail: { name: cellName } });
         this.dispatchEvent(event);
 
         return true;
     }
 
-    private handleCommentsChange(e: Event): boolean {
+    private handleCommentsChange(): boolean {
         const event: CustomEvent =
             new CustomEvent('comments-change', { detail: { comments: this.uiBindings.comments[0].value } });
         this.dispatchEvent(event);

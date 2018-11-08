@@ -9,27 +9,15 @@
 import resolve from 'rollup-plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
 
-const defaults = { compilerOptions: { declaration: true } };
-const override = { compilerOptions: { declaration: false } };
-
-function config({ input = '', context = undefined, output = {}, external = [] }) {
+function config({ input = '', output = {} }) {
     return {
         input,
-        context,
         output: {
             ...output,
         },
-        external: [
-            ...external,
-        ],
         plugins: [
             resolve(),
-            typescript({
-                tsconfigDefaults: defaults,
-                declaration: false,
-                removeComments: true,
-                tsconfig: "./tsconfig.json"
-            })
+            typescript()
         ]
     }
 }

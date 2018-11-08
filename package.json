@@ -1,35 +1,31 @@
 {
     "author": "RhiTech <tech@rickhanseninstitute.org>",
     "dependencies": {
-        "@material/mwc-switch": "^0.3.1",
-        "@rhi-ui/html": "^1.0.6",
         "@webcomponents/webcomponentsjs": "^2.1.3"
     },
     "description": "Web components package for the ISNCSCI project.",
     "devDependencies": {
         "cpx": "^1.5.0",
-        "express": "^4.16.3",
         "rollup-plugin-node-resolve": "^3.4.0",
-        "rollup-plugin-typescript2": "^0.17.0",
-        "typescript": "^2.9.2"
+        "rollup-plugin-typescript2": "^0.17.2",
+        "tslint": "^5.11.0",
+        "typescript": "^3.1.6"
     },
-    "homepage": "https://www.rickhanseninstitute.org/rhi-isncsci/",
+    "homepage": "https://github.com/rhi-isncsci/ui",
     "license": "Apache-2.0",
     "main": "index.js",
-    "name": "rhi-ui-isncsci",
+    "name": "rhi-isncsci-ui",
     "private": false,
-    "repository": "https://github.com/rick-hansen-institute/rhi-ui-isncsci.git",
+    "repository": "https://github.com/rhi-isncsci/ui.git",
     "scripts": {
         "build:demo": "rollup -c ./rollup.config.js",
-        "build:lib": "rollup -c ./build-configs/lib/rollup.config.js",
         "build:logo": "rollup -c ./build-configs/logo/rollup.config.js && cpx \"./src/@rhi-isncsci-ui/logo/*.{md,json}\" ./packages/@rhi-isncsci-ui/logo",
         "build:mobile-sensory": "rollup -c ./build-configs/mobile-sensory/rollup.config.js && cpx \"./src/@rhi-isncsci-ui/mobile-sensory/*.{md,json}\" ./packages/@rhi-isncsci-ui/mobile-sensory",
         "build:mobile-totals": "rollup -c ./build-configs/mobile-totals/rollup.config.js && cpx \"./src/@rhi-isncsci-ui/mobile-totals/*.{md,json}\" ./packages/@rhi-isncsci-ui/mobile-totals",
         "publish:logo": "npm run build:logo && npm publish ./packages/@rhi-isncsci-ui/logo --access public",
         "publish:mobile-sensory": "npm run build:mobile-sensory && npm publish ./packages/@rhi-isncsci-ui/mobile-sensory --access public",
         "publish:mobile-totals": "npm run build:mobile-totals && npm publish ./packages/@rhi-isncsci-ui/mobile-totals --access public",
-        "start": "npm run start:express",
-        "start:express": "node server.js"
+        "tslint": "tslint -p ."
     },
-    "version": "0.0.5"
+    "version": "0.0.6"
 }

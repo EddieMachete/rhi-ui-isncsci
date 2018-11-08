@@ -16,9 +16,7 @@
  */
 'use strict';
 
-import { html } from '@rhi-ui/html';
-
-export const template: string = html`
+export const template: string = `
     <!-- shadow DOM for your element -->
     <style>
         :host {

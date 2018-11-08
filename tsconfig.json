@@ -4,23 +4,19 @@
         "declaration": true,
         "lib": [
             "dom",
-            "es6",
-            "scripthost"
+            "es6"
         ],
         "module": "es6",
         "moduleResolution": "node",
-        "noEmitOnError": true,
-        "noImplicitAny": false,
-        "outDir": "./build/umd/@rhi-isncsci-ui",
         "removeComments": false,
-        "sourceMap": false,
+        "sourceMap": true,
+        "strict": true,
         "target": "es6"
     },
     "include": [
-        "src/@rhi-isncsci-ui/**/*"
+        "src/**/*"
     ],
     "exclude": [
-        "./node_modules",
-        "**/*.spec.ts"
+        "./node_modules"
     ]
 }

@@ -7,7 +7,7 @@
  * You may obtain a copy of the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,12 +16,7 @@
  */
 'use strict';
 
-// Currently, this material design component sucks.
-// import "@material/mwc-switch";
-import { html } from '@rhi-ui/html';
-
-export const template: string =
-    html`
+export const template: string = `
     <!-- shadow DOM for your element -->
     <style>
         :host {
@@ -169,14 +164,14 @@ export const template: string =
         .content .dermatome-details .section {
             margin: 16px 16px 24px 16px;
         }
-        
+
         .content .dermatome-details .label {
             color: var(--isncsci-on-primary-color, #666);
             font-size: var(--isncsci-primary-text-font-size, 16px);
             font-weight: var(--isncsci-primary-text-font-weight, 400);
             line-height: 18px;
         }
-        
+
         .content .dermatome-details textarea {
             border: none;
             background-color: transparent;
