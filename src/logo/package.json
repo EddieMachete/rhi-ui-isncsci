@@ -1,0 +1,9 @@
+{
+    "description": "SVG Rick Hansen Institute logo",
+    "keywords": [
+        "logo",
+        "svg"
+    ],
+    "name": "@rhi-isncsci-ui/logo",
+    "version": "1.0.2"
+}
