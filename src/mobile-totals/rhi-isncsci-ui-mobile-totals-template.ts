@@ -178,10 +178,10 @@ export const template: string = `
             <div>
                 <select bind-to="vac"
                         class="cell-select">
-                    <option value="None"></option>
-                    <option value="Yes" bind-to="text-option-yes"></option>
-                    <option value="No" bind-to="text-option-no"></option>
-                    <option value="NT" bind-to="text-option-nt"></option>
+                    <option value="none"></option>
+                    <option value="yes" bind-to="text-option-yes"></option>
+                    <option value="no" bind-to="text-option-no"></option>
+                    <option value="nt" bind-to="text-option-nt"></option>
                 </select>
             </div>
         </div>
@@ -195,10 +195,10 @@ export const template: string = `
             <div>
                 <select bind-to="dap"
                         class="cell-select">
-                    <option value="None"></option>
-                    <option value="Yes" bind-to="text-option-yes"></option>
-                    <option value="No" bind-to="text-option-no"></option>
-                    <option value="NT" bind-to="text-option-nt"></option>
+                    <option value="none"></option>
+                    <option value="yes" bind-to="text-option-yes"></option>
+                    <option value="no" bind-to="text-option-no"></option>
+                    <option value="nt" bind-to="text-option-nt"></option>
                 </select>
             </div>
         </div>

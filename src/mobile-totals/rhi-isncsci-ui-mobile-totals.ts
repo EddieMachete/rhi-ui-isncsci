@@ -118,7 +118,7 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
         // console.log(this.uiBindings);
         // Wire up Voluntary Anal Contraction events
         const analContractionChangeHandler = (e: Event) => this.handleVacChange(e);
-        const analContraction: Element = this.uiBindings['anal-contraction'][0];
+        const analContraction: Element = this.uiBindings.vac[0];
         analContraction.addEventListener('change', analContractionChangeHandler);
         this.eventBindings.push({
             eventName: 'change',
@@ -128,7 +128,7 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
 
         // Wire up Deep Anal Pressure events
         const analSensationChangeHandler = (e: Event) => this.handleDapChange(e);
-        const analSensation: Element = this.uiBindings['anal-sensation'][0];
+        const analSensation: Element = this.uiBindings.dap[0];
         analSensation.addEventListener('change', analSensationChangeHandler);
         this.eventBindings.push({
             eventName: 'change',
