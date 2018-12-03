@@ -176,7 +176,7 @@ export const template: string = `
                 </div>
             </div>
             <div>
-                <select bind-to="anal-contraction"
+                <select bind-to="vac"
                         class="cell-select">
                     <option value="None"></option>
                     <option value="Yes" bind-to="text-option-yes"></option>
@@ -193,7 +193,7 @@ export const template: string = `
                 </div>
             </div>
             <div>
-                <select bind-to="anal-sensation"
+                <select bind-to="dap"
                         class="cell-select">
                     <option value="None"></option>
                     <option value="Yes" bind-to="text-option-yes"></option>

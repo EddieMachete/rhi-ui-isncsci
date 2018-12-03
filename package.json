@@ -40,7 +40,8 @@
         "prebuild:prod": "rimraf ./dist",
         "build:prod": "rollup -c --environment BUILD:production",
         "postbuild:prod": "node -e \"process.env.BUILD='production'; require('./postbuild/index')\"",
-        "serve": "concurrently \"npm start\" \"npm run build\" \"rollup -c --watch\"",
+        "preserve": "npm run build",
+        "serve": "concurrently \"npm start\" \"rollup -c --watch\" --kill-others-on-fail",
         "start": "http-server ./demo -o -c-1 -p 8081",
         "tslint": "tslint -p ."
     },

@@ -33,8 +33,8 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
 
     private static getOptionTemplate(label: string, value: string, selectedValue: string) {
         return value === selectedValue
-            ? `<option value="${value}" selected>${label}</option>`
-            : `<option value="${value}">${label}</option>`;
+        ? `<option value="${value}" selected>${label}</option>`
+        : `<option value="${value}">${label}</option>`;
     }
 
     public static get properties(): any {
@@ -187,7 +187,11 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
 
         if (elements) {
             elements.forEach((element: Element) => {
-                element.innerHTML = newValue;
+                if ( element.classList.contains('cell-select')) {
+                    (element as HTMLSelectElement).value = newValue;
+                } else {
+                    element.innerHTML = newValue;
+                }
             });
         }
     }
