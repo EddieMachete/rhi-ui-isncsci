@@ -27,6 +27,7 @@ export class RhiIsncsciUiDermatomeDiagramHeadRight extends HTMLElement {
     }
 
     public getTemplate(): string {
+        // tslint:disable:max-line-length
         return `
             <style>
                 :host {
@@ -130,6 +131,7 @@ export class RhiIsncsciUiDermatomeDiagramHeadRight extends HTMLElement {
                 </g>
             </svg>
         `;
+        // tslint:enable:max-line-length
     }
 
     private requestRender(): void {
