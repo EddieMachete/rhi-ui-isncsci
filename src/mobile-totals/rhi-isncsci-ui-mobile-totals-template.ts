@@ -212,15 +212,15 @@ export const template: string = `
             <div class="label">
                 <span class="text-align-right secondary-text" bind-to="text-sensory-nl"></span>
             </div>
-            <div class="cell interactive"  bind-to="right-sensory-nl"></div>
-            <div class="cell interactive" bind-to="left-sensory-nl"></div>
+            <div class="cell"  bind-to="right-sensory-nl"></div>
+            <div class="cell" bind-to="left-sensory-nl"></div>
         </div>
         <div class="row">
             <div class="label">
                 <span class="text-align-right secondary-text" bind-to="text-motor-nl"></span>
             </div>
-            <div class="cell interactive" bind-to="right-motor-nl"></div>
-            <div class="cell interactive" bind-to="left-motor-nl"></div>
+            <div class="cell" bind-to="right-motor-nl"></div>
+            <div class="cell" bind-to="left-motor-nl"></div>
         </div>
     </div>
     <div class="grid">
