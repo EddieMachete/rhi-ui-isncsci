@@ -16,7 +16,7 @@
  */
 'use strict';
 
-import { template as RhiIsncsciUiMobileTotalsTemplate} from './rhi-isncsci-ui-mobile-totals-template';
+import { template as RhiIsncsciUiMobileTotalsTemplate } from './rhi-isncsci-ui-mobile-totals-template';
 
 interface IEventDetails {
     eventName: string;
@@ -33,55 +33,77 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
 
     private static getOptionTemplate(label: string, value: string, selectedValue: string) {
         return value === selectedValue
-        ? `<option value="${value}" selected>${label}</option>`
-        : `<option value="${value}">${label}</option>`;
+            ? `<option value="${value}" selected>${label}</option>`
+            : `<option value="${value}">${label}</option>`;
     }
 
-    public static get properties(): any {
+    public static get properties(): {
+        [index: string]: {
+            reflectToAttribute: boolean,
+            type: {},
+            useProperty: string,
+            value: string | boolean | number,
+        },
+    } {
         return {
-            'ais': { reflectToAttribute: true, type: String, value: '' },
-            'comments': { reflectToAttribute: true, type: String, value: '' },
-            'complete-incomplete': { reflectToAttribute: true, type: String, value: '' },
-            'dap': { reflectToAttribute: true, type: String, value: '' },
-            'left-lower-motor': { reflectToAttribute: true, type: String, value: '' },
-            'left-motor-nl': { reflectToAttribute: true, type: String, value: '' },
-            'left-motor-nl-zpp': { reflectToAttribute: true, type: String, value: '' },
-            'left-prick': { reflectToAttribute: true, type: String, value: '' },
-            'left-sensory-nl': { reflectToAttribute: true, type: String, value: '' },
-            'left-sensory-nl-zpp': { reflectToAttribute: true, type: String, value: '' },
-            'left-touch': { reflectToAttribute: true, type: String, value: '' },
-            'left-upper-motor': { reflectToAttribute: true, type: String, value: '' },
-            'nli': { reflectToAttribute: true, type: String, value: '' },
-            'right-lower-motor': { reflectToAttribute: true, type: String, value: '' },
-            'right-motor-nl': { reflectToAttribute: true, type: String, value: '' },
-            'right-motor-nl-zpp': { reflectToAttribute: true, type: String, value: '' },
-            'right-prick': { reflectToAttribute: true, type: String, value: '' },
-            'right-sensory-nl': { reflectToAttribute: true, type: String, value: '' },
-            'right-sensory-nl-zpp': { reflectToAttribute: true, type: String, value: '' },
-            'right-touch': { reflectToAttribute: true, type: String, value: '' },
-            'right-upper-motor': { reflectToAttribute: true, type: String, value: '' },
-            'text-ais': { reflectToAttribute: true, type: String, value: 'AIS' },
-            'text-comments': { reflectToAttribute: true, type: String, value: 'General comments:' },
-            'text-complete-incomplete': { reflectToAttribute: true, type: String, value: 'Complete or incomplete' },
-            'text-dap': { reflectToAttribute: true, type: String, value: 'DAP' },
-            'text-dap-description': { reflectToAttribute: true, type: String, value: 'Deep anal pressure' },
-            'text-left': { reflectToAttribute: true, type: String, value: 'Left' },
-            'text-light-touch': { reflectToAttribute: true, type: String, value: 'Light touch' },
-            'text-lower-motor': { reflectToAttribute: true, type: String, value: 'Lower motor' },
-            'text-motor-nl': { reflectToAttribute: true, type: String, value: 'Motor NL' },
-            'text-motor-nl-zpp': { reflectToAttribute: true, type: String, value: 'Motor NL ZPP' },
-            'text-nli': { reflectToAttribute: true, type: String, value: 'NLI' },
-            'text-option-no': { reflectToAttribute: true, type: String, value: 'No' },
-            'text-option-nt': { reflectToAttribute: true, type: String, value: 'NT' },
-            'text-option-yes': { reflectToAttribute: true, type: String, value: 'Yes' },
-            'text-pin-prick': { reflectToAttribute: true, type: String, value: 'Pin prick' },
-            'text-right': { reflectToAttribute: true, type: String, value: 'Right' },
-            'text-sensory-nl': { reflectToAttribute: true, type: String, value: 'Sensory NL' },
-            'text-sensory-nl-zpp': { reflectToAttribute: true, type: String, value: 'Sensory NL ZPP' },
-            'text-upper-motor': { reflectToAttribute: true, type: String, value: 'Upper motor' },
-            'text-vac': { reflectToAttribute: true, type: String, value: 'VAC' },
-            'text-vac-description': { reflectToAttribute: true, type: String, value: 'Voluntary anal contraction' },
-            'vac': { reflectToAttribute: true, type: String, value: '' },
+            'ais': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'comments': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'complete-incomplete': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'dap': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'left-lower-motor': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'left-motor-nl': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'left-motor-nl-zpp': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'left-prick': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'left-sensory-nl': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'left-sensory-nl-zpp': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'left-touch': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'left-upper-motor': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'nli': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'right-lower-motor': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'right-motor-nl': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'right-motor-nl-zpp': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'right-prick': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'right-sensory-nl': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'right-sensory-nl-zpp': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'right-touch': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'right-upper-motor': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'text-ais': { reflectToAttribute: true, type: String, useProperty: '', value: 'AIS' },
+            'text-comments': { reflectToAttribute: true, type: String, useProperty: '', value: 'General comments:' },
+            'text-complete-incomplete': {
+                reflectToAttribute: true,
+                type: String,
+                useProperty: '',
+                value: 'Complete or incomplete',
+            },
+            'text-dap': { reflectToAttribute: true, type: String, useProperty: '', value: 'DAP' },
+            'text-dap-description': {
+                reflectToAttribute: true,
+                type: String,
+                useProperty: '',
+                value: 'Deep anal pressure',
+            },
+            'text-left': { reflectToAttribute: true, type: String, useProperty: '', value: 'Left' },
+            'text-light-touch': { reflectToAttribute: true, type: String, useProperty: '', value: 'Light touch' },
+            'text-lower-motor': { reflectToAttribute: true, type: String, useProperty: '', value: 'Lower motor' },
+            'text-motor-nl': { reflectToAttribute: true, type: String, useProperty: '', value: 'Motor NL' },
+            'text-motor-nl-zpp': { reflectToAttribute: true, type: String, useProperty: '', value: 'Motor NL ZPP' },
+            'text-nli': { reflectToAttribute: true, type: String, useProperty: '', value: 'NLI' },
+            'text-option-no': { reflectToAttribute: true, type: String, useProperty: '', value: 'No' },
+            'text-option-nt': { reflectToAttribute: true, type: String, useProperty: '', value: 'NT' },
+            'text-option-yes': { reflectToAttribute: true, type: String, useProperty: '', value: 'Yes' },
+            'text-pin-prick': { reflectToAttribute: true, type: String, useProperty: '', value: 'Pin prick' },
+            'text-right': { reflectToAttribute: true, type: String, useProperty: '', value: 'Right' },
+            'text-sensory-nl': { reflectToAttribute: true, type: String, useProperty: '', value: 'Sensory NL' },
+            'text-sensory-nl-zpp': { reflectToAttribute: true, type: String, useProperty: '', value: 'Sensory NL ZPP' },
+            'text-upper-motor': { reflectToAttribute: true, type: String, useProperty: '', value: 'Upper motor' },
+            'text-vac': { reflectToAttribute: true, type: String, useProperty: '', value: 'VAC' },
+            'text-vac-description': {
+                reflectToAttribute: true,
+                type: String,
+                useProperty: '',
+                value: 'Voluntary anal contraction',
+            },
+            'vac': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
         };
     }
 
@@ -97,11 +119,20 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
         return attributes;
     }
 
-    private uiBindings: any = {
-        comments: null,
-    };
+    private uiBindings: {
+        [index: string]: HTMLElement[] | null,
+        'comments': HTMLInputElement[] | null,
+        'comments-component': HTMLElement[] | null,
+        'dap': HTMLInputElement[] | null,
+        'vac': HTMLInputElement[] | null,
+    } = {
+            'comments': null,
+            'comments-component': null,
+            'dap': null,
+            'vac': null,
+        };
     private eventBindings: IEventDetails[] = [];
-    private props: any = {};
+    private props: { [index: string]: string | boolean | number } = {};
 
     // private commentsClass: string = 'comments-component';
 
@@ -117,52 +148,58 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
     public connectedCallback() {
         // console.log(this.uiBindings);
         // Wire up Voluntary Anal Contraction events
-        const analContractionChangeHandler = (e: Event) => this.handleVacChange(e);
-        const analContraction: Element = this.uiBindings.vac[0];
-        analContraction.addEventListener('change', analContractionChangeHandler);
-        this.eventBindings.push({
-            eventName: 'change',
-            handler: analContractionChangeHandler,
-            target: analContraction,
-        });
+        if (this.uiBindings.vac) {
+            const analContractionChangeHandler = (e: Event) => this.handleVacChange(e);
+            const analContraction: HTMLElement = this.uiBindings.vac[0];
+            analContraction.addEventListener('change', analContractionChangeHandler);
+            this.eventBindings.push({
+                eventName: 'change',
+                handler: analContractionChangeHandler,
+                target: analContraction,
+            });
+        }
 
         // Wire up Deep Anal Pressure events
-        const analSensationChangeHandler = (e: Event) => this.handleDapChange(e);
-        const analSensation: Element = this.uiBindings.dap[0];
-        analSensation.addEventListener('change', analSensationChangeHandler);
-        this.eventBindings.push({
-            eventName: 'change',
-            handler: analSensationChangeHandler,
-            target: analSensation,
-        });
+        if (this.uiBindings.dap) {
+            const analSensationChangeHandler = (e: Event) => this.handleDapChange(e);
+            const analSensation: Element = this.uiBindings.dap[0];
+            analSensation.addEventListener('change', analSensationChangeHandler);
+            this.eventBindings.push({
+                eventName: 'change',
+                handler: analSensationChangeHandler,
+                target: analSensation,
+            });
+        }
 
         // Wire up the comments events
-        const commentsElement: Element = this.uiBindings.comments[0];
-        const commentsComponent: Element = this.uiBindings['comments-component'][0];
-        const commentsChangeHandler: EventListener = () => this.handleCommentsChange();
-        const commentsFocusHandler: EventListener = () => commentsComponent.classList.add('active');
-        const commentsBlurHandler: EventListener = () => commentsComponent.classList.remove('active');
-        commentsElement.addEventListener('change', commentsChangeHandler);
-        commentsElement.addEventListener('focus', commentsFocusHandler);
-        commentsElement.addEventListener('blur', commentsBlurHandler);
+        if (this.uiBindings.comments && this.uiBindings['comments-component']) {
+            const commentsElement: HTMLInputElement = this.uiBindings.comments[0];
+            const commentsComponent: HTMLElement = this.uiBindings['comments-component'][0];
+            const commentsChangeHandler: EventListener = () => this.handleCommentsChange();
+            const commentsFocusHandler: EventListener = () => commentsComponent.classList.add('active');
+            const commentsBlurHandler: EventListener = () => commentsComponent.classList.remove('active');
+            commentsElement.addEventListener('change', commentsChangeHandler);
+            commentsElement.addEventListener('focus', commentsFocusHandler);
+            commentsElement.addEventListener('blur', commentsBlurHandler);
 
-        this.eventBindings.push({
-            eventName: 'change',
-            handler: commentsChangeHandler,
-            target: commentsElement,
-        });
+            this.eventBindings.push({
+                eventName: 'change',
+                handler: commentsChangeHandler,
+                target: commentsElement,
+            });
 
-        this.eventBindings.push({
-            eventName: 'focus',
-            handler: commentsFocusHandler,
-            target: commentsElement,
-        });
+            this.eventBindings.push({
+                eventName: 'focus',
+                handler: commentsFocusHandler,
+                target: commentsElement,
+            });
 
-        this.eventBindings.push({
-            eventName: 'blur',
-            handler: commentsBlurHandler,
-            target: commentsElement,
-        });
+            this.eventBindings.push({
+                eventName: 'blur',
+                handler: commentsBlurHandler,
+                target: commentsElement,
+            });
+        }
     }
 
     public disconnectedCallback() {
@@ -177,17 +214,17 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
             return;
         }
 
-        const commentsElement = this.uiBindings.comments[0];
+        const commentsElement: HTMLInputElement | null = this.uiBindings.comments ? this.uiBindings.comments[0] : null;
         if (name === 'comments' && commentsElement && commentsElement.value !== newValue) {
             commentsElement.value = newValue;
             return;
         }
 
-        const elements: Element[] = this.uiBindings[name];
+        const elements: HTMLElement[] | null = this.uiBindings[name];
 
         if (elements) {
             elements.forEach((element: Element) => {
-                if ( element.classList.contains('cell-select')) {
+                if (element.classList.contains('cell-select')) {
                     (element as HTMLSelectElement).value = newValue;
                 } else {
                     element.innerHTML = newValue;
@@ -203,7 +240,7 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
     }
 
     private initializeDeclaredProperties(): void {
-        const props: any = RhiIsncsciUiMobileTotals.properties;
+        const props: { [index: string]: { value: string | boolean | number } } = RhiIsncsciUiMobileTotals.properties;
 
         for (const key in props) {
             if (props.hasOwnProperty(key)) {
@@ -220,19 +257,20 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
 
             // In rare cases, we may want to share a binding.
             // It happens with UI Labels that repeat in a template, like the word 'right' repeated more than once.
-            if (this.uiBindings[bindTo]) {
-                this.uiBindings[bindTo].push(element);
+            const binding: HTMLElement[] | null = this.uiBindings[bindTo];
+            if (binding) {
+                binding.push(element as HTMLElement);
             } else {
-                this.uiBindings[bindTo] = [element];
+                this.uiBindings[bindTo] = [element as HTMLElement];
             }
 
             const property = RhiIsncsciUiMobileTotals.properties[bindTo];
 
             if (property && property.value) {
                 if (property.useProperty) {
-                    (element as  any)[property.useProperty] = property.value;
+                    (element as any)[property.useProperty] = property.value;
                 } else {
-                    element.innerHTML = property.value;
+                    (element as HTMLElement).innerHTML = property.value.toString();
                 }
             }
 
@@ -258,6 +296,10 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
     }
 
     private handleCommentsChange(): boolean {
+        if (!this.uiBindings.comments) {
+            return true;
+        }
+
         const event: CustomEvent =
             new CustomEvent('comments-change', { detail: { comments: this.uiBindings.comments[0].value } });
         this.dispatchEvent(event);
