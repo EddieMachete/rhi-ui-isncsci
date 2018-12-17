@@ -16,7 +16,7 @@
  */
 const fs = require('fs-extra');
 const projectPackagePath = './package.json';
-const COMPONENTS = ['logo','mobile-sensory','mobile-totals'];
+const COMPONENTS = ['dermatome-diagram', 'logo','mobile-sensory','mobile-totals'];
 
 const modifyProperties = (packagePath, projectPackage) => {
   return fs.readJson(packagePath).then( package => {
