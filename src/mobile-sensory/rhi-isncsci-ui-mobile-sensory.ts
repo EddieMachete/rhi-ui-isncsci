@@ -16,7 +16,7 @@
  */
 'use strict';
 
-import { template as RhiIsncsciUiMobileSensoryTemplate} from './rhi-isncsci-ui-mobile-sensory-template';
+import { template as RhiIsncsciUiMobileSensoryTemplate } from './rhi-isncsci-ui-mobile-sensory-template';
 
 export class RhiIsncsciUiMobileSensory extends HTMLElement {
     public static get is(): string { return 'rhi-isncsci-ui-mobile-sensory'; }
@@ -25,72 +25,119 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
         return RhiIsncsciUiMobileSensoryTemplate;
     }
 
-    public static get properties(): any {
+    public static get properties(): {
+        [index: string]: {
+            reflectToAttribute: boolean,
+            type: {},
+            useProperty: string,
+            value: string | boolean | number,
+        },
+    } {
         return {
-            'c2': { reflectToAttribute: true, type: String, value: '' },
-            'c3': { reflectToAttribute: true, type: String, value: '' },
-            'c4': { reflectToAttribute: true, type: String, value: '' },
-            'c5': { reflectToAttribute: true, type: String, value: '' },
-            'c6': { reflectToAttribute: true, type: String, value: '' },
-            'c7': { reflectToAttribute: true, type: String, value: '' },
-            'c8': { reflectToAttribute: true, type: String, value: '' },
-            'dermatome': { reflectToAttribute: true, type: String, value: '' },
-            'dermatome-score': { reflectToAttribute: true, type: String, value: '' },
+            'c2': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'c3': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'c4': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'c5': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'c6': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'c7': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'c8': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'dermatome': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'dermatome-score': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
             'instructions': {
                 reflectToAttribute: true,
                 type: String,
+                useProperty: '',
                 value: 'Use the ! and * symbols to indicate impairment not due to SCI.',
             },
-            'l1': { reflectToAttribute: true, type: String, value: '' },
-            'l2': { reflectToAttribute: true, type: String, value: '' },
-            'l3': { reflectToAttribute: true, type: String, value: '' },
-            'l4': { reflectToAttribute: true, type: String, value: '' },
-            'l5': { reflectToAttribute: true, type: String, value: '' },
-            'nl': { reflectToAttribute: true, type: String, value: '' },
-            'nl-label': { reflectToAttribute: true, type: String, value: 'NL:' },
-            'non-sci-impairment-comments': { reflectToAttribute: true, type: String, value: '' },
-            'non-sci-impairment-comments-label': { reflectToAttribute: true, type: String, value: 'Specify:' },
+            'l1': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'l2': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'l3': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'l4': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'l5': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'nl': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'nl-label': { reflectToAttribute: true, type: String, useProperty: '', value: 'NL:' },
+            'non-sci-impairment-comments': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'non-sci-impairment-comments-label': {
+                reflectToAttribute: true,
+                type: String,
+                useProperty: '',
+                value: 'Specify:',
+            },
             'non-sci-impairment-label': {
                 reflectToAttribute: true,
                 type: String,
+                useProperty: '',
                 value: 'If sensory impairment not due to SCI, please indicate the reason:',
             },
-            'non-sci-impairment-reason': { reflectToAttribute: true, type: String, value: '' },
-            'non-sci-impairment-reason-atrophy': { reflectToAttribute: true, type: String, value: 'Disuse atrophy' },
+            'non-sci-impairment-reason': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'non-sci-impairment-reason-atrophy': {
+                reflectToAttribute: true,
+                type: String,
+                useProperty: '',
+                value: 'Disuse atrophy',
+            },
             'non-sci-impairment-reason-myoneural': {
                 reflectToAttribute: true,
                 type: String,
+                useProperty: '',
                 value: 'Pre-existing myoneural disease (e.g. Stroke, MS, etc.)',
             },
             'non-sci-impairment-reason-neuropathy': {
                 reflectToAttribute: true,
                 type: String,
+                useProperty: '',
                 value: 'Peripheral neuropathy',
             },
-            'non-sci-impairment-reason-none': { reflectToAttribute: true, type: String, value: 'Select one' },
-            'non-sci-impairment-reason-other': { reflectToAttribute: true, type: String, value: 'Other (specify:)' },
-            'non-sci-impairment-reason-pain': { reflectToAttribute: true, type: String, value: 'Pain' },
-            'non-sci-impairment-reason-plexopathy': { reflectToAttribute: true, type: String, value: 'Plexopathy' },
-            'propagate-value': { reflectToAttribute: true, type: Boolean, value: false },
-            'propagate-value-label': { reflectToAttribute: true, type: String, value: 'Propagate values down' },
-            's1': { reflectToAttribute: true, type: String, value: '' },
-            's2': { reflectToAttribute: true, type: String, value: '' },
-            's3': { reflectToAttribute: true, type: String, value: '' },
-            's4-5': { reflectToAttribute: true, type: String, value: '' },
-            't1': { reflectToAttribute: true, type: String, value: '' },
-            't10': { reflectToAttribute: true, type: String, value: '' },
-            't11': { reflectToAttribute: true, type: String, value: '' },
-            't12': { reflectToAttribute: true, type: String, value: '' },
-            't2': { reflectToAttribute: true, type: String, value: '' },
-            't3': { reflectToAttribute: true, type: String, value: '' },
-            't4': { reflectToAttribute: true, type: String, value: '' },
-            't5': { reflectToAttribute: true, type: String, value: '' },
-            't6': { reflectToAttribute: true, type: String, value: '' },
-            't7': { reflectToAttribute: true, type: String, value: '' },
-            't8': { reflectToAttribute: true, type: String, value: '' },
-            't9': { reflectToAttribute: true, type: String, value: '' },
-            'total': { reflectToAttribute: true, type: String, value: '' },
-            'total-label': { reflectToAttribute: true, type: String, value: 'Total:' },
+            'non-sci-impairment-reason-none': {
+                reflectToAttribute: true,
+                type: String,
+                useProperty: '',
+                value: 'Select one',
+            },
+            'non-sci-impairment-reason-other': {
+                reflectToAttribute: true,
+                type: String,
+                useProperty: '',
+                value: 'Other (specify:)',
+            },
+            'non-sci-impairment-reason-pain': {
+                reflectToAttribute: true,
+                type: String,
+                useProperty: '',
+                value: 'Pain',
+            },
+            'non-sci-impairment-reason-plexopathy': {
+                reflectToAttribute: true,
+                type: String,
+                useProperty: '',
+                value: 'Plexopathy',
+            },
+            'propagate-value': {
+                reflectToAttribute: true,
+                type: Boolean,
+                useProperty: '',
+                value: false,
+            },
+            'propagate-value-label': {
+                reflectToAttribute: true, type: String, useProperty: '', value: 'Propagate values down' },
+            's1': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            's2': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            's3': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            's4-5': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            't1': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            't10': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            't11': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            't12': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            't2': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            't3': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            't4': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            't5': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            't6': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            't7': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            't8': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            't9': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'total': { reflectToAttribute: true, type: String, useProperty: '', value: '' },
+            'total-label': { reflectToAttribute: true, type: String, useProperty: '', value: 'Total:' },
         };
     }
 
@@ -106,21 +153,31 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
         return attributes;
     }
 
-    private uiBindings: any = {
-        'dermatome': null,
-        'dermatome-score': null,
-        'dermatomes': null,
-        'non-sci-impairment-comments': null,
-        'non-sci-impairment-reason': null,
-    };
+    private uiBindings: {
+        // { [index: string]: { value: string } }
+        [index: string]: HTMLElement | null,
+        'dermatome': HTMLElement | null,
+        'dermatome-score': HTMLInputElement | null,
+        'dermatomes': HTMLElement | null,
+        'non-sci-impairment-comments': HTMLInputElement | null,
+        'non-sci-impairment-reason': HTMLInputElement | null,
+        'propagate-value': HTMLInputElement | null,
+    } = {
+            'dermatome': null,
+            'dermatome-score': null,
+            'dermatomes': null,
+            'non-sci-impairment-comments': null,
+            'non-sci-impairment-reason': null,
+            'propagate-value': null,
+        };
 
-    private props: any = {};
+    private props: { [index: string]: string | boolean | number } = {};
     private selectedDermatome: HTMLElement | null = null;
-    private dermatomeClickHandler: any;
-    private propagateValueChangeHandler: any;
-    private scoreChangeHandler: any;
-    private nonSciImpairmentReasonChangeHandler: any;
-    private nonSciImpairmentCommentsChangeHandler: any;
+    private dermatomeClickHandler: (e: MouseEvent) => boolean;
+    private propagateValueChangeHandler: () => boolean;
+    private scoreChangeHandler: () => boolean;
+    private nonSciImpairmentReasonChangeHandler: () => boolean;
+    private nonSciImpairmentCommentsChangeHandler: () => boolean;
 
     public constructor() {
         super();
@@ -138,22 +195,51 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
     }
 
     public connectedCallback() {
-        this.uiBindings.dermatomes.addEventListener('click', this.dermatomeClickHandler);
-        this.uiBindings['propagate-value'].addEventListener('change', this.propagateValueChangeHandler);
-        this.uiBindings['dermatome-score'].addEventListener('change', this.scoreChangeHandler);
-        this.uiBindings['non-sci-impairment-reason']
-            .addEventListener('change', this.nonSciImpairmentReasonChangeHandler);
-        this.uiBindings['non-sci-impairment-comments']
-            .addEventListener('change', this.nonSciImpairmentCommentsChangeHandler);
+        if (this.uiBindings.dermatomes) {
+            this.uiBindings.dermatomes.addEventListener('click', this.dermatomeClickHandler);
+        }
+
+        if (this.uiBindings['propagate-value']) {
+            this.uiBindings['propagate-value'].addEventListener('change', this.propagateValueChangeHandler);
+        }
+
+        if (this.uiBindings['dermatome-score']) {
+            this.uiBindings['dermatome-score'].addEventListener('change', this.scoreChangeHandler);
+        }
+
+        if (this.uiBindings['non-sci-impairment-reason']) {
+            this.uiBindings['non-sci-impairment-reason']
+                .addEventListener('change', this.nonSciImpairmentReasonChangeHandler);
+        }
+
+        if (this.uiBindings['non-sci-impairment-comments']) {
+            this.uiBindings['non-sci-impairment-comments']
+                .addEventListener('change', this.nonSciImpairmentCommentsChangeHandler);
+        }
     }
 
     public disconnectedCallback() {
-        this.uiBindings.dermatomes.removeEventListener('click', this.dermatomeClickHandler);
-        this.uiBindings['propagate-value'].removeEventListener('change', this.propagateValueChangeHandler);
-        this.uiBindings['dermatome-score'].removeEventListener('change', this.scoreChangeHandler);
-        this.uiBindings['non-sci-impairment-reason'].removeEventListener('change', this.onNonSciImpairmentReasonChange);
-        this.uiBindings['non-sci-impairment-comments']
-            .removeEventListener('change', this.onNonSciImpairmentCommentsChange);
+        if (this.uiBindings.dermatomes) {
+            this.uiBindings.dermatomes.removeEventListener('click', this.dermatomeClickHandler);
+        }
+
+        if (this.uiBindings['propagate-value']) {
+            this.uiBindings['propagate-value'].removeEventListener('change', this.propagateValueChangeHandler);
+        }
+
+        if (this.uiBindings['dermatome-score']) {
+            this.uiBindings['dermatome-score'].removeEventListener('change', this.scoreChangeHandler);
+        }
+
+        if (this.uiBindings['non-sci-impairment-reason']) {
+            this.uiBindings['non-sci-impairment-reason']
+                .removeEventListener('change', this.nonSciImpairmentReasonChangeHandler);
+        }
+
+        if (this.uiBindings['non-sci-impairment-comments']) {
+            this.uiBindings['non-sci-impairment-comments']
+                .removeEventListener('change', this.nonSciImpairmentCommentsChangeHandler);
+        }
     }
 
     public onDermatomeClick(e: MouseEvent): boolean {
@@ -179,6 +265,10 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
     }
 
     public onPropagateValueChange(): boolean {
+        if (!this.uiBindings['propagate-value']) {
+            return true;
+        }
+
         const event: CustomEvent =
             new CustomEvent(
                 'propagate-value-changed',
@@ -195,6 +285,10 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
     }
 
     public onScoreChange(): boolean {
+        if (!this.uiBindings['dermatome-score']) {
+            return true;
+        }
+
         const event: CustomEvent =
             new CustomEvent(
                 'dermatome-score-changed',
@@ -212,6 +306,10 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
     }
 
     public onNonSciImpairmentReasonChange(): boolean {
+        if (!this.uiBindings['non-sci-impairment-reason']) {
+            return true;
+        }
+
         const event: CustomEvent =
             new CustomEvent(
                 'non-sci-impairment-reason-changed',
@@ -229,6 +327,10 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
     }
 
     public onNonSciImpairmentCommentsChange(): boolean {
+        if (!this.uiBindings['non-sci-impairment-comments']) {
+            return true;
+        }
+
         const event: CustomEvent =
             new CustomEvent(
                 'non-sci-impairment-comments-changed',
@@ -252,40 +354,57 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
 
         if (name === 'dermatome') {
             this.selectDermatome(newValue);
-            this.uiBindings.dermatome.innerHTML = newValue.toUpperCase();
+
+            if (this.uiBindings.dermatome) {
+                this.uiBindings.dermatome.innerHTML = newValue.toUpperCase();
+            }
 
             // Force refresh of other input controls.
             // There are issues when the controls request an update but the dermatome changes right after.
             // Occurs when selecting the next dermatome after updating the current one.
-            const score: string | null = this.getAttribute('dermatome-score');
-            this.uiBindings['dermatome-score'].value = score || '';
+            if (this.uiBindings['dermatome-score']) {
+                const score: string | null = this.getAttribute('dermatome-score');
+                this.uiBindings['dermatome-score'].value = score || '';
+            }
+
             return;
         }
 
         if (name === 'dermatome-score') {
-            this.uiBindings['dermatome-score'].value = newValue;
+            if (this.uiBindings['dermatome-score']) {
+                this.uiBindings['dermatome-score'].value = newValue;
+            }
+
             return;
         }
 
         if (name === 'non-sci-impairment-reason') {
-            this.uiBindings['non-sci-impairment-reason'].value = newValue;
+            if (this.uiBindings['non-sci-impairment-reason']) {
+                this.uiBindings['non-sci-impairment-reason'].value = newValue;
+            }
+
             return;
         }
 
         if (name === 'non-sci-impairment-comments') {
-            this.uiBindings['non-sci-impairment-comments'].value = newValue;
+            if (this.uiBindings['non-sci-impairment-comments']) {
+                this.uiBindings['non-sci-impairment-comments'].value = newValue;
+            }
 
             return;
         }
 
         if (name === 'propagate-value') {
-            this.uiBindings['propagate-value'].checked = newValue !== null;
+            if (this.uiBindings['propagate-value']) {
+                this.uiBindings['propagate-value'].checked = newValue !== null;
+            }
+
             this.onPropagateValueChange();
 
             return;
         }
 
-        const element: Element = this.uiBindings[name];
+        const element: HTMLElement = this.uiBindings[name] as HTMLElement;
 
         if (element) {
             element.innerHTML = newValue;
@@ -299,7 +418,7 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
     }
 
     private initializeDeclaredProperties(): void {
-        const props: any = RhiIsncsciUiMobileSensory.properties;
+        const props: { [index: string]: { value: string | boolean | number } } = RhiIsncsciUiMobileSensory.properties;
 
         for (const key in props) {
             if (props.hasOwnProperty(key)) {
@@ -309,7 +428,7 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
     }
 
     private updateUiBindings(): void {
-        const elements: Element[] = Array.from(this.shadowRoot!.querySelectorAll('[bind-to]'));
+        const elements: HTMLElement[] = Array.from(this.shadowRoot!.querySelectorAll('[bind-to]'));
 
         for (const element of elements) {
             const bindTo: string = element.getAttribute('bind-to') as string;
@@ -319,9 +438,9 @@ export class RhiIsncsciUiMobileSensory extends HTMLElement {
 
             if (property && property.value) {
                 if (property.useProperty) {
-                    (element as  any)[property.useProperty] = property.value;
+                    (element as any)[property.useProperty] = property.value;
                 } else {
-                    element.innerHTML = property.value;
+                    (element as HTMLElement).innerHTML = property.value.toString();
                 }
             }
         }
