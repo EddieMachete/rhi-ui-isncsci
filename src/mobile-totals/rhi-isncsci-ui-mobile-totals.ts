@@ -250,7 +250,7 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
     }
 
     private updateUiBindings(): void {
-        const elements: Element[] = Array.from(this.shadowRoot!.querySelectorAll('[bind-to]'));
+        const elements: HTMLElement[] = Array.from(this.shadowRoot!.querySelectorAll('[bind-to]'));
 
         for (const element of elements) {
             const bindTo: string = element.getAttribute('bind-to') as string;
@@ -259,9 +259,9 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
             // It happens with UI Labels that repeat in a template, like the word 'right' repeated more than once.
             const binding: HTMLElement[] | null = this.uiBindings[bindTo];
             if (binding) {
-                binding.push(element as HTMLElement);
+                binding.push(element);
             } else {
-                this.uiBindings[bindTo] = [element as HTMLElement];
+                this.uiBindings[bindTo] = [element];
             }
 
             const property = RhiIsncsciUiMobileTotals.properties[bindTo];
@@ -270,7 +270,7 @@ export class RhiIsncsciUiMobileTotals extends HTMLElement {
                 if (property.useProperty) {
                     (element as any)[property.useProperty] = property.value;
                 } else {
-                    (element as HTMLElement).innerHTML = property.value.toString();
+                    (element).innerHTML = property.value.toString();
                 }
             }
 
