@@ -20,7 +20,7 @@ export const template: string = `
     <!-- shadow DOM for your element -->
     <style>
         :host {
-            --mdc-theme-secondary: var(--isncsci-secondayr-color, #999);
+            --mdc-theme-secondary: var(--isncsci-secondary-color, #999);
             -webkit-font-smoothing: var(--isncsci-font-common-base-webkit-font-smoothing, antialiased);
             display: block;
             font-family: var(--isncsci-font-common-base-font-family, 'Roboto', 'Noto', 'Open Sans', sans-serif);
