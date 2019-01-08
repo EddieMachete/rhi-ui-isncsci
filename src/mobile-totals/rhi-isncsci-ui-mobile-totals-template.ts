@@ -124,7 +124,7 @@ export const template: string = `
             background-color: transparent;
             color: var(--isncsci-primary-text-color, #000);
             font-family: 'Roboto', 'Noto', sans-serif;
-            font-size: 14px;
+            font-size: 16px; /* minimum font-size needs to be 16px, to disable auto zoom in ios */
             height: 120px;
             outline: none;
             overflow: auto;
