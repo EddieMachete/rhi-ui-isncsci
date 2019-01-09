@@ -86,12 +86,16 @@ export const template: string = `
         }
 
         .cell-select {
+            -moz-appearance: none;
+            -webkit-appearance: none;
             background-color: var(--isncsci-interactive-cell-color, #DCDCDC);
             border: none;
+            border-radius: 0;
             font-family: 'Roboto', 'Noto', sans-serif;
             font-size: 16px;
             height: 40px;
             margin-left: 8px;
+            padding-left: 12px;
             width: 104px;
         }
 
