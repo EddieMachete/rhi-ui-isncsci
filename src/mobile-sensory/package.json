@@ -1,0 +1,9 @@
+{
+    "description": "Component to display the ISNCSCI totals on a mobile device.",
+    "keywords": [
+        "sensory",
+        "input"
+    ],
+    "name": "@rhi-isncsci-ui/mobile-sensory",
+    "version": "0.1.3"
+}

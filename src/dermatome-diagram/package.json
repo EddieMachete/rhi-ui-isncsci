@@ -1,0 +1,10 @@
+{
+    "description": "SVG Rick Hansen Institute logo",
+    "keywords": [
+        "dermatome",
+        "diagram",
+        "svg"
+    ],
+    "name": "@rhi-isncsci-ui/dermatome-diagram",
+    "version": "0.0.1"
+}

@@ -1,0 +1,8 @@
+{
+    "description": "Component to display the ISNCSCI totals on a mobile device.",
+    "keywords": [
+        "totals"
+    ],
+    "name": "@rhi-isncsci-ui/mobile-totals",
+    "version": "1.0.12"
+}
